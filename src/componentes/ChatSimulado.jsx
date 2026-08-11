@@ -23,13 +23,12 @@ export default function ChatSimulado() {
   const contenedorRef = useRef(null)
 
   useEffect(() => {
-    // Respetar preferencia de movimiento reducido: mostrar todo de golpe
-    const sinMovimiento = window.matchMedia('(prefers-reduced-motion: reduce)').matches
-    if (sinMovimiento) {
-      setVisibles(chat.mensajes)
-      return
-    }
-
+    // Este chat es decorativo (aria-hidden, los lectores de pantalla ya lo
+    // ignoran), así que anima siempre — no se condiciona a
+    // prefers-reduced-motion. Confirmado con Ángel: en su navegador normal
+    // el chat aparecía siempre estático con todos los mensajes de golpe,
+    // pese a que su Windows/Chrome no tienen el movimiento reducido
+    // activado — así que depender de ese media query no era fiable aquí.
     let temporizadores = []
     let activo = true
 

@@ -13,7 +13,7 @@ export const EMPRESA = {
   telefonoWhatsApp: '34722842925',
   web: 'speedprofitai.com',
   domicilio: 'Calle Pablo Serrano nº11, 50794',
-  instagram: 'https://www.instagram.com/speedprofitai',
+  instagram: 'https://www.instagram.com/angel.speedprofit/',
   linkedin: 'https://www.linkedin.com/in/angel-valen-580a093a8',
   copyright: '© 2026 SpeedProfit AI · Todos los derechos reservados',
   youtubeId: 'rHPGOX5TKM4',
@@ -364,7 +364,7 @@ export const CALCULADORA = {
     },
   },
   botonCalcular: 'Ver cuánto estoy perdiendo',
-  botonMejora: 'Calcula ahora lo que podrías mejorar con SpeedProfit',
+  botonMejora: 'Ver qué podría mejorar',
   resultado: {
     titulo: 'Esto es lo que tu agencia deja escapar cada año',
     etiquetaOperacionesPerdidas: 'operaciones perdidas al año por respuesta tardía o falta de seguimiento',
@@ -377,7 +377,7 @@ export const CALCULADORA = {
     etiquetaDineroGanado: 'de facturación adicional estimada al año',
     etiquetaDineroGanadoMes: 'al mes',
     etiquetaHorasAhorradas: 'horas al año liberadas para ti o tu equipo',
-    cta: 'Quiero recuperar esto en mi agencia',
+    cta: 'Quiero recuperarlo',
   },
   transparencia: {
     titulo: 'Cómo lo calculamos',
