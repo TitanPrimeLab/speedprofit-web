@@ -1,0 +1,163 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ==========================================================================
+   TOKENS DE DISEÑO — SpeedProfit AI
+   Extraídos del sitio original en Base44. No cambiar sin motivo.
+   ========================================================================== */
+:root {
+  --gold: #c9a84c;
+  --gold-light: #e8c96a;
+  --gold-dark: #a07830;
+  --gold-bright: #f5dc8a;
+
+  --ink: #0a0a0a;
+  --bone: #f2ede4;
+
+  --text-muted: rgba(200, 190, 175, 0.7);
+  --card-bg: rgba(255, 255, 255, 0.03);
+  --card-border: rgba(201, 168, 76, 0.15);
+  --card-border-hover: rgba(201, 168, 76, 0.4);
+
+  --section-testimonios: rgba(5, 5, 8, 0.9);
+  --section-nosotros: rgba(8, 8, 12, 0.88);
+}
+
+/* --------------------------------------------------------------------------
+   FONDO GLOBAL
+   Imagen de triángulos dorados sobre negro, fija. WebP comprimido (~40 kB).
+   -------------------------------------------------------------------------- */
+html {
+  scroll-behavior: smooth;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+body {
+  margin: 0;
+  background-color: var(--ink);
+  background-image: url('/img/fondo.webp');
+  background-size: cover;
+  background-position: 50% 50%;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  color: #ffffff;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* En móvil, background-attachment: fixed provoca saltos y consumo de batería */
+@media (max-width: 768px) {
+  body {
+    background-attachment: scroll;
+  }
+}
+
+/* --------------------------------------------------------------------------
+   BOTÓN DORADO — CSS exacto del sitio original
+   -------------------------------------------------------------------------- */
+.btn-gold {
+  background: linear-gradient(135deg, #e8c96a 0%, #c9a84c 50%, #a07830 100%);
+  color: #000;
+  font-weight: 700;
+  letter-spacing: 0.03em;
+  box-shadow:
+    0 4px 24px 0 rgba(201, 168, 76, 0.35),
+    0 1px 0 rgba(255, 255, 255, 0.15) inset;
+  border: 1px solid rgba(232, 201, 106, 0.4);
+  transition: all 0.2s ease;
+}
+
+.btn-gold:hover {
+  background: linear-gradient(135deg, #f5dc8a 0%, #e8c96a 50%, #c9a84c 100%);
+  box-shadow:
+    0 6px 32px 0 rgba(201, 168, 76, 0.55),
+    0 1px 0 rgba(255, 255, 255, 0.2) inset;
+  transform: translateY(-1px);
+}
+
+.btn-gold:active {
+  transform: translateY(0);
+}
+
+/* Foco visible por teclado — requisito de accesibilidad */
+.btn-gold:focus-visible,
+a:focus-visible,
+button:focus-visible {
+  outline: 2px solid var(--gold-light);
+  outline-offset: 3px;
+}
+
+/* --------------------------------------------------------------------------
+   UTILIDADES REUTILIZABLES
+   -------------------------------------------------------------------------- */
+.texto-apagado {
+  color: var(--text-muted);
+}
+
+.tarjeta-glass {
+  background: var(--card-bg);
+  border: 1px solid var(--card-border);
+  border-radius: 16px;
+  transition: all 0.3s ease;
+}
+
+.tarjeta-glass:hover {
+  border-color: var(--card-border-hover);
+  background: rgba(255, 255, 255, 0.05);
+  transform: translateY(-2px);
+}
+
+.texto-oro {
+  color: var(--gold);
+}
+
+.texto-oro-degradado {
+  background: linear-gradient(135deg, #f5dc8a 0%, #e8c96a 45%, #c9a84c 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: transparent;
+}
+
+/* Aparición al hacer scroll */
+.revelar {
+  opacity: 0;
+  transform: translateY(20px);
+  transition:
+    opacity 0.6s ease,
+    transform 0.6s ease;
+}
+
+.revelar.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Enlace de salto para lectores de pantalla / teclado */
+.saltar-a-contenido {
+  position: absolute;
+  left: -9999px;
+  z-index: 999;
+  padding: 12px 20px;
+  background: var(--gold);
+  color: #000;
+  font-weight: 700;
+  border-radius: 8px;
+}
+
+.saltar-a-contenido:focus {
+  left: 24px;
+  top: 12px;
+}
