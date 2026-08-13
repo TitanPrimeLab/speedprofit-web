@@ -278,10 +278,6 @@ export const HOME = {
         r: 'No. Ofrecemos garantía total de 30 días. Si no ves resultados, te devolvemos el dinero.',
       },
       {
-        p: '¿Cuánto cuesta?',
-        r: 'La inversión es de 1.500€. Sin costes ocultos ni sorpresas.',
-      },
-      {
         p: '¿Mi agencia de la competencia puede contratar SpeedProfit AI en mi misma zona?',
         r: 'No. Trabajamos con exclusividad por zona geográfica. Una sola agencia por área.',
       },
