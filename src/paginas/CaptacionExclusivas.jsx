@@ -4,7 +4,6 @@ import {
   CabeceraSeccion,
   CierreCTA,
   Icono,
-  Ilustracion,
   Insignia,
   Revelar,
   Seccion,
@@ -19,38 +18,21 @@ export default function CaptacionExclusivas() {
       {/* HERO */}
       <section className="relative min-h-[75vh] flex items-center">
         <div className="max-w-7xl mx-auto px-6 py-20 w-full">
-          <div
-            className={`grid grid-cols-1 gap-12 items-center ${
-              EXCLUSIVAS.imagen ? 'lg:grid-cols-2' : ''
-            }`}
-          >
-            <div className="max-w-4xl">
-              <Insignia>{EXCLUSIVAS.kicker}</Insignia>
+          <div className="max-w-4xl">
+            <Insignia>{EXCLUSIVAS.kicker}</Insignia>
 
-              <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white leading-[1.08] tracking-tight mt-6">
-                {EXCLUSIVAS.titulo}{' '}
-                <span className="texto-oro-degradado">{EXCLUSIVAS.tituloDestacado}</span>
-              </h1>
+            <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white leading-[1.08] tracking-tight mt-6">
+              {EXCLUSIVAS.titulo}{' '}
+              <span className="texto-oro-degradado">{EXCLUSIVAS.tituloDestacado}</span>
+            </h1>
 
-              <p className="texto-apagado text-lg md:text-xl mt-6 leading-relaxed max-w-2xl">
-                {EXCLUSIVAS.subtitulo}
-              </p>
+            <p className="texto-apagado text-lg md:text-xl mt-6 leading-relaxed max-w-2xl">
+              {EXCLUSIVAS.subtitulo}
+            </p>
 
-              <div className="mt-9">
-                <BotonOro mensaje={EXCLUSIVAS.ctaMensaje}>{EXCLUSIVAS.cta}</BotonOro>
-              </div>
+            <div className="mt-9">
+              <BotonOro mensaje={EXCLUSIVAS.ctaMensaje}>{EXCLUSIVAS.cta}</BotonOro>
             </div>
-
-            {EXCLUSIVAS.imagen && (
-              <div className="hidden lg:block">
-                <Ilustracion
-                  src={EXCLUSIVAS.imagen}
-                  alt={EXCLUSIVAS.imagenAlt}
-                  ancho={900}
-                  alto={900}
-                />
-              </div>
-            )}
           </div>
         </div>
       </section>

@@ -2,80 +2,335 @@
 <html lang="es">
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="icon" type="image/png" href="/img/favicon.png" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
 
-    <title>SpeedProfit AI — Automatización con IA para inmobiliarias</title>
-    <meta name="description" content="Agentes de IA que responden, cualifican y agendan visitas 24/7 para agencias inmobiliarias independientes en España. Soporte 365 días al año. Una sola agencia por zona." />
-    <meta name="keywords" content="automatización inmobiliaria, agencias inmobiliarias España, captación de leads inmobiliarios, inteligencia artificial inmobiliaria, CRM inmobiliario, leads inmobiliarios, automatización marketing inmobiliario" />
-    <link rel="canonical" href="https://speedprofitai.com" />
+    <!-- Favicon e iconos -->
+    <link rel="icon" type="image/png" href="/img/logo.png" />
+    <link rel="apple-touch-icon" href="/img/logo.png" />
+    <link rel="manifest" href="/manifest.webmanifest" />
+
+    <!-- =========================================================================
+         METADATOS BÁSICOS
+         ========================================================================= -->
+    <title>SpeedProfit AI — Automatización con IA para inmobiliarias en España</title>
+    <meta name="description" content="Agentes de IA que responden, cualifican y agendan visitas 24/7 para agencias inmobiliarias independientes en España. Sistema propio, no un CRM más. Soporte 365 días al año. Una sola agencia por zona. Diseño web para inmobiliarias desde 399€. 63 auditorías de respuesta medidas." />
+    <meta name="keywords" content="automatización inmobiliaria, IA inmobiliaria, agentes IA inmobiliaria, chatbot inmobiliario WhatsApp, agencias inmobiliarias España, captación de leads inmobiliarios, inteligencia artificial inmobiliaria, CRM inmobiliario, leads inmobiliarios 24/7, automatización marketing inmobiliario, respuesta automática inmobiliaria, IA WhatsApp inmobiliaria" />
+    <meta name="author" content="SpeedProfit AI" />
+    <meta name="publisher" content="SpeedProfit AI" />
+    <meta name="copyright" content="SpeedProfit AI" />
+    <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1" />
+    <meta name="googlebot" content="index, follow" />
+    <meta name="bingbot" content="index, follow" />
+    <meta name="rating" content="general" />
+    <meta name="revisit-after" content="7 days" />
+    <meta name="distribution" content="global" />
+    <meta name="language" content="Spanish" />
+    <meta http-equiv="content-language" content="es-ES" />
+
+    <!-- Canonical y alternates -->
+    <link rel="canonical" href="https://speedprofitai.com/" />
+    <link rel="alternate" hreflang="es-ES" href="https://speedprofitai.com/" />
+    <link rel="alternate" hreflang="es-MX" href="https://speedprofitai.com/" />
+    <link rel="alternate" hreflang="es-AR" href="https://speedprofitai.com/" />
+    <link rel="alternate" hreflang="es-CO" href="https://speedprofitai.com/" />
+    <link rel="alternate" hreflang="es-CL" href="https://speedprofitai.com/" />
+    <link rel="alternate" hreflang="es-PE" href="https://speedprofitai.com/" />
+    <link rel="alternate" hreflang="es-VE" href="https://speedprofitai.com/" />
+    <link rel="alternate" hreflang="es" href="https://speedprofitai.com/" />
+    <link rel="alternate" hreflang="ca-ES" href="https://speedprofitai.com/" />
+    <link rel="alternate" hreflang="x-default" href="https://speedprofitai.com/" />
+
+    <!-- Verificación de propiedad -->
     <meta name="google-site-verification" content="RuX6hqOoyv2Pkxb3uPX7fqSR6TJnsFyZlhbseZ7PPag" />
 
+    <!-- =========================================================================
+         METADATOS GEO (SEO local para España)
+         ========================================================================= -->
+    <meta name="geo.region" content="ES" />
+    <meta name="geo.country" content="España" />
+    <meta name="geo.placename" content="España" />
+    <meta name="ICBM" content="40.4168, -3.7038" />
+    <meta name="geo.position" content="40.4168;-3.7038" />
+
+    <!-- =========================================================================
+         PWA / MOBILE
+         ========================================================================= -->
     <meta name="mobile-web-app-capable" content="yes" />
     <meta name="apple-mobile-web-app-capable" content="yes" />
-    <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
     <meta name="apple-mobile-web-app-title" content="SpeedProfit AI" />
+    <meta name="application-name" content="SpeedProfit AI" />
     <meta name="theme-color" content="#0A0A0A" />
+    <meta name="msapplication-TileColor" content="#0A0A0A" />
+    <meta name="format-detection" content="telephone=no" />
 
+    <!-- =========================================================================
+         OPEN GRAPH (Facebook, WhatsApp, LinkedIn...)
+         ========================================================================= -->
     <meta property="og:type" content="website" />
     <meta property="og:site_name" content="SpeedProfit AI" />
     <meta property="og:title" content="SpeedProfit AI — Automatización con IA para inmobiliarias" />
-    <meta property="og:description" content="Agentes de IA que responden, cualifican y agendan visitas 24/7 para agencias inmobiliarias independientes en España." />
-    <meta property="og:url" content="https://speedprofitai.com" />
-    <meta property="og:image" content="https://speedprofitai.com/img/og-image.jpg" />
+    <meta property="og:description" content="Agentes de IA que responden, cualifican y agendan visitas 24/7 para agencias inmobiliarias independientes en España. Diseño web para inmobiliarias desde 399€. 63 auditorías de respuesta medidas." />
+    <meta property="og:url" content="https://speedprofitai.com/" />
+    <meta property="og:image" content="https://speedprofitai.com/img/og-image.png" />
+    <meta property="og:image:secure_url" content="https://speedprofitai.com/img/og-image.png" />
+    <meta property="og:image:type" content="image/png" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content="SpeedProfit AI — Automatización con IA para inmobiliarias" />
     <meta property="og:locale" content="es_ES" />
+    <meta property="og:locale:alternate" content="es_MX" />
+    <meta property="og:locale:alternate" content="es_AR" />
 
+    <!-- =========================================================================
+         TWITTER / X
+         ========================================================================= -->
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content="SpeedProfit AI — Automatización con IA para inmobiliarias" />
-    <meta name="twitter:description" content="Agentes de IA que responden, cualifican y agendan visitas 24/7 para agencias inmobiliarias independientes en España." />
-    <meta name="twitter:image" content="https://speedprofitai.com/img/og-image.jpg" />
+    <meta name="twitter:description" content="Agentes de IA que responden, cualifican y agendan visitas 24/7 para agencias inmobiliarias independientes en España. Diseño web para inmobiliarias desde 399€. 63 auditorías de respuesta medidas." />
+    <meta name="twitter:image" content="https://speedprofitai.com/img/og-image.png" />
+    <meta name="twitter:image:alt" content="SpeedProfit AI — Automatización con IA para inmobiliarias" />
 
-    <!--
-      Schema.org — Organization + LocalBusiness + Offer
-      Esto es lo que un motor de IA (ChatGPT, Gemini, Perplexity...) o un
-      buscador leen como datos verificables de la empresa, en vez de tener
-      que interpretarlos del texto visual de la web. Mantener actualizado si
-      cambia el precio, la dirección o los datos de contacto.
+    <!-- =========================================================================
+         PRECONNECT / PERFORMANCE
+         ========================================================================= -->
+    <link rel="preconnect" href="https://www.youtube-nocookie.com" />
+    <link rel="dns-prefetch" href="https://www.youtube-nocookie.com" />
+    <link rel="preconnect" href="https://wa.me" />
 
-      ⚠️ IMPORTANTE — no rellenar "sameAs" ni "aggregateRating" con enlaces o
-      cifras que no existan todavía (Google Business Profile, Trustpilot...).
-      Un dato estructurado falso es peor que no ponerlo: si un motor de IA lo
-      contrasta con la fuente real y no coincide, penaliza la confianza en
-      toda la web. Añadir cada campo según se vaya creando de verdad — ver
-      CLAUDE.md, "Frente 3".
+    <!-- =========================================================================
+         SCHEMA.ORG — DATOS ESTRUCTURADOS PARA IAs Y BUSCADORES
+         =========================================================================
+         Esto es lo que un motor de IA (ChatGPT, Gemini, Perplexity, Claude...)
+         y los buscadores leen como datos verificables de la empresa, en vez
+         de tener que interpretarlos del texto visual. Se combinan varios
+         @type porque cada uno cubre una cara distinta del negocio:
+           - Organization: identidad legal + contacto + logo
+           - LocalBusiness: presencia en España + área servida
+           - Service: descripción del servicio ofrecido con precio
+           - WebSite: metadatos de la web + acción de búsqueda
+           - FAQPage: se añade dinámicamente en Home.jsx desde el FAQ
+
+         ⚠️ IMPORTANTE — no rellenar "sameAs" ni "aggregateRating" con enlaces
+         o cifras que no existan todavía. Un dato estructurado falso es peor
+         que no ponerlo: si un motor de IA lo contrasta con la fuente real y
+         no coincide, penaliza la confianza en toda la web. Añadir cada campo
+         según se vaya creando de verdad — ver CLAUDE.md, "Frente 3".
     -->
     <script type="application/ld+json">
     {
       "@context": "https://schema.org",
-      "@type": "LocalBusiness",
-      "name": "SpeedProfit AI",
-      "description": "Automatización con inteligencia artificial para agencias inmobiliarias independientes en España: agentes de IA que responden, cualifican y agendan visitas 24/7, y captación de exclusivas con Meta Ads.",
-      "url": "https://speedprofitai.com",
-      "email": "info.angelspeedprofit@gmail.com",
-      "telephone": "+34722842925",
-      "address": {
-        "@type": "PostalAddress",
-        "streetAddress": "Calle Pablo Serrano nº11",
-        "postalCode": "50794",
-        "addressCountry": "ES"
-      },
-      "areaServed": {
-        "@type": "Country",
-        "name": "España"
-      },
-      "priceRange": "1500€",
-      "makesOffer": {
-        "@type": "Offer",
-        "name": "Implementación de agente de IA para inmobiliarias",
-        "price": "1500",
-        "priceCurrency": "EUR",
-        "description": "Agente de IA entrenado con el catálogo y procesos de la agencia, integrado con WhatsApp, web y CRM, implementado en 2 a 3 semanas, con soporte 24/7 y garantía de devolución de 30 días."
-      }
+      "@graph": [
+        {
+          "@type": "Organization",
+          "@id": "https://speedprofitai.com/#organization",
+          "name": "SpeedProfit AI",
+          "legalName": "SpeedProficient OÜ",
+          "alternateName": "SpeedProfit",
+          "url": "https://speedprofitai.com/",
+          "identifier": {
+            "@type": "PropertyValue",
+            "propertyID": "Estonian Business Register",
+            "value": "17532333"
+          },
+          "address": {
+            "@type": "PostalAddress",
+            "streetAddress": "Pärnu mnt 105",
+            "addressLocality": "Tallinn",
+            "addressRegion": "Harju maakond",
+            "postalCode": "11312",
+            "addressCountry": "EE"
+          },
+          "logo": {
+            "@type": "ImageObject",
+            "url": "https://speedprofitai.com/img/logo.png",
+            "width": 512,
+            "height": 512
+          },
+          "image": "https://speedprofitai.com/img/og-image.png",
+          "description": "Agencia de automatización con IA para inmobiliarias independientes en España. Desarrollamos agentes de inteligencia artificial por WhatsApp que responden leads las 24 horas, filtran consultas y agendan visitas automáticamente.",
+          "email": "info@speedprofitai.com",
+          "telephone": "+34722842925",
+          "foundingDate": "2025",
+          "areaServed": [
+            { "@type": "Country", "name": "España" },
+            { "@type": "Country", "name": "México" },
+            { "@type": "Country", "name": "Argentina" },
+            { "@type": "Country", "name": "Colombia" }
+          ],
+          "knowsAbout": [
+            "Automatización con inteligencia artificial",
+            "Agentes conversacionales de IA",
+            "Sector inmobiliario",
+            "Marketing digital inmobiliario",
+            "Meta Ads para inmobiliarias",
+            "Captación de leads inmobiliarios",
+            "WhatsApp Business API",
+            "Integración de CRM"
+          ],
+          "knowsLanguage": ["es", "en", "ca", "ar", "pt", "fr", "ru", "hi", "zh"],
+          "slogan": "Que tu agencia no pierda otra operación por no responder a tiempo",
+          "contactPoint": [
+            {
+              "@type": "ContactPoint",
+              "contactType": "customer service",
+              "telephone": "+34722842925",
+              "email": "info@speedprofitai.com",
+              "availableLanguage": ["Spanish", "English", "Catalan"],
+              "areaServed": "ES"
+            },
+            {
+              "@type": "ContactPoint",
+              "contactType": "sales",
+              "telephone": "+34722842925",
+              "email": "info@speedprofitai.com",
+              "availableLanguage": ["Spanish", "English"],
+              "areaServed": ["ES", "MX", "AR", "CO"]
+            }
+          ]
+        },
+        {
+          "@type": "LocalBusiness",
+          "@id": "https://speedprofitai.com/#localbusiness",
+          "name": "SpeedProfit AI",
+          "url": "https://speedprofitai.com/",
+          "image": "https://speedprofitai.com/img/og-image.png",
+          "priceRange": "€€",
+          "telephone": "+34722842925",
+          "email": "info@speedprofitai.com",
+          "address": {
+            "@type": "PostalAddress",
+            "streetAddress": "Calle Pablo Serrano nº11",
+            "postalCode": "50794",
+            "addressCountry": "ES"
+          },
+          "areaServed": {
+            "@type": "Country",
+            "name": "España"
+          },
+          "openingHoursSpecification": {
+            "@type": "OpeningHoursSpecification",
+            "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"],
+            "opens": "00:00",
+            "closes": "23:59",
+            "description": "Soporte 24/7 los 365 días del año"
+          },
+          "parentOrganization": { "@id": "https://speedprofitai.com/#organization" }
+        },
+        {
+          "@type": "Service",
+          "@id": "https://speedprofitai.com/#service-agentes-ia",
+          "serviceType": "Automatización con Inteligencia Artificial para Inmobiliarias",
+          "name": "Agente de IA para inmobiliarias",
+          "provider": { "@id": "https://speedprofitai.com/#organization" },
+          "description": "Agente de inteligencia artificial entrenado con el catálogo, tono y procesos de tu agencia, integrado con WhatsApp, web y CRM. Responde, cualifica y agenda visitas 24/7 los 365 días. Incluye soporte y garantía de resultados a 30 días.",
+          "areaServed": { "@type": "Country", "name": "España" },
+          "audience": {
+            "@type": "BusinessAudience",
+            "audienceType": "Agencias inmobiliarias independientes"
+          },
+          "offers": {
+            "@type": "Offer",
+            "name": "Implementación de agente de IA",
+            "price": "399",
+            "priceCurrency": "EUR",
+            "priceSpecification": {
+              "@type": "PriceSpecification",
+              "price": "399",
+              "priceCurrency": "EUR",
+              "valueAddedTaxIncluded": false
+            },
+            "availability": "https://schema.org/InStock",
+            "url": "https://speedprofitai.com/como-funciona",
+            "description": "Pago único de configuración. Agente entrenado con tu catálogo y tono, integrado con WhatsApp, web y CRM. Soporte 24/7. Garantía de devolución si no ves resultados en 30 días.",
+            "warranty": {
+              "@type": "WarrantyPromise",
+              "durationOfWarranty": {
+                "@type": "QuantitativeValue",
+                "value": 30,
+                "unitCode": "DAY"
+              }
+            }
+          }
+        },
+        {
+          "@type": "WebSite",
+          "@id": "https://speedprofitai.com/#website",
+          "url": "https://speedprofitai.com/",
+          "name": "SpeedProfit AI",
+          "description": "Automatización con IA para inmobiliarias en España",
+          "publisher": { "@id": "https://speedprofitai.com/#organization" },
+          "inLanguage": "es-ES"
+        }
+      ]
     }
     </script>
   </head>
   <body>
     <div id="root"></div>
+
+    <!-- =========================================================================
+         CONTENIDO PARA CRAWLERS SIN JAVASCRIPT
+         =========================================================================
+         React renderiza el contenido de la web con JavaScript, así que un
+         crawler que no ejecute JS (Semrush por defecto, algunos crawlers de
+         IA antiguos) vería el <div id="root"></div> vacío y no encontraría
+         ni el <h1>, ni el texto, ni los enlaces.
+
+         Esto de aquí es un FALLBACK: contenido HTML estático con la
+         estructura mínima que un crawler necesita para entender de qué
+         va la web y qué páginas existen. NO lo ve un usuario normal — se
+         reemplaza en cuanto el JavaScript carga.
+
+         Google, Bing y los crawlers modernos SÍ ejecutan JS y ven la web
+         completa. Esto es para el resto.
+    -->
+    <noscript>
+      <div style="max-width: 800px; margin: 40px auto; padding: 20px; font-family: system-ui, sans-serif; color: #fff; background: #0a0a0a;">
+        <h1>SpeedProfit AI — Automatización con IA para inmobiliarias en España</h1>
+        <p><strong>Agencia de automatización con inteligencia artificial para inmobiliarias independientes en España.</strong> Desarrollamos agentes de IA por WhatsApp que responden, cualifican y agendan visitas 24/7 los 365 días del año. Diseño web para inmobiliarias: 399€. Resto de servicios, precio según volumen. Garantía de resultados a 30 días. 63 auditorías de tiempo de respuesta medidas sobre agencias españolas.</p>
+
+        <h2>Qué hacemos</h2>
+        <p>Diseñamos e implementamos agentes de inteligencia artificial a medida para agencias inmobiliarias. Cada agente se entrena con el catálogo, tono y forma de trabajar de la agencia, se integra con WhatsApp, la web y el CRM, y responde en menos de 3 segundos las 24 horas del día. Los mismos leads que se pierden hoy por no responder a tiempo se convierten en visitas agendadas.</p>
+
+        <h2>Por qué SpeedProfit AI</h2>
+        <ul>
+          <li>Sistema propio, no un CRM más — construido específicamente para el sector inmobiliario.</li>
+          <li>Soporte 24/7 los 365 días del año.</li>
+          <li>Una sola agencia por zona: no trabajamos con la competencia de nuestros clientes.</li>
+          <li>Habla 8 idiomas y funciona en todas las zonas horarias.</li>
+          <li>Cumplimiento con el RGPD, datos cifrados, nunca compartidos con terceros.</li>
+          <li>Equipo real: especialistas en marketing digital, sector inmobiliario, programadores y soporte.</li>
+        </ul>
+
+        <h2>Datos del sector</h2>
+        <ul>
+          <li><strong>78%</strong> de compradores eligen al primer agente que responde.</li>
+          <li><strong>21x</strong> más probabilidad de cualificar si respondes en 5 min vs 30 min.</li>
+          <li><strong>6h</strong> tiempo medio de respuesta en el sector inmobiliario.</li>
+        </ul>
+
+        <h2>Páginas</h2>
+        <ul>
+          <li><a href="https://speedprofitai.com/">Inicio</a></li>
+          <li><a href="https://speedprofitai.com/agentes-ia">Agentes de IA</a></li>
+          <li><a href="https://speedprofitai.com/como-funciona">Cómo funciona</a></li>
+          <li><a href="https://speedprofitai.com/captacion-exclusivas">Captación de Exclusivas</a></li>
+          <li><a href="https://speedprofitai.com/testimonios">Testimonios</a></li>
+          <li><a href="https://speedprofitai.com/sobre-nosotros">Sobre nosotros</a></li>
+          <li><a href="https://speedprofitai.com/blog">Blog</a></li>
+          <li><a href="https://speedprofitai.com/contacto">Contacto</a></li>
+        </ul>
+
+        <h2>Contacto</h2>
+        <p>
+          Email: <a href="mailto:info@speedprofitai.com">info@speedprofitai.com</a><br>
+          WhatsApp: <a href="https://wa.me/34722842925">+34 722 842 925</a><br>
+          Web: <a href="https://speedprofitai.com/">speedprofitai.com</a>
+        </p>
+      </div>
+    </noscript>
+
     <script type="module" src="/src/main.jsx"></script>
   </body>
 </html>

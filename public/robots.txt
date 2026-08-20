@@ -1,4 +1,154 @@
+# =============================================================================
+# robots.txt — SpeedProfit AI
+# =============================================================================
+# Este archivo es CRÍTICO para SEO y AEO/GEO. Cualquier bot de IA que no
+# pueda leer la web no puede citarla en respuestas — que es exactamente lo
+# que queremos evitar. Por eso permitimos EXPLÍCITAMENTE todos los bots
+# relevantes, incluyendo los que se usan para entrenar IAs.
+#
+# IMPORTANTE: si Cloudflare tiene activado "Managed robots.txt", puede
+# sobreescribir este archivo añadiendo Content-Signal: ai-train=no.
+# Para desactivarlo: Cloudflare Dashboard → speedprofitai.com → Bots →
+# AI Crawl Control → desactivar "Managed robots.txt".
+# =============================================================================
+
+# --- Bots de motores de búsqueda tradicionales -------------------------------
+User-agent: Googlebot
+Allow: /
+
+User-agent: Bingbot
+Allow: /
+
+User-agent: DuckDuckBot
+Allow: /
+
+User-agent: Slurp
+Allow: /
+
+User-agent: YandexBot
+Allow: /
+
+User-agent: Baiduspider
+Allow: /
+
+# --- Bots de IA: los permitimos EXPLÍCITAMENTE para AEO/GEO ------------------
+# Queremos que ChatGPT, Perplexity, Gemini, Claude y compañía puedan
+# leernos, indexarnos y citarnos.
+
+User-agent: GPTBot
+Allow: /
+
+User-agent: ChatGPT-User
+Allow: /
+
+User-agent: OAI-SearchBot
+Allow: /
+
+User-agent: Google-Extended
+Allow: /
+
+User-agent: PerplexityBot
+Allow: /
+
+User-agent: Perplexity-User
+Allow: /
+
+User-agent: ClaudeBot
+Allow: /
+
+User-agent: Claude-User
+Allow: /
+
+User-agent: Claude-SearchBot
+Allow: /
+
+User-agent: anthropic-ai
+Allow: /
+
+User-agent: CCBot
+Allow: /
+
+User-agent: Applebot
+Allow: /
+
+User-agent: Applebot-Extended
+Allow: /
+
+User-agent: FacebookBot
+Allow: /
+
+User-agent: Meta-ExternalAgent
+Allow: /
+
+User-agent: MistralAI-User
+Allow: /
+
+User-agent: cohere-ai
+Allow: /
+
+User-agent: DeepSeekBot
+Allow: /
+
+User-agent: YouBot
+Allow: /
+
+User-agent: Amazonbot
+Allow: /
+
+User-agent: Meta-ExternalFetcher
+Allow: /
+
+User-agent: Google-CloudVertexBot
+Allow: /
+
+User-agent: Ai2Bot
+Allow: /
+
+User-agent: Ai2Bot-Dolma
+Allow: /
+
+User-agent: Bytespider
+Allow: /
+
+User-agent: PetalBot
+Allow: /
+
+User-agent: Diffbot
+Allow: /
+
+User-agent: omgili
+Allow: /
+
+User-agent: omgilibot
+Allow: /
+
+User-agent: ImagesiftBot
+Allow: /
+
+User-agent: Timpibot
+Allow: /
+
+User-agent: FirecrawlAgent
+Allow: /
+
+User-agent: AndiBot
+Allow: /
+
+User-agent: ChatGLM-Spider
+Allow: /
+
+User-agent: QwenBot
+Allow: /
+
+# --- Regla general (por si algún bot no está en la lista) --------------------
 User-agent: *
 Allow: /
 
+# --- Content Signals (Cloudflare / IETF aipref) ------------------------------
+# Declaración explícita: permitimos indexación en buscadores, uso como
+# input de IA (RAG, AI Overviews, etc.) y entrenamiento. Todo permitido
+# porque nuestra estrategia depende de aparecer en respuestas de IA.
+Content-Signal: search=yes, ai-input=yes, ai-train=yes
+
+# --- Sitemap ----------------------------------------------------------------
 Sitemap: https://speedprofitai.com/sitemap.xml

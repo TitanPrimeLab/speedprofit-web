@@ -26,7 +26,8 @@
 
 /* --------------------------------------------------------------------------
    FONDO GLOBAL
-   Imagen de triángulos dorados sobre negro, fija. WebP comprimido (~40 kB).
+   Imagen de triángulos dorados sobre negro, fija.
+   Sustituye /img/fondo.png por tu imagen real (la que ya tienes guardada).
    -------------------------------------------------------------------------- */
 html {
   scroll-behavior: smooth;
@@ -48,7 +49,7 @@ html {
 body {
   margin: 0;
   background-color: var(--ink);
-  background-image: url('/img/fondo.webp');
+  background-image: url('/img/fondo.png');
   background-size: cover;
   background-position: 50% 50%;
   background-repeat: no-repeat;
@@ -160,4 +161,164 @@ button:focus-visible {
 .saltar-a-contenido:focus {
   left: 24px;
   top: 12px;
+}
+
+/* --------------------------------------------------------------------------
+   ESTILOS DEL CONTENIDO DEL BLOG
+   Se aplican al HTML generado desde markdown (marked) en BlogArticulo.jsx.
+   Mantén los tokens de la web para que los artículos se sientan parte
+   del sitio, no un cuerpo extraño.
+   -------------------------------------------------------------------------- */
+.prose-blog {
+  color: rgba(255, 255, 255, 0.85);
+  font-size: 1.05rem;
+  line-height: 1.75;
+}
+
+.prose-blog > * + * {
+  margin-top: 1.25rem;
+}
+
+.prose-blog h1,
+.prose-blog h2,
+.prose-blog h3,
+.prose-blog h4 {
+  color: #fff;
+  font-weight: 700;
+  line-height: 1.25;
+}
+
+.prose-blog h1 {
+  font-size: 2.25rem;
+  margin-top: 3rem;
+}
+
+.prose-blog h2 {
+  font-size: 1.75rem;
+  margin-top: 2.5rem;
+  padding-top: 0.5rem;
+}
+
+.prose-blog h3 {
+  font-size: 1.35rem;
+  margin-top: 2rem;
+  color: var(--gold);
+}
+
+.prose-blog h4 {
+  font-size: 1.1rem;
+  margin-top: 1.75rem;
+}
+
+.prose-blog p {
+  color: rgba(255, 255, 255, 0.82);
+}
+
+.prose-blog strong {
+  color: #fff;
+  font-weight: 700;
+}
+
+.prose-blog em {
+  color: rgba(255, 255, 255, 0.9);
+}
+
+.prose-blog a {
+  color: var(--gold);
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 3px;
+  transition: color 0.2s ease;
+}
+
+.prose-blog a:hover {
+  color: var(--gold-light);
+}
+
+.prose-blog ul,
+.prose-blog ol {
+  padding-left: 1.5rem;
+  color: rgba(255, 255, 255, 0.82);
+}
+
+.prose-blog ul {
+  list-style: disc;
+}
+
+.prose-blog ol {
+  list-style: decimal;
+}
+
+.prose-blog li {
+  margin-top: 0.5rem;
+}
+
+.prose-blog li::marker {
+  color: var(--gold);
+}
+
+.prose-blog blockquote {
+  border-left: 3px solid var(--gold);
+  padding: 0.5rem 0 0.5rem 1.25rem;
+  margin: 1.5rem 0;
+  color: rgba(255, 255, 255, 0.75);
+  font-style: italic;
+  background: rgba(201, 168, 76, 0.04);
+  border-radius: 0 8px 8px 0;
+}
+
+.prose-blog code {
+  background: rgba(255, 255, 255, 0.08);
+  padding: 0.15rem 0.4rem;
+  border-radius: 4px;
+  font-size: 0.9em;
+  color: var(--gold-light);
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, monospace;
+}
+
+.prose-blog pre {
+  background: rgba(0, 0, 0, 0.5);
+  padding: 1.25rem;
+  border-radius: 12px;
+  overflow-x: auto;
+  border: 1px solid rgba(201, 168, 76, 0.15);
+}
+
+.prose-blog pre code {
+  background: none;
+  padding: 0;
+  color: rgba(255, 255, 255, 0.9);
+}
+
+.prose-blog hr {
+  border: none;
+  border-top: 1px solid rgba(201, 168, 76, 0.15);
+  margin: 2.5rem 0;
+}
+
+.prose-blog img {
+  border-radius: 12px;
+  margin: 1.5rem 0;
+  max-width: 100%;
+  height: auto;
+}
+
+.prose-blog table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 1.5rem 0;
+  font-size: 0.95rem;
+}
+
+.prose-blog th,
+.prose-blog td {
+  padding: 0.75rem 1rem;
+  border: 1px solid rgba(201, 168, 76, 0.15);
+  text-align: left;
+}
+
+.prose-blog th {
+  background: rgba(201, 168, 76, 0.08);
+  font-weight: 700;
+  color: #fff;
 }

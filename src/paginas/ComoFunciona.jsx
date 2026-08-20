@@ -1,16 +1,15 @@
-import { COMO_FUNCIONA, PRECIO } from '../contenido'
+import { COMO_FUNCIONA } from '../contenido'
 import {
-  BotonOro,
   CabeceraSeccion,
   CierreCTA,
   Icono,
-  Ilustracion,
   ListaPuntos,
   Revelar,
   Seccion,
   Tarjeta,
 } from '../componentes/ui'
 import VolverAlInicio from '../componentes/VolverAlInicio'
+import Precio from '../componentes/Precio'
 
 export default function ComoFunciona() {
   return (
@@ -19,21 +18,11 @@ export default function ComoFunciona() {
 
       <Seccion className="!pt-12">
         <CabeceraSeccion
+          esH1
           kicker={COMO_FUNCIONA.kicker}
           titulo={COMO_FUNCIONA.titulo}
           subtitulo={COMO_FUNCIONA.subtitulo}
         />
-
-        {COMO_FUNCIONA.imagen && (
-          <div className="max-w-2xl mx-auto mb-14">
-            <Ilustracion
-              src={COMO_FUNCIONA.imagen}
-              alt={COMO_FUNCIONA.imagenAlt}
-              ancho={900}
-              alto={900}
-            />
-          </div>
-        )}
 
         <div className="space-y-6 max-w-5xl mx-auto">
           {COMO_FUNCIONA.pasos.map((paso) => (
@@ -79,51 +68,7 @@ export default function ComoFunciona() {
         </div>
       </Seccion>
 
-      {/* Precio — movido aquí desde Home: el visitante ya ha visto el proceso
-          completo y la garantía de devolución antes de ver la cifra */}
-      <Seccion>
-        <CabeceraSeccion kicker={PRECIO.kicker} titulo={PRECIO.titulo} subtitulo={PRECIO.subtitulo} />
-
-        <div
-          className={`max-w-5xl mx-auto grid grid-cols-1 gap-10 items-center ${
-            PRECIO.imagen ? 'lg:grid-cols-2' : ''
-          }`}
-        >
-          {PRECIO.imagen && (
-            <div className="hidden lg:block">
-              <Ilustracion src={PRECIO.imagen} alt={PRECIO.imagenAlt} ancho={1100} alto={1100} />
-            </div>
-          )}
-
-          <div className="max-w-md mx-auto w-full">
-            <Tarjeta className="text-center border-[rgba(201,168,76,0.35)]">
-              <p className="text-sm texto-apagado uppercase tracking-wider mb-2">
-                {PRECIO.plan.nombre}
-              </p>
-              <p className="text-3xl font-bold texto-oro mb-1">{PRECIO.plan.precio}</p>
-              <p className="texto-apagado text-sm mb-3">{PRECIO.plan.periodo}</p>
-              {PRECIO.puente && (
-                <p className="texto-oro text-sm font-medium mb-8 leading-relaxed">{PRECIO.puente}</p>
-              )}
-
-              <ul className="space-y-3 text-left mb-8">
-                {PRECIO.plan.incluye.map((item) => (
-                  <li key={item} className="flex items-start gap-3">
-                    <Icono nombre="Check" className="w-5 h-5 texto-oro flex-shrink-0 mt-0.5" />
-                    <span className="texto-apagado text-sm leading-relaxed">{item}</span>
-                  </li>
-                ))}
-              </ul>
-
-              <BotonOro className="w-full" mensaje={PRECIO.ctaMensaje}>
-                {PRECIO.cta}
-              </BotonOro>
-            </Tarjeta>
-
-            <p className="texto-apagado text-sm text-center mt-6">{PRECIO.nota}</p>
-          </div>
-        </div>
-      </Seccion>
+      <Precio />
 
       <div style={{ backgroundColor: 'rgba(5,5,8,0.9)' }}>
         <CierreCTA

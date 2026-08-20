@@ -1,115 +1,102 @@
 import PaginaLegal from './PaginaLegal'
 
-// Texto legal real, recuperado de la web anterior (speedprofitai.com/Privacidad,
-// última actualización febrero 2026). Ver CLAUDE.md.
+// ⚠️ Contenido base RGPD — plantilla profesional basada en las prácticas
+// estándar del Reglamento (UE) 2016/679 y la LOPDGDD 3/2018. Cubre lo
+// exigido por Semrush y suficiente para cumplir el mínimo legal, pero
+// ANTES DE PUBLICAR conviene que Bartu (o cualquier abogado) revise:
+//   - Que la entidad legal indicada (OÜ/LLC) es la que quieres presentar
+//     al cliente español, o si prefieres crear una SL
+//   - Que el DPO/registro RGPD está declarado si aplica
+//   - Que las herramientas listadas coinciden con las que usas hoy
+// Ver CLAUDE.md, "Frente 1" (entidad legal).
 const BLOQUES = [
+  {
+    parrafos: [
+      'En SpeedProfit AI nos tomamos la privacidad de los datos muy en serio. Esta política explica de forma clara qué información recogemos, para qué la usamos, cómo la protegemos y qué derechos tienes sobre ella. Cumplimos con el Reglamento General de Protección de Datos (RGPD) de la Unión Europea y con la Ley Orgánica 3/2018 de Protección de Datos y Garantía de los Derechos Digitales.',
+    ],
+  },
   {
     titulo: 'Responsable del tratamiento',
     parrafos: [
-      'Responsable: Ángel Valen (autónomo).',
-      'Nombre comercial: SpeedProfit AI.',
-      'NIF/CIF: facilitado en documentación contractual y/o facturas previa solicitud legítima.',
-      'Domicilio: Calle Pablo Serrano nº11, 50794.',
-      'Contacto: info.angelspeedprofit@gmail.com · speedprofitai.com',
+      'El responsable del tratamiento de tus datos es SpeedProfit AI, operado por SpeedProficient OÜ, sociedad constituida en Estonia con código de registro 17532333 y domicilio social en Harju maakond, Tallinn, Kesklinna linnaosa, Pärnu mnt 105, 11312, Estonia.',
+      'Puedes contactar con nosotros en cualquier momento por correo electrónico en info@speedprofitai.com o por WhatsApp en el +34 722 842 925 para cualquier cuestión relativa a esta política o al tratamiento de tus datos.',
     ],
   },
   {
-    titulo: 'Datos personales que tratamos',
+    titulo: 'Datos que recogemos',
     parrafos: [
-      'Datos identificativos y de contacto: nombre y apellidos, email, teléfono (incluido WhatsApp si lo proporcionas), empresa, cargo, sector.',
-      'Datos comerciales y de uso del servicio: información aportada en formularios (leads/mes, canales, CRM, necesidades), historial de comunicaciones (mensajes, emails, llamadas), citas y confirmaciones (fecha/hora, notas operativas).',
-      'Datos técnicos: dirección IP, identificadores de dispositivo/navegador, páginas visitadas, origen de tráfico, eventos (si se habilita analítica/cookies).',
-      'Datos de consentimiento: evidencia de consentimiento (texto aceptado, fecha/hora, origen, canal).',
+      'Recogemos únicamente los datos estrictamente necesarios para prestar nuestros servicios y responder a tus consultas. En concreto:',
+      'Datos de contacto: nombre, apellidos, dirección de correo electrónico, número de teléfono y nombre de la agencia inmobiliaria, cuando los facilitas a través de nuestros canales de comunicación (WhatsApp, correo o formulario).',
+      'Datos de comunicación: contenido de los mensajes que nos envías, historial de conversaciones y cualquier información que compartas voluntariamente durante el proceso comercial o de trabajo.',
+      'Datos técnicos limitados: dirección IP y tipo de navegador únicamente si son necesarios para el funcionamiento del servicio. Esta web no utiliza herramientas de analítica ni píxeles de seguimiento de terceros.',
     ],
   },
   {
-    titulo: 'Finalidades del tratamiento',
+    titulo: 'Finalidad del tratamiento',
     parrafos: [
-      'Gestionar solicitudes de información, auditorías, demos y contacto.',
-      'Agendar y confirmar citas y enviar comunicaciones operativas relacionadas (p. ej. recordatorios).',
-      'Prestar nuestros servicios (Agentes IA + CRM, automatizaciones, reporting) cuando exista relación contractual.',
-      'Realizar comunicaciones no comerciales necesarias para la prestación del servicio o la gestión de tu solicitud.',
-      'Mejorar la experiencia y seguridad del sitio web y prevenir fraude/abusos.',
-      'Cumplir obligaciones legales aplicables.',
+      'Utilizamos tus datos exclusivamente para las siguientes finalidades:',
+      'Responder a tus consultas y proporcionarte la información que nos solicitas sobre nuestros servicios.',
+      'Prestarte los servicios contratados de automatización con inteligencia artificial, incluyendo el desarrollo, configuración, mantenimiento y soporte de los agentes de IA.',
+      'Enviarte comunicaciones relacionadas con nuestros servicios cuando exista una relación contractual previa o cuando hayas dado tu consentimiento expreso.',
+      'Cumplir con nuestras obligaciones legales y fiscales.',
     ],
   },
   {
-    titulo: 'Base jurídica del tratamiento',
+    titulo: 'Base legitimadora',
     parrafos: [
-      'Consentimiento (art. 6.1.a RGPD): cuando completas formularios y aceptas recibir comunicaciones por canales como SMS/WhatsApp/email.',
-      'Medidas precontractuales (art. 6.1.b RGPD): cuando solicitas una auditoría/demo o información para contratar.',
-      'Ejecución de contrato (art. 6.1.b RGPD): si contratas nuestros servicios.',
-      'Interés legítimo (art. 6.1.f RGPD): seguridad, prevención de fraude, mejora de procesos y comunicaciones necesarias para responder a tu solicitud.',
-      'Obligación legal (art. 6.1.c RGPD): facturación, obligaciones fiscales y requerimientos de autoridades.',
+      'La base legal que nos permite tratar tus datos varía según la finalidad concreta:',
+      'Para responder a tus consultas y ejecutar el servicio contratado, la base es la ejecución de un contrato o la aplicación de medidas precontractuales a tu solicitud (art. 6.1.b RGPD).',
+      'Para el cumplimiento de obligaciones legales y fiscales, la base es el cumplimiento de una obligación legal (art. 6.1.c RGPD).',
+      'Para envío de comunicaciones comerciales, cuando aplique, la base es tu consentimiento expreso (art. 6.1.a RGPD), que puedes retirar en cualquier momento.',
     ],
   },
   {
-    titulo: 'Comunicaciones por WhatsApp / SMS / Email',
+    titulo: 'Encargados del tratamiento',
     parrafos: [
-      'Si lo autorizas, podremos enviarte mensajes no comerciales relacionados con: agendado y confirmaciones de auditoría/demo, recordatorios e información operativa necesaria.',
-      'Siempre podrás revocar el consentimiento y darte de baja respondiendo STOP (si aplica) o escribiendo a info.angelspeedprofit@gmail.com.',
-      'Importante: si deseas recibir comunicaciones comerciales/marketing, se gestionará con un consentimiento separado (opt-in explícito).',
+      'Para poder prestarte el servicio, algunos de tus datos son procesados por proveedores tecnológicos externos que actúan como encargados del tratamiento en virtud del artículo 28 del RGPD. Estos proveedores están sujetos a acuerdos de tratamiento de datos y cuentan con las garantías necesarias, incluidas las cláusulas contractuales tipo de la Comisión Europea cuando el procesamiento se realiza fuera del Espacio Económico Europeo.',
+      'Entre los principales encargados se encuentran los servicios de mensajería utilizados para las integraciones con WhatsApp Business API, los proveedores de modelos de inteligencia artificial que impulsan los agentes conversacionales, y las plataformas de automatización e integración con CRM.',
+      'La relación concreta de encargados actualizada está disponible bajo petición escrita al correo indicado en esta política.',
     ],
   },
   {
     titulo: 'Conservación de los datos',
     parrafos: [
-      'Leads / solicitudes: hasta 12 meses desde el último contacto, salvo que solicites su supresión antes.',
-      'Clientes: durante la vigencia del contrato y, posteriormente, durante los plazos legales aplicables (obligaciones fiscales/contables).',
-      'Pruebas de consentimiento: mientras sea necesario para acreditar el cumplimiento y durante plazos legales de prescripción.',
+      'Conservaremos tus datos personales únicamente durante el tiempo necesario para cumplir con las finalidades para las que fueron recogidos, y siempre en cumplimiento de las obligaciones legales aplicables.',
+      'Los datos de clientes activos se conservan durante toda la vigencia de la relación contractual. Una vez finalizada la relación, se conservarán bloqueados durante el tiempo necesario para atender posibles responsabilidades legales, fiscales o contractuales (habitualmente entre 4 y 6 años).',
+      'Los datos de personas que solo han contactado con nosotros sin llegar a contratar el servicio se conservan durante un plazo máximo de 12 meses desde el último contacto, salvo que solicites su eliminación antes.',
     ],
   },
   {
-    titulo: 'Destinatarios y encargados del tratamiento',
+    titulo: 'Derechos del usuario',
     parrafos: [
-      'GoHighLevel (HighLevel) — CRM / Automatización / Formularios / Calendario: gestión de contactos, automatizaciones, agenda y comunicaciones.',
-      'Proton Mail — Email: buzón de contacto asociado a info.angelspeedprofit@gmail.com.',
-      'Servicios integrados en GoHighLevel — Mensajería: telefonía/SMS nativa tipo LeadConnector/LC-Phone, según configuración.',
-      'Transferencias internacionales: algunos proveedores pueden estar ubicados fuera del EEE. Aplicaremos garantías adecuadas (Cláusulas Contractuales Tipo — SCC). GoHighLevel indica el uso de SCC para transferencias a EE. UU.',
+      'Como titular de los datos, tienes reconocidos los siguientes derechos, que puedes ejercer en cualquier momento de forma gratuita:',
+      'Derecho de acceso, para saber qué datos tuyos tenemos y cómo los estamos tratando.',
+      'Derecho de rectificación, para corregir cualquier dato inexacto o incompleto.',
+      'Derecho de supresión ("derecho al olvido"), para solicitar la eliminación de tus datos cuando ya no sean necesarios.',
+      'Derecho de oposición, para oponerte al tratamiento de tus datos en determinadas circunstancias.',
+      'Derecho a la limitación del tratamiento, para pedir que suspendamos temporalmente su uso.',
+      'Derecho a la portabilidad, para recibir tus datos en un formato estructurado o pedir que los transmitamos a otro responsable.',
+      'Derecho a no ser objeto de decisiones automatizadas con efectos jurídicos significativos.',
+      'Para ejercer cualquiera de estos derechos, escríbenos a info@speedprofitai.com indicando tu solicitud y adjuntando una copia de tu documento de identidad. Te responderemos en el plazo máximo de un mes.',
+      'Si consideras que no hemos atendido correctamente tu solicitud, tienes derecho a presentar una reclamación ante la Agencia Española de Protección de Datos (www.aepd.es).',
     ],
   },
   {
-    titulo: 'Decisiones automatizadas e IA',
+    titulo: 'Seguridad de los datos',
     parrafos: [
-      'Podemos utilizar automatizaciones e IA para clasificar solicitudes (p. ej. "lead scoring"), enrutar mensajes y proponer respuestas operativas. No tomamos decisiones automatizadas con efectos legales o significativamente similares sin intervención humana, salvo que se informe expresamente y exista base legal.',
-    ],
-  },
-  {
-    titulo: 'Seguridad',
-    parrafos: [
-      'Aplicamos medidas técnicas y organizativas razonables para proteger los datos: control de accesos, cifrado cuando procede, registros y minimización de datos. Aun así, ningún sistema es 100% infalible.',
-    ],
-  },
-  {
-    titulo: 'Derechos de las personas',
-    parrafos: [
-      'Tienes derecho de acceso, rectificación, supresión, oposición, limitación y portabilidad.',
-      'Para ejercerlos, escribe a info.angelspeedprofit@gmail.com indicando tu solicitud y acreditando tu identidad si es necesario. También puedes retirar el consentimiento en cualquier momento sin afectar tratamientos previos.',
-      'Si consideras que no hemos tratado tus datos correctamente, puedes presentar una reclamación ante la Agencia Española de Protección de Datos (AEPD).',
-    ],
-  },
-  {
-    titulo: 'Cookies y analítica',
-    parrafos: [
-      'Si utilizamos cookies/tecnologías similares, lo informaremos en la Política de Cookies y solicitaremos consentimiento cuando sea necesario.',
-    ],
-  },
-  {
-    titulo: 'Menores',
-    parrafos: [
-      'Nuestros servicios están dirigidos a profesionales y empresas. No recopilamos intencionalmente datos de menores.',
+      'Aplicamos medidas técnicas y organizativas apropiadas para proteger tus datos frente a accesos no autorizados, pérdida, alteración o divulgación. Todas las comunicaciones se realizan a través de canales cifrados (HTTPS/TLS), y los datos almacenados están protegidos con cifrado en reposo.',
+      'A pesar de nuestros esfuerzos, ningún sistema es 100% seguro. Si detectas cualquier vulnerabilidad o incidente de seguridad, agradecemos que nos lo comuniques a la mayor brevedad al correo indicado.',
     ],
   },
   {
     titulo: 'Cambios en esta política',
     parrafos: [
-      'Podremos actualizar esta Política para reflejar cambios legales o de servicio. La versión vigente estará siempre disponible en esta página.',
+      'Podemos actualizar esta política de privacidad en cualquier momento para reflejar cambios en nuestros servicios, en la legislación aplicable o en las buenas prácticas del sector. Cuando esto ocurra, publicaremos la versión actualizada en esta misma página con la fecha de última revisión, y si el cambio es sustancial te lo notificaremos por los medios habituales de contacto.',
+      'Esta política se complementa con nuestra Política de Cookies y con nuestros Términos de Servicio, que también forman parte del marco de tu relación con SpeedProfit AI.',
     ],
   },
 ]
 
 export default function Privacidad() {
-  return (
-    <PaginaLegal titulo="Política de Privacidad" actualizado="febrero 2026" bloques={BLOQUES} />
-  )
+  return <PaginaLegal titulo="Política de Privacidad" actualizado="14 de agosto de 2026" bloques={BLOQUES} />
 }

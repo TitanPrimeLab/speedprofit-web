@@ -7,13 +7,13 @@
 // --- DATOS DE CONTACTO (fuente única de verdad) -----------------------------
 export const EMPRESA = {
   nombre: 'SpeedProfit AI',
-  email: 'info.angelspeedprofit@gmail.com',
+  email: 'info@speedprofitai.com',
   // OJO: número corregido. El sitio antiguo en Base44 tenía 722852924 (incorrecto).
   telefonoVisible: '+34 722 842 925',
   telefonoWhatsApp: '34722842925',
   web: 'speedprofitai.com',
   domicilio: 'Calle Pablo Serrano nº11, 50794',
-  instagram: 'https://www.instagram.com/angel.speedprofit/',
+  instagram: 'https://www.instagram.com/speedprofitai',
   linkedin: 'https://www.linkedin.com/in/angel-valen-580a093a8',
   copyright: '© 2026 SpeedProfit AI · Todos los derechos reservados',
   youtubeId: 'rHPGOX5TKM4',
@@ -29,7 +29,9 @@ export const NAV = [
   { etiqueta: 'Agentes de IA', ruta: '/agentes-ia' },
   { etiqueta: 'Cómo funciona', ruta: '/como-funciona' },
   { etiqueta: 'Captación de Exclusivas', ruta: '/captacion-exclusivas' },
+  { etiqueta: 'Diseño Web', ruta: '/diseno-web-inmobiliarias' },
   { etiqueta: 'Testimonios', ruta: '/testimonios' },
+  { etiqueta: 'Blog', ruta: '/blog' },
   { etiqueta: 'Sobre nosotros', ruta: '/sobre-nosotros' },
   { etiqueta: 'Contacto', ruta: '/contacto' },
 ]
@@ -56,8 +58,8 @@ export const HOME = {
     ctaHref: '#calculadora',
     estadisticas: [
       { valor: '8 min', etiqueta: 'Tiempo máximo antes de perder un lead' },
-      { valor: '40%', etiqueta: 'De consultas llegan fuera de horario' },
-      { valor: 'Tu ROI real', etiqueta: 'Calcula el tuyo en la calculadora', href: '#calculadora' },
+      { valor: '63', etiqueta: 'Auditorías de respuesta medidas en agencias españolas' },
+      { valor: '24/7', etiqueta: 'Respuesta activa los 365 días del año' },
     ],
   },
 
@@ -85,33 +87,20 @@ export const HOME = {
       {
         de: 'agente',
         tipo: 'propiedad',
-        propiedades: [
-          {
-            titulo: 'Piso en Castelldefels',
-            detalles: '3 hab · 65 m² · 2 baños',
-            extras: 'Garaje + trastero',
-            ubicacion: 'A 300 m del mar · Reformado',
-            precio: '299.000€',
-          },
-          {
-            titulo: 'Piso en Castelldefels',
-            detalles: '3 hab · 90 m² · 2 baños',
-            extras: 'Garaje + trastero',
-            ubicacion: 'A 300 m del mar · Reformado',
-            precio: '339.000€',
-          },
-        ],
+        propiedad: {
+          titulo: 'Piso en Castelldefels',
+          detalles: '3 hab · 90 m² · 2 baños',
+          extras: 'Garaje + trastero',
+          ubicacion: 'A 300 m del mar · Reformado',
+          precio: '339.000€',
+        },
       },
-      { de: 'cliente', texto: 'Me gusta más la de 90 m², ¿podría ir a verla?' },
       {
         de: 'agente',
         texto: 'Tengo visita libre el sábado a las 10:30 o a las 12:00. ¿Cuál te va mejor?',
       },
       { de: 'cliente', texto: 'A las 10:30 perfecto' },
-      {
-        de: 'agente',
-        texto: '¡Hecho! 🏠 Te confirmo la visita el sábado a las 10:30. Te llegará un recordatorio.',
-      },
+      { de: 'agente', texto: '¡Hecho! 🏠 Te confirmo la visita el sábado a las 10:30. Te llega recordatorio.' },
     ],
   },
 
@@ -154,8 +143,6 @@ export const HOME = {
     kicker: 'La solución',
     titulo: 'La IA que trabaja mientras tú cierras operaciones',
     subtitulo: 'No es tecnología del futuro. Es lo que tus clientes ya esperan hoy.',
-    imagen: '/img/home-agentes.webp',
-    imagenAlt: 'Agentes de IA de SpeedProfit AI integrados en WhatsApp, web y CRM',
     bloques: [
       {
         icono: 'Zap',
@@ -235,8 +222,6 @@ export const HOME = {
 
   urgencia: {
     badge: 'Plazas limitadas',
-    imagen: '/img/home-equipo.webp',
-    imagenAlt: 'Equipo de SpeedProfit AI, soporte real 24/7 los 365 días del año',
     titulo: 'Tu competencia ya tomó la decisión. ¿Y tú?',
     subtitulo:
       'La pregunta es cuántas operaciones más vas a dejar ir antes de tomar la tuya.',
@@ -263,7 +248,7 @@ export const HOME = {
       },
       {
         p: '¿Cuánto tarda la implementación?',
-        r: 'De 2 a 3 semanas después de firmar el contrato. Sin necesidad de conocimientos técnicos.',
+        r: '5 días desde la contratación. Sin necesidad de conocimientos técnicos.',
       },
       {
         p: '¿Funciona 24 horas al día?',
@@ -279,7 +264,7 @@ export const HOME = {
       },
       {
         p: '¿Cuánto cuesta?',
-        r: 'La inversión es de 1.500€. Sin costes ocultos ni sorpresas.',
+        r: 'Depende del volumen de leads y de los canales que conectemos. Te lo decimos en la auditoría inicial, con el número concreto para tu caso y sin costes ocultos. El diseño web para inmobiliarias sí tiene precio cerrado: 399€.',
       },
       {
         p: '¿Mi agencia de la competencia puede contratar SpeedProfit AI en mi misma zona?',
@@ -306,24 +291,56 @@ export const HOME = {
 }
 
 // ============================================================================
+// INTEGRACIONES — solo herramientas verificadas: probadas de forma real
+// conectando agentes de SpeedProfit a ellas. No incluir nada que no esté
+// en esta lista sin confirmar primero que es una integración real.
+// ============================================================================
+export const INTEGRACIONES = {
+  kicker: 'Compatibilidad',
+  titulo: 'Si tiene API, lo conectamos',
+  subtitulo:
+    'No dependemos de una lista cerrada de integraciones. Conectamos tu WhatsApp, tu web, tu CRM actual, tu calendario y tus canales de captación — sin que tengas que cambiar de herramientas ni migrar nada. Estas son algunas con las que ya hemos probado la conexión.',
+  grupos: [
+    {
+      categoria: 'Portales inmobiliarios',
+      icono: 'Search',
+      herramientas: ['Idealista', 'Fotocasa', 'Habitaclia', 'Pisos.com', 'Inmoweb'],
+    },
+    {
+      categoria: 'CRM',
+      icono: 'Users',
+      herramientas: ['HubSpot', 'Salesforce', 'Zoho CRM', 'Pipedrive'],
+    },
+    {
+      categoria: 'Mensajería y redes',
+      icono: 'MessageSquare',
+      herramientas: ['WhatsApp', 'Instagram', 'Facebook'],
+    },
+    {
+      categoria: 'Calendario y documentos',
+      icono: 'PhoneCall',
+      herramientas: ['Google Calendar', 'Calendly', 'Google Drive'],
+    },
+  ],
+  nota: '¿Usas otra herramienta? Si tiene API, la conectamos igual — pregúntanos.',
+}
+
+// ============================================================================
 // PRECIO — sección pública de precio en Home
 // ============================================================================
 export const PRECIO = {
   kicker: 'Precio',
   titulo: 'Un precio. Sin sorpresas.',
   subtitulo:
-    'Sabemos que vas a comparar. Preferimos que compares con el precio real delante, no adivinando.',
-  imagen: '/img/home-dashboard.webp',
-  imagenAlt: 'Dashboard de SpeedProfit AI con métricas de leads y operaciones en tiempo real',
-  puente: 'La mayoría de nuestros clientes recupera esta inversión con la primera operación cerrada.',
+    'Ya has visto cómo trabajamos y qué garantía te damos. Esto es lo que cuesta — sin sorpresas.',
   plan: {
     nombre: 'Implementación completa',
-    precio: '1.500€',
+    precio: 'Consultar precio',
     periodo: 'pago único de configuración',
     incluye: [
       'Agente de IA entrenado con tu catálogo, tono y procesos reales',
       'Integración con WhatsApp, tu web y tu CRM actual',
-      'Implementación completa en 2 a 3 semanas',
+      'Implementación completa en 5 días',
       'Soporte 24 horas, los 365 días del año',
       'Optimización mensual sin coste adicional',
       'Garantía de devolución total en 30 días si no ves resultados',
@@ -342,50 +359,153 @@ export const PRECIO = {
 export const CALCULADORA = {
   id: 'calculadora',
   kicker: 'Calculadora',
-  titulo: 'Cuánto estás perdiendo en comisiones cada año',
+  titulo: 'Cuánto estás perdiendo por no responder a tiempo',
   subtitulo:
-    'Mete tus números reales. En unos segundos ves cuánto te está costando no responder a tiempo o no hacer seguimiento — y cuántas horas podrías ahorrar automatizando.',
+    'Estos son los datos por defecto del sector — cámbialos por los de tu agencia y verás los resultados al instante.',
   campos: {
     leads: {
-      etiqueta: '¿Cuántos leads recibes al mes aproximadamente?',
-      placeholder: 'Ej. 60',
+      etiqueta: 'Leads que recibes al mes',
+      ayuda: 'Formularios, WhatsApp, llamadas, etc.',
+      defecto: 48,
     },
-    operaciones: {
-      etiqueta: '¿Cuántas operaciones cierras al mes con esos leads?',
-      placeholder: 'Ej. 4',
+    tiempoRespuesta: {
+      etiqueta: 'Tiempo medio de respuesta',
+      opciones: [
+        { valor: 'inmediato', texto: 'Inmediato (< 1 min)', minutos: 1 },
+        { valor: '1_5', texto: '1 - 5 min', minutos: 3 },
+        { valor: '5_30', texto: '5 - 30 min', minutos: 15 },
+        { valor: '30_60', texto: '30 min - 1 hora', minutos: 45 },
+        { valor: '1_6', texto: '1 - 6 horas', minutos: 210 },
+        { valor: 'mas_6', texto: 'Más de 6 horas', minutos: 720 },
+      ],
+      defecto: '30_60',
+    },
+    ticket: {
+      etiqueta: 'Ticket medio de venta (€)',
+      ayuda: 'Precio medio de las propiedades que vendes',
+      defecto: 350000,
     },
     comision: {
-      etiqueta: 'Comisión media por operación (€)',
-      placeholder: 'Ej. 3000',
+      etiqueta: 'Tu comisión (%)',
+      ayuda: 'Comisión que ganas por venta',
+      defecto: 3,
     },
-    horas: {
-      etiqueta: 'Horas a la semana que tú o tu equipo dedicáis a atender consultas (opcional)',
-      placeholder: 'Ej. 10',
+    conversion: {
+      etiqueta: 'Tasa de conversión (%)',
+      ayuda: '% de leads que acaban comprando',
+      defecto: 5,
     },
   },
-  botonCalcular: 'Ver cuánto estoy perdiendo',
-  botonMejora: 'Ver qué podría mejorar',
+
+  // Resultado en vivo (panel derecho)
   resultado: {
-    titulo: 'Esto es lo que tu agencia deja escapar cada año',
-    etiquetaOperacionesPerdidas: 'operaciones perdidas al año por respuesta tardía o falta de seguimiento',
-    etiquetaDineroPerdido: 'en comisiones que no llegan a tu agencia cada año',
-    etiquetaDineroPerdidoMes: 'al mes',
+    titulo: 'Pérdida mensual estimada',
+    etiquetaMes: 'al mes',
+    etiquetaAnio: 'al año',
+    metricas: {
+      leadsPerdidos: 'Leads perdidos/mes',
+      ventasPerdidas: 'Ventas perdidas/mes',
+      penalizacion: 'Tu penalización',
+    },
   },
+
+  // Panel de recuperación con SpeedProfit
   mejora: {
-    titulo: 'Esto es lo que podrías recuperar trabajando con SpeedProfit',
-    etiquetaOperacionesGanadas: 'operaciones adicionales al año',
-    etiquetaDineroGanado: 'de facturación adicional estimada al año',
-    etiquetaDineroGanadoMes: 'al mes',
-    etiquetaHorasAhorradas: 'horas al año liberadas para ti o tu equipo',
-    cta: 'Quiero recuperarlo',
+    titulo: 'Si respondieras en 3 segundos con SpeedProfit',
+    etiquetaRecupera: 'Recuperarías',
+    etiquetaRecuperaAnio: 'Al año',
+    cta: 'Quiero recuperar esas ventas',
+    ctaMensajeBase:
+      'Hola Ángel, he calculado en la web que mi agencia podría estar perdiendo unos %DINERO% al año. Quiero hablar sobre cómo recuperarlo.',
   },
+
+  // Transparencia del cálculo
   transparencia: {
-    titulo: 'Cómo lo calculamos',
-    texto:
-      'La fórmula, paso a paso, para que puedas repetirla tú mismo con tus datos: 1) Leads que no conviertes al mes = leads − operaciones. 2) No todos esos leads eran una venta real: descontamos un 60% que son curiosos sin intención real de compra — es una estimación conservadora del sector, no una cifra a tu medida. 3) Lo que queda son los leads que sí eran oportunidades reales y se perdieron por respuesta tardía o falta de seguimiento: son las operaciones y el dinero perdidos que ves arriba (con el equivalente mensual justo debajo), multiplicado por 12 para el total anual. Con esta fórmula, si cierras el 100% de tus leads el resultado siempre da 0 — no puedes perder lo que no se te escapa. 4) De esas oportunidades reales perdidas, estimamos que SpeedProfit recupera un 70% con respuesta inmediata 24/7 y seguimiento automático — no el 100%, porque no prometemos resultados milagrosos. 5) Si nos dices cuántas horas a la semana dedicáis a atender consultas, calculamos también cuántas de esas horas quedarían libres para tu equipo (60% de ese tiempo). Es una estimación orientativa, no una promesa de resultados — en la consulta gratuita de 30 minutos calculamos las cifras reales de tu agencia con tus datos concretos.',
+    titulo: '¿Cómo calculamos esto?',
+    puntos: [
+      {
+        numero: '1',
+        titulo: 'Penalización por tiempo',
+        texto:
+          'Basado en estudios del sector: responder en más de 1 hora reduce tu probabilidad de contacto en un 60%. En más de 24h, pierdes el 90% de los leads.',
+      },
+      {
+        numero: '2',
+        titulo: 'Leads que se van a la competencia',
+        texto:
+          'El 78% de compradores trabajan con el primer agente que responde. Si tardas, ya están hablando con otro.',
+      },
+      {
+        numero: '3',
+        titulo: 'Impacto en tu comisión',
+        texto:
+          'Multiplicamos los leads perdidos × tu tasa de conversión × tu comisión = dinero que dejas en la mesa.',
+      },
+    ],
+    fuentes: 'Fuentes: Harvard Business Review, InsideSales.com, Lead Response Management Study',
+    enlaceArticulo: {
+      texto: 'Lee el análisis completo en nuestro próximo artículo: El coste real de responder tarde a tus leads inmobiliarios',
+      url: '/blog',
+    },
   },
+
+  // Fila de estadísticas grandes del sector (debajo de la calculadora)
+  estadisticasSector: {
+    titulo: 'Datos del sector inmobiliario',
+    lista: [
+      {
+        valor: '78%',
+        texto: 'de compradores eligen al primer agente que responde',
+      },
+      {
+        valor: '21x',
+        texto: 'más probabilidad de cualificar si respondes en 5 min vs 30 min',
+      },
+      {
+        valor: '6h',
+        texto: 'tiempo medio de respuesta en el sector inmobiliario',
+      },
+    ],
+  },
+
   disclaimer:
     'Estimación orientativa basada en datos medios del sector y de nuestros clientes actuales. No es una garantía de resultados.',
+}
+
+// ============================================================================
+// DIFERENCIADORES (4 tarjetas debajo de la calculadora)
+// ============================================================================
+export const DIFERENCIADORES = {
+  kicker: 'Por qué SpeedProfit AI',
+  titulo: 'Diseñado para no fallar en lo que importa',
+  subtitulo:
+    'Un agente de IA no vale nada si no llega a tiempo, no entiende al cliente, o pone en riesgo sus datos. Lo hemos construido teniendo eso en cuenta desde el primer día.',
+  lista: [
+    {
+      icono: 'Globe',
+      titulo: 'Pensado para mercados globales',
+      texto:
+        'El inmobiliario es internacional. SpeedProfit habla 8 idiomas (español, inglés, catalán, árabe, portugués, francés, ruso, hindi y chino) y funciona en todas las zonas horarias para que nunca pierdas un lead.',
+    },
+    {
+      icono: 'ShieldCheck',
+      titulo: 'Privacidad y seguridad ante todo',
+      texto:
+        'Seguridad de nivel empresarial y cumplimiento con el RGPD. Tus datos y los de tus clientes son tuyos: siempre cifrados y nunca compartidos con terceros.',
+    },
+    {
+      icono: 'Eye',
+      titulo: 'IA transparente',
+      texto:
+        'Creemos que la IA debe potenciar a tu equipo, no reemplazarlo. Cada interacción queda registrada y tus agentes mantienen el control total en todo momento.',
+    },
+    {
+      icono: 'Zap',
+      titulo: 'La velocidad importa',
+      texto:
+        'En el sector inmobiliario, el primer agente en responder gana. Nos aseguramos de que siempre seas tú, respondiendo en menos de 3 segundos.',
+    },
+  ],
 }
 
 // ============================================================================
@@ -400,7 +520,6 @@ export const AGENTES = {
   lista: [
     {
       icono: 'PhoneCall',
-      imagen: '/img/agente-callcenter.webp',
       titulo: 'IA Call Center — Nunca más un teléfono que nadie coge',
       texto:
         'Cada llamada que no contestas es un comprador que llama a la siguiente agencia de la lista. Tu IA atiende todas las llamadas entrantes al instante, responde, cualifica y agenda — y cuando tú llegas por la mañana, las visitas ya están en el calendario.',
@@ -413,7 +532,6 @@ export const AGENTES = {
     },
     {
       icono: 'MessageSquare',
-      imagen: '/img/agente-chat.webp',
       titulo: 'IA Vendedor por Chat — El comercial que nunca se cansa ni pide comisión',
       texto:
         'Un comprador que escribe por WhatsApp a las 11 de la noche quiere respuesta ahora, no mañana a las 9. Tu agente IA responde en segundos, resuelve dudas, envía fichas de propiedades y cierra la visita — mientras tú estás en la cena con tu familia.',
@@ -426,7 +544,6 @@ export const AGENTES = {
     },
     {
       icono: 'Users',
-      imagen: '/img/agente-setter.webp',
       titulo: 'IA Setter — Un equipo entero de prospección trabajando solo',
       texto:
         '¿Cuántos contactos tienes en tu CRM que nunca has llegado a trabajar bien? Tu IA Setter los contacta a todos, personaliza cada mensaje, filtra a los que tienen intención real de comprar o vender y te los entrega listos para hablar. Lo que un equipo de 3 personas haría en una semana, lo hace en una hora.',
@@ -439,7 +556,6 @@ export const AGENTES = {
     },
     {
       icono: 'Headphones',
-      imagen: '/img/agente-soporte.webp',
       titulo: 'IA Soporte — El 90% de las preguntas de tus clientes ya tienen respuesta',
       texto:
         'Tu equipo pierde horas respondiendo siempre lo mismo: horarios, documentación, estado de la operación, precios. Cada hora ahí es una hora que no están vendiendo. Tu agente de soporte resuelve el 90% de las consultas solo, escala solo lo que realmente necesita atención humana y libera a tu equipo para lo que genera dinero.',
@@ -452,7 +568,6 @@ export const AGENTES = {
     },
     {
       icono: 'Wrench',
-      imagen: '/img/agente-medida.webp',
       titulo: '¿Tu caso es distinto? Mejor. Lo construimos desde cero para ti.',
       texto:
         'Las agencias que más crecen no usan soluciones genéricas. Usan sistemas diseñados exactamente para cómo trabajan ellas. Si tus procesos son distintos, tus flujos son complejos o simplemente quieres algo que nadie más tenga — lo desarrollamos. Entrenado con tu material, integrado en tus herramientas, funcionando a tu manera.',
@@ -468,7 +583,7 @@ export const AGENTES = {
     titulo: 'Cada hora que pasa sin esto, tu competencia gana terreno.',
     texto:
       'Dinos con qué parte de tu negocio quieres empezar. En 30 minutos te mostramos exactamente cómo funcionaría para tu agencia.',
-    cta: 'Quiero verlo en mi agencia',
+    cta: 'Quiero ver cómo funciona para mi agencia',
     ctaMensaje: 'Hola Ángel, quiero ver cómo funcionarían los agentes de IA en mi agencia',
   },
 }
@@ -480,9 +595,7 @@ export const COMO_FUNCIONA = {
   kicker: 'Cómo funciona',
   titulo: 'Cada día que no tienes IA, estás pagando un coste invisible',
   subtitulo:
-    'En 2 a 3 semanas tu agencia responde sola, cualifica sola y agenda sola. Lo que pierdes mientras esperas, no vuelve.',
-  imagen: '/img/como-funciona.webp',
-  imagenAlt: 'Agente de IA de SpeedProfit AI gestionando conversaciones automatizadas',
+    'En 5 días tu agencia responde sola, cualifica sola y agenda sola. Lo que pierdes mientras esperas, no vuelve.',
   pasos: [
     {
       numero: '01',
@@ -499,9 +612,9 @@ export const COMO_FUNCIONA = {
     },
     {
       numero: '02',
-      titulo: 'Construimos tu agente IA en 2 a 3 semanas',
-      duracion: '2-3 semanas',
-      meta: '2-3 semanas · Tu equipo no para · Nosotros nos encargamos de todo',
+      titulo: 'Construimos tu agente IA en 3 a 5 días',
+      duracion: '3-5 días',
+      meta: '3-5 días · Tu equipo no para · Nosotros nos encargamos de todo',
       texto:
         'Mientras tú sigues cerrando operaciones como siempre, nuestro equipo entrena tu agente con el tono de tu marca, tu catálogo, tus guiones y tus procesos. Lo integramos en WhatsApp, tu web y tu CRM. Lo probamos hasta que funciona perfecto. Tú no tocas nada, no interrumpes nada y no necesitas saber de tecnología.',
       puntos: [
@@ -559,7 +672,7 @@ export const COMO_FUNCIONA = {
     titulo: 'Cada semana sin esto son operaciones que no verás nunca.',
     texto:
       '30 minutos para saber exactamente cuánto te está costando esperar. Sin compromiso. Sin tecnicismos. Solo números reales.',
-    cta: 'Solicitar diagnóstico gratuito',
+    cta: 'Solicitar diagnóstico gratuito ahora',
     ctaMensaje: 'Hola Ángel, quiero solicitar el diagnóstico gratuito',
     microcopy:
       'Sin compromiso · Garantía de devolución en 30 días · Solo una agencia por zona',
@@ -575,8 +688,6 @@ export const EXCLUSIVAS = {
   tituloDestacado: 'Ahora mismo.',
   subtitulo:
     'No es mala suerte. No es el mercado. Es que hay una agencia llegando antes que tú a propietarios que todavía no han llamado a nadie. Y tú no lo estás viendo.',
-  imagen: '/img/captacion-whatsapp.webp',
-  imagenAlt: 'Notificaciones de WhatsApp de propietarios captados con Meta Ads',
   cta: 'Ver cómo lo hacemos',
   ctaMensaje: 'Hola Ángel, quiero ver cómo captáis exclusivas con Meta Ads',
 
@@ -656,9 +767,9 @@ export const EXCLUSIVAS = {
       'La pregunta es si vas a ser tú — o la agencia de al lado.',
     ],
     destacado:
-      'Cada semana que pasa sin esto son entre 1.500 y 3.000€ que se quedan en el bolsillo de otra agencia de tu zona.',
+      'Cada semana que pasa sin esto son operaciones que se quedan en el bolsillo de otra agencia de tu zona.',
     texto: '30 minutos. Sin compromiso. Solo números reales para tu zona.',
-    cta: 'Quiero ser el primero',
+    cta: 'Quiero ser el primero en mi zona',
     ctaMensaje:
       'Hola Ángel, quiero captar exclusivas en mi zona antes que mi competencia',
     microcopy:
@@ -667,67 +778,150 @@ export const EXCLUSIVAS = {
 }
 
 // ============================================================================
+// DISEÑO WEB PARA INMOBILIARIAS — producto de entrada, precio público
+// ============================================================================
+export const DISENO_WEB = {
+  kicker: 'Diseño web para inmobiliarias',
+  titulo: 'Una web que vende mientras tú',
+  tituloDestacado: 'atiendes visitas.',
+  subtitulo:
+    'Web profesional para tu agencia, lista para captar leads y conectarse a tu agente de IA desde el primer día. Precio cerrado, sin sorpresas.',
+  precio: '399€',
+  precioNota: 'Pago único · Sin cuotas mensuales · Entrega en 5-7 días laborables',
+  cta: 'Quiero mi web por 399€',
+  ctaMensaje: 'Hola Ángel, quiero información sobre la web para inmobiliarias por 399€',
+
+  problema: {
+    kicker: 'El problema',
+    titulo: 'Tu web actual no está pensada para captar. Está pensada para existir.',
+    parrafos: [
+      'La mayoría de webs de agencias inmobiliarias son una tarjeta de visita: bonita, estática, y sin ninguna forma real de convertir a quien la visita en un lead cualificado.',
+      'Y si mañana quieres conectar un agente de IA que responda por WhatsApp, cualifique y agende visitas, tu web actual probablemente ni siquiera está preparada técnicamente para eso.',
+    ],
+    remate: 'Una web que no está lista para automatizarse es una web que ya se ha quedado atrás.',
+  },
+
+  incluye: {
+    kicker: 'Qué incluye',
+    titulo: 'Todo lo que necesita tu agencia para empezar a captar',
+    bloques: [
+      {
+        icono: 'Zap',
+        titulo: 'Lista para tu agente de IA',
+        texto:
+          'Construida sobre la misma base técnica que usamos para conectar agentes de WhatsApp, formularios inteligentes y automatización — sin trabajo extra de integración cuando decidas dar el siguiente paso.',
+      },
+      {
+        icono: 'Search',
+        titulo: 'Optimizada para SEO local',
+        texto:
+          'Estructura técnica correcta desde el primer día: velocidad, metadatos, datos estructurados (schema.org) para que Google y los buscadores de IA entiendan quién eres y dónde operas.',
+      },
+      {
+        icono: 'Target',
+        titulo: 'Diseñada para convertir',
+        texto:
+          'Formularios de contacto, botón de WhatsApp directo y estructura pensada para que quien entra deje sus datos, no para que solo mire fotos de pisos.',
+      },
+      {
+        icono: 'Gauge',
+        titulo: 'Rápida y responsive',
+        texto:
+          'Carga en segundos en móvil y escritorio. La mayoría de tus leads te van a encontrar desde el teléfono — tu web tiene que estar a la altura.',
+      },
+    ],
+  },
+
+  precioBloque: {
+    kicker: 'Precio',
+    titulo: 'Un precio, sin letra pequeña',
+    tarjeta: {
+      nombre: 'Web para inmobiliarias',
+      precio: '399€',
+      precioEtiqueta: 'pago único',
+      incluye: [
+        'Diseño a medida de tu marca',
+        'Hasta 6 páginas (inicio, propiedades, sobre nosotros, contacto y 2 más)',
+        'Formulario de contacto y botón de WhatsApp',
+        'Optimización SEO técnica de base',
+        'Adaptada a móvil',
+        'Entrega en 5-7 días laborables',
+        'Lista para conectar tu agente de IA cuando quieras',
+      ],
+      notaAparte: 'Dominio y hosting no incluidos. Te ayudamos a configurarlos sin coste adicional de gestión.',
+    },
+  },
+
+  faq: {
+    kicker: 'Preguntas frecuentes',
+    titulo: 'Antes de que preguntes',
+    lista: [
+      {
+        p: '¿El precio de 399€ es real, sin sorpresas después?',
+        r: 'Sí. Es el precio completo del diseño y desarrollo de la web. Lo único no incluido es el dominio y el hosting, que son costes de terceros (normalmente entre 10-20€/año) y te ayudamos a contratarlos sin cobrarte gestión.',
+      },
+      {
+        p: '¿Puedo conectar esta web a un agente de IA más adelante?',
+        r: 'Sí, de hecho está pensada para eso. Se construye sobre la misma base técnica que usamos en nuestros sistemas de automatización, así que cuando quieras dar el paso, no hay que rehacer nada.',
+      },
+      {
+        p: '¿Cuánto tarda la entrega?',
+        r: 'Entre 5 y 7 días laborables desde que nos confirmas los contenidos (textos, fotos, propiedades) y el diseño de referencia si tienes uno.',
+      },
+      {
+        p: '¿Puedo pedir cambios después de la entrega?',
+        r: 'Incluimos una ronda de ajustes tras la entrega. Cambios estructurales más adelante (páginas nuevas, secciones nuevas) se presupuestan aparte.',
+      },
+    ],
+  },
+
+  cierre: {
+    titulo: '¿Empezamos con tu web?',
+    texto: 'Cuéntanos sobre tu agencia y te confirmamos plazos en menos de 24h.',
+    cta: 'Quiero mi web por 399€',
+    ctaMensaje: 'Hola Ángel, quiero información sobre la web para inmobiliarias por 399€',
+    microcopy: 'Precio cerrado · Sin permanencia · Entrega en 5-7 días laborables',
+  },
+}
+
+// ============================================================================
 // TESTIMONIOS
 // ⚠️ REVISAR ANTES DE PUBLICAR — ver CLAUDE.md, sección "Decisiones pendientes"
 // ============================================================================
 export const TESTIMONIOS = {
-  kicker: 'Testimonios reales',
-  titulo: 'Empresas que ya trabajan diferente',
+  kicker: 'Casos medidos',
+  titulo: 'Resultados medidos, no historias',
   subtitulo:
-    'No te contamos historias. Aquí tienes los resultados reales de los negocios que confiaron en SpeedProfit AI para automatizar su crecimiento.',
+    'Cada caso de esta página parte de una auditoría real: medimos el tiempo de respuesta antes de tocar nada, y volvemos a medirlo con el sistema en marcha. Mismos mensajes, mismo canal, mismo método. Los datos son nuestros y son verificables.',
   estadisticas: [
-    { valor: '+50', etiqueta: 'Empresas activas' },
-    { valor: 'Tu ROI real', etiqueta: 'Calcula el tuyo en la calculadora', href: '/#calculadora' },
-    { valor: '4.9/5', etiqueta: 'Valoración media' },
+    { valor: '63', etiqueta: 'Auditorías de respuesta realizadas' },
+    { valor: '2 años', etiqueta: 'Operando con IA aplicada a ventas' },
+    { valor: '24/7', etiqueta: 'Cobertura real, 365 días' },
   ],
   lista: [
     {
-      metrica: '+320%',
-      metricaEtiqueta: 'leads cualificados',
-      cita: 'Llevábamos años con el mismo problema: los leads llegaban fuera de horario y nadie los atendía. Desde que implantamos el agente de IA de SpeedProfit, cada consulta recibe respuesta al instante, a cualquier hora. En 3 meses hemos triplicado los leads cualificados y nuestro equipo solo habla con clientes listos para comprar.',
-      iniciales: 'CM',
-      nombre: 'Carlos M.',
-      cargo: 'Director comercial · Agencia inmobiliaria, Madrid',
+      metrica: '7h 16m → segundos',
+      metricaEtiqueta: 'tiempo de primera respuesta',
+      cita: 'La auditoría inicial midió 29 horas y 4 minutos de espera acumulada en solo cuatro mensajes: el 93,3% del tiempo perdido se concentraba fuera del horario de oficina. Con el agente de IA activo, los mismos mensajes reciben respuesta inmediata y con cualificación incluida, a cualquier hora.',
+      iniciales: 'EV',
+      nombre: 'Engel & Völkers Santa Cruz de Tenerife',
+      cargo: 'Inmobiliaria · Santa Cruz de Tenerife',
     },
     {
-      metrica: '15',
-      metricaEtiqueta: 'ventas extra en 90 días',
-      cita: 'Antes perdíamos el 60% de las consultas fuera de horario. Ahora la IA atiende 24/7, califica a cada prospecto y agenda citas automáticamente. En un solo trimestre cerramos 15 operaciones extra que antes simplemente se perdían. El retorno fue inmediato.',
-      iniciales: 'LF',
-      nombre: 'Laura F.',
-      cargo: 'CEO · Grupo residencial, Costa Mediterránea',
+      metrica: '9h 21m → segundos',
+      metricaEtiqueta: 'tiempo de primera respuesta',
+      cita: 'Auditoría inicial: 37 horas y 25 minutos de espera acumulada en cuatro mensajes, con el 94,1% del tiempo perdido fuera de horario. Tras automatizar WhatsApp e integrarlo con web, CRM, email y calendario, las consultas reciben respuesta inmediata y quedan cualificadas antes de llegar al equipo.',
+      iniciales: 'CO',
+      nombre: 'Constructora (caso anónimo por acuerdo)',
+      cargo: 'Promoción y obra nueva · España',
     },
     {
-      metrica: 'x8',
-      metricaEtiqueta: 'ROI en los primeros 90 días',
-      cita: 'Soy escéptico por naturaleza, así que pedí datos antes de confiar. Los resultados me dejaron sin palabras: cada euro invertido nos devuelve x8 en comisiones. SpeedProfit AI no es un gasto, es la inversión de mayor rentabilidad que hemos tomado en la historia de la empresa.',
-      iniciales: 'MR',
-      nombre: 'Miguel Ángel R.',
-      cargo: 'Fundador · Consultora inmobiliaria',
-    },
-    {
-      metrica: '+40%',
-      metricaEtiqueta: 'tasa de conversión a visita',
-      cita: 'Lo que más me sorprendió fue la naturalidad con la que el agente habla con los clientes. Nadie nota que es IA. Las conversaciones son fluidas, empáticas y siempre enfocadas en cerrar la cita. Nuestra tasa de conversión de visitas ha subido un 40%.',
-      iniciales: 'ES',
-      nombre: 'Elena S.',
-      cargo: 'Directora de marketing · Agencia inmobiliaria, Alicante',
-    },
-    {
-      metrica: '3.000€',
-      metricaEtiqueta: 'ahorro mensual en personal',
-      cita: 'Implantamos el Call Center IA para las llamadas de seguimiento. Lo que antes requería 2 personas a tiempo completo, ahora lo gestiona solo el agente: llama, habla, registra y agenda. Ahorramos más de 3.000€ al mes en costes de personal y el seguimiento es mucho más consistente.',
-      iniciales: 'AV',
-      nombre: 'Andrés V.',
-      cargo: 'Gerente · Agencia inmobiliaria, Barcelona',
-    },
-    {
-      metrica: '< 1 semana',
-      metricaEtiqueta: 'de implementación completa',
-      cita: 'La implementación fue sorprendentemente rápida. En menos de una semana ya estaba funcionando con nuestro catálogo y tono de marca. El equipo de SpeedProfit nos guió en cada paso y el soporte post-lanzamiento es excelente. No podríamos estar más contentos.',
-      iniciales: 'PN',
-      nombre: 'Patricia N.',
-      cargo: 'Socia fundadora · Agencia inmobiliaria, Galicia',
+      metrica: '< 30 segundos',
+      metricaEtiqueta: 'tiempo de respuesta (verificado)',
+      cita: 'Antes de automatizar, gestionaban cada contacto a mano: 4 instalaciones cerradas, sin sistema de captación, respondiendo y haciendo seguimiento de forma manual. Con el sistema completo montado, responden en menos de 30 segundos de forma verificada, con campañas activas de 17.320 impresiones y un CPL de 16,99€.',
+      iniciales: 'AS',
+      nombre: 'Arpamsolar',
+      cargo: 'Energía solar · España',
     },
   ],
   cierre: {
@@ -742,24 +936,10 @@ export const TESTIMONIOS = {
     titulo: '¿Ya eres cliente de SpeedProfit AI?',
     texto: 'Tu experiencia ayuda a otras agencias a decidir con datos reales, no con promesas.',
     cta: 'Comparte tu experiencia',
-    // TODO Ángel: cuando tengas Google Business Profile o Trustpilot (ver
-    // CLAUDE.md, Frente 3) puedes seguir usando este mismo formulario o
-    // enlazar directo — lo que prefieras. Por ahora el formulario te avisa
-    // por email; revisas la reseña y decides si la publicas en contenido.js.
-    formulario: {
-      campos: {
-        nombre: { etiqueta: 'Nombre y apellidos', placeholder: 'Ej. María García' },
-        cargo: { etiqueta: 'Cargo', placeholder: 'Ej. Directora comercial' },
-        empresa: { etiqueta: 'Empresa', placeholder: 'Nombre de tu agencia' },
-        zona: { etiqueta: 'Zona', placeholder: 'Ej. Madrid' },
-        resena: { etiqueta: 'Tu reseña', placeholder: 'Cuéntanos tu experiencia con SpeedProfit AI…' },
-      },
-      etiquetaEstrellas: 'Valoración',
-      botonEnviar: 'Enviar reseña',
-      botonEnviando: 'Enviando…',
-      exito: 'Reseña recibida, gracias. La revisamos y la publicamos en cuanto podamos.',
-      error: 'No se pudo enviar. Escríbenos por WhatsApp mientras lo solucionamos.',
-    },
+    // TODO Ángel: sustituir por el enlace directo a Google Business Profile o
+    // Trustpilot en cuanto estén creados (ver CLAUDE.md, Frente 3). Mientras
+    // tanto entra por WhatsApp y se le pasa el enlace a mano.
+    ctaMensaje: 'Hola Ángel, soy cliente y me gustaría dejar una reseña de mi experiencia',
   },
 }
 
@@ -770,8 +950,6 @@ export const SOBRE_NOSOTROS = {
   kicker: 'Sobre nosotros',
   titulo:
     'No somos una plataforma de software. Somos el equipo que hace que tu agencia nunca pierda otra operación.',
-  imagen: '/img/sobre-nosotros.webp',
-  imagenAlt: 'Equipo de SpeedProfit AI trabajando con sus clientes',
   parrafos: [
     'SpeedProfit AI nació de una frustración real: ver cómo negocios con talento perdían operaciones cada día simplemente por no poder responder a tiempo. No por falta de capacidad. Por falta de escala.',
     'Decidimos que eso tenía solución. Y que esa solución no debería costar lo que cuesta en una empresa del Fortune 500.',
@@ -793,17 +971,10 @@ export const SOBRE_NOSOTROS = {
       'Cada agente que desarrollamos está diseñado para que desde el primer mes genere más de lo que cuesta: más ventas cerradas, más horas de equipo recuperadas, más oportunidades que antes se perdían. Si nuestro agente no te devuelve el múltiplo en valor, algo hemos hecho mal — y eso no es aceptable para nosotros.',
     ],
     metricas: [
-      { valor: 'Tu ROI real', etiqueta: 'Calcula el tuyo en la calculadora', href: '/#calculadora' },
-      { valor: '24/7', etiqueta: 'Soporte los 365 días del año para nuestras +50 empresas activas' },
+      { valor: '63', etiqueta: 'Auditorías de tiempo de respuesta medidas en agencias españolas' },
+      { valor: '24/7', etiqueta: 'Soporte los 365 días del año' },
       { valor: '30 días', etiqueta: 'Garantía de devolución si no ves resultados' },
     ],
-  },
-
-  equipo: {
-    kicker: 'Nuestro equipo',
-    titulo: 'Personas reales detrás de cada sistema',
-    texto:
-      'Detrás de cada sistema que desplegamos hay un equipo real. Especialistas en marketing digital y sector inmobiliario que diseñan la estrategia, programadores que construyen los agentes sin atajos técnicos, y un equipo de soporte que está disponible cuando lo necesitas — no durante "horario de oficina", sino 24/7 los 365 días. Cada cliente tiene una persona que conoce su agencia, su zona, su forma de trabajar. Ese es el trabajo que hacemos.',
   },
 
   valores: {
@@ -813,7 +984,7 @@ export const SOBRE_NOSOTROS = {
         icono: 'Gauge',
         titulo: 'Velocidad que no se negocia',
         texto:
-          'De la consulta al sistema funcionando en 2-3 semanas. Mientras tu competencia evalúa opciones, tú ya estás captando leads.',
+          'De la consulta al sistema funcionando en 5 días. Mientras tu competencia evalúa opciones, tú ya estás captando leads.',
       },
       {
         icono: 'Crosshair',
@@ -874,20 +1045,6 @@ export const CONTACTO = {
       href: waLink(),
     },
     { icono: 'Globe', etiqueta: 'Web', valor: EMPRESA.web, href: 'https://speedprofitai.com/' },
-    { icono: 'MapPin', etiqueta: 'Domicilio', valor: EMPRESA.domicilio, href: null },
+    { icono: 'MapPin', etiqueta: 'Oficina en España', valor: EMPRESA.domicilio, href: null },
   ],
-  formulario: {
-    titulo: 'O escríbenos directamente',
-    campos: {
-      nombre: { etiqueta: 'Nombre y apellidos', placeholder: 'Ej. María García' },
-      email: { etiqueta: 'Email', placeholder: 'maria@agencia.com' },
-      telefono: { etiqueta: 'Teléfono (opcional)', placeholder: '600 000 000' },
-      empresa: { etiqueta: 'Empresa (opcional)', placeholder: 'Nombre de tu agencia' },
-      mensaje: { etiqueta: 'Mensaje', placeholder: 'Cuéntanos en qué podemos ayudarte…' },
-    },
-    botonEnviar: 'Enviar mensaje',
-    botonEnviando: 'Enviando…',
-    exito: 'Mensaje enviado. Te responderemos a la mayor brevedad.',
-    error: 'No se pudo enviar. Escríbenos por WhatsApp o a nuestro email mientras lo solucionamos.',
-  },
 }

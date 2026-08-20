@@ -5,7 +5,6 @@ import {
   CierreCTA,
   Estadistica,
   Icono,
-  Ilustracion,
   Insignia,
   Revelar,
   Seccion,
@@ -14,14 +13,20 @@ import {
 import ChatSimulado from '../componentes/ChatSimulado'
 import Acordeon from '../componentes/Acordeon'
 import Calculadora from '../componentes/Calculadora'
+import EstadisticasSector from '../componentes/EstadisticasSector'
+import Diferenciadores from '../componentes/Diferenciadores'
+import Integraciones from '../componentes/Integraciones'
 
 export default function Home() {
   return (
     <>
       <Hero />
       <Calculadora />
+      <EstadisticasSector />
       <Problema />
+      <Integraciones />
       <Solucion />
+      <Diferenciadores />
       <Proceso />
       <Urgencia />
       <Video />
@@ -56,7 +61,7 @@ function Hero() {
 
             <div className="grid grid-cols-3 gap-4 mt-14 pt-8 border-t border-[rgba(201,168,76,0.15)]">
               {hero.estadisticas.map((e) => (
-                <Estadistica key={e.valor} valor={e.valor} etiqueta={e.etiqueta} href={e.href} />
+                <Estadistica key={e.valor} valor={e.valor} etiqueta={e.etiqueta} />
               ))}
             </div>
           </div>
@@ -111,12 +116,6 @@ function Solucion() {
         titulo={solucion.titulo}
         subtitulo={solucion.subtitulo}
       />
-
-      {solucion.imagen && (
-        <div className="max-w-3xl mx-auto mb-14">
-          <Ilustracion src={solucion.imagen} alt={solucion.imagenAlt} ancho={900} alto={900} />
-        </div>
-      )}
 
       <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
         {solucion.bloques.map((b) => (
@@ -178,11 +177,6 @@ function Urgencia() {
   const { urgencia } = HOME
   return (
     <div style={{ backgroundColor: 'rgba(5,5,8,0.9)' }}>
-      {urgencia.imagen && (
-        <div className="max-w-2xl mx-auto px-6 pt-14 md:pt-16">
-          <Ilustracion src={urgencia.imagen} alt={urgencia.imagenAlt} ancho={1000} alto={552} />
-        </div>
-      )}
       <CierreCTA
         badge={urgencia.badge}
         titulo={urgencia.titulo}

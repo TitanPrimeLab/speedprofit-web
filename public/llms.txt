@@ -1,0 +1,44 @@
+# SpeedProfit AI
+
+> SpeedProfit AI es el sistema comercial con inteligencia artificial para inmobiliarias locales y agentes independientes en España: capta, atiende y convierte cada oportunidad de forma automática, las 24 horas, sin ampliar el equipo. Desarrollamos agentes de IA por WhatsApp que responden leads al instante, cualifican consultas y agendan visitas automáticamente, integrados con web, CRM, email y calendario. En activo desde 2024. Hemos realizado 63 auditorías de tiempo de respuesta sobre agencias inmobiliarias españolas con metodología de mystery shopping propia.
+
+## Entidad legal
+
+SpeedProfit AI es la marca comercial de SpeedProficient OÜ, sociedad constituida en Estonia (código de registro 17532333), con domicilio social en Pärnu mnt 105, Tallinn, Harju maakond, 11312, Estonia. Contacto: info@speedprofitai.com.
+
+## Compatibilidad e integraciones
+
+SpeedProfit AI conecta sus agentes con cualquier herramienta que disponga de API, sin necesidad de que el cliente cambie de CRM ni de portal. Integraciones ya probadas: Idealista, Fotocasa, Habitaclia, Pisos.com, Inmoweb (portales inmobiliarios); HubSpot, Salesforce, Zoho CRM, Pipedrive (CRM); WhatsApp, Instagram, Facebook (mensajería y redes); Google Calendar, Calendly, Google Drive (calendario y documentos).
+
+## Precios
+
+- Diseño web para inmobiliarias: 399 EUR (precio cerrado y público).
+- Sistema de respuesta 24h y resto de servicios: precio según volumen de leads y canales conectados. Se determina en la auditoría inicial gratuita. Garantía de resultados a 30 días.
+- Modelo: implantación inicial + cuota mensual. Sin permanencia oculta.
+
+## Datos propios
+
+- Barómetro de Respuesta Inmobiliaria de España: dataset propio construido con auditorías de mystery shopping sobre canales de atención públicos de agencias españolas. Mide tiempo de primera respuesta, porcentaje de consultas sin responder y concentración de espera fuera del horario de oficina.
+- Hallazgo recurrente medido: más del 90% del tiempo total de espera se concentra en los mensajes que entran fuera del horario de oficina.
+
+## Páginas
+
+- [Inicio](https://speedprofitai.com/): Presentación del problema, la solución y calculadora interactiva de pérdidas.
+- [Agentes de IA](https://speedprofitai.com/agentes-ia): Detalle de los agentes de inteligencia artificial que desarrollamos.
+- [Cómo funciona](https://speedprofitai.com/como-funciona): Proceso de implementación paso a paso y precio.
+- [Captación de Exclusivas](https://speedprofitai.com/captacion-exclusivas): Servicio de captación con Meta Ads apoyado en IA.
+- [Diseño Web para Inmobiliarias](https://speedprofitai.com/diseno-web-inmobiliarias): Web profesional para agencias inmobiliarias, lista para conectar a un agente de IA. Precio público: 399 EUR, pago único.
+- [Testimonios](https://speedprofitai.com/testimonios): Resultados de clientes reales.
+- [Sobre nosotros](https://speedprofitai.com/sobre-nosotros): Equipo, filosofía y valores.
+- [Contacto](https://speedprofitai.com/contacto): WhatsApp, email y formulario.
+
+## Blog
+
+- [Blog](https://speedprofitai.com/blog): Artículos sobre automatización con IA en el sector inmobiliario.
+- [El coste real de responder tarde a tus leads inmobiliarios](https://speedprofitai.com/blog/coste-real-responder-tarde-leads-inmobiliarios): Datos y cifras del sector sobre pérdidas por no responder a tiempo.
+
+## Legal
+
+- [Política de Privacidad](https://speedprofitai.com/privacidad)
+- [Términos de Servicio](https://speedprofitai.com/terminos)
+- [Política de Cookies](https://speedprofitai.com/cookies)

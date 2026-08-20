@@ -191,10 +191,19 @@ entidad legal) lo lleva el cliente aparte y no toca este repositorio.
   generado a partir de `HOME.faq.preguntas` — si añades una pregunta al FAQ,
   el schema se actualiza solo.
 
-### 2. Precio público (`PRECIO` en `contenido.js`, sección `Precio` en `Home.jsx`)
+### 2. Precio público (`PRECIO` en `contenido.js`, componente `componentes/Precio.jsx`)
 1.500€, con lo que incluye y la garantía de 30 días. Esto es directamente lo
 que las IAs comparaban con el precio público de Inmovilla (79€/mes) y usaban
 como argumento de opacidad.
+
+**Vive en "Cómo funciona", no en la Home.** Decisión deliberada: un visitante
+escéptico que ve 1.500€ antes de entender qué compra, cierra la pestaña. El
+dato que necesitan las IAs no depende de en qué página esté la tarjeta visual
+— vive en dos sitios que no se mueven: el `schema.org Offer` de `index.html`
+(presente en toda la web, es la plantilla única del SPA) y la respuesta del
+FAQ en la Home ("¿Cuánto cuesta?"). Si algún día se quiere mover el precio
+otra vez, `Precio.jsx` es un componente independiente — se importa donde
+haga falta, no hay que reescribirlo.
 
 ### 3. FAQ ampliado (`HOME.faq.preguntas` en `contenido.js`)
 5 preguntas nuevas que responden literalmente a las objeciones que planteaban
@@ -231,6 +240,113 @@ IAs: que las cifras de retorno prometidas ("ROI 3x", "300% de crecimiento")
 son "promesas comerciales sin contrastar". Aquí pasa lo contrario: el
 visitante ve la fórmula, mete sus propios números, y la propia web le dice
 que no es una garantía.
+
+### 6. Política de Cookies (`paginas/PoliticaCookies.jsx`, ruta `/cookies`)
+No existía en el sitio original ni estaba pedida por las IAs — se añadió
+aparte, a petición del cliente, por transparencia. A diferencia de
+Privacidad y Términos, **este contenido SÍ es real y no un placeholder**:
+refleja el estado técnico actual (sin Analytics, sin píxeles, YouTube en
+modo `nocookie`). Si en algún momento se añade Analytics o cualquier píxel
+de seguimiento, hay que actualizar el bloque "Qué cookies usamos" — y en ese
+momento sí pasaría a ser obligatorio un banner de consentimiento, que hoy no
+lo es.
+
+### 7. llms.txt (`public/llms.txt`)
+Estándar nuevo (2024-2026, llmstxt.org) — el equivalente de robots.txt pero
+para que ChatGPT/Claude/Gemini lean un resumen limpio de la web sin tener
+que rastrear todo el HTML. Markdown puro: H1 + blockquote de resumen +
+secciones con enlaces a cada página. Si se añaden o cambian páginas, hay
+que actualizar este archivo también — no se genera solo.
+
+### 8. Fix de accesibilidad/SEO: h1 en todas las páginas
+`AgentesIA.jsx`, `ComoFunciona.jsx` y `Testimonios.jsx` usaban `<h2>` como
+título de apertura (vía `CabeceraSeccion`) y no tenían ningún `<h1>` en la
+página. Se añadió una prop `esH1` a `CabeceraSeccion` (en `componentes/ui.jsx`)
+que renderiza `<h1>` en vez de `<h2>` cuando se pasa. Si se crea una página
+nueva, comprobar que su título de apertura use `esH1` — cada página necesita
+exactamente un `<h1>`.
+
+### 9. Calculadora rediseñada (`componentes/Calculadora.jsx`)
+Reescrita al estilo de calculadora moderna con dos columnas: inputs a la
+izquierda, resultados en vivo a la derecha. **Cambios clave respecto a la
+versión anterior:**
+- Valores por defecto pre-rellenados (48 leads, 350k€ ticket, etc.) — el
+  usuario ve un resultado en cuanto entra, cero fricción.
+- Cálculo en tiempo real sin botón "calcular". Cambias un input, cambia el
+  resultado inmediatamente (via `useMemo`).
+- Fórmula nueva basada en penalización por tiempo de respuesta (curva
+  documentada en el propio archivo).
+- ROI calculado sobre la inversión de 1.500€.
+- Bloque "¿Cómo calculamos esto?" desplegable con 3 puntos + fuentes +
+  enlace al artículo de blog correspondiente.
+
+### 10. Estadísticas del sector (`componentes/EstadisticasSector.jsx`)
+Fila de 3 números grandes (78% / 21x / 6h) debajo de la calculadora.
+Refuerza los datos del sector que la calculadora acaba de usar. Todo el
+copy en `CALCULADORA.estadisticasSector`.
+
+### 11. Diferenciadores (`componentes/Diferenciadores.jsx`)
+Bloque de 4 tarjetas: mercados globales (8 idiomas), privacidad/RGPD, IA
+transparente, velocidad. Va entre "La solución" y "El proceso" en la Home.
+Copy en `DIFERENCIADORES` en `contenido.js`.
+
+### 12. Blog (Fase 1) — sistema completo de artículos en Markdown
+
+**Arquitectura:**
+- Los artículos viven en `src/blog/*.md` — un archivo por artículo.
+- Cada archivo tiene frontmatter YAML al principio con los metadatos
+  (título, slug, descripción, fecha, autor, categoría, imagen, palabras
+  clave).
+- `src/blog/index.js` los lee todos vía `import.meta.glob` de Vite, parsea
+  el frontmatter, y expone `listarArticulos()` y `obtenerArticulo(slug)`.
+- El markdown se renderiza a HTML con `marked` (dependencia nueva, ~30kb).
+
+**Rutas:**
+- `/blog` → listado (`paginas/Blog.jsx`).
+- `/blog/:slug` → artículo individual (`paginas/BlogArticulo.jsx`).
+
+**SEO por artículo:**
+- El título, meta description, canonical, Open Graph y JSON-LD (`Article`
+  + `BreadcrumbList`) se actualizan dinámicamente al cargar cada artículo.
+- Ver funciones helper al final de `BlogArticulo.jsx`.
+
+**Estilos del cuerpo:**
+- Clase `.prose-blog` en `index.css` — tipografía, listas, blockquotes,
+  código, tablas. Todo con los tokens de la web.
+
+**Cómo añadir un artículo nuevo:**
+1. Crea un archivo `.md` en `src/blog/` (nombre libre, pero el `slug` del
+   frontmatter es lo que va en la URL).
+2. Copia la estructura del frontmatter del artículo de ejemplo
+   (`coste-real-responder-tarde-leads-inmobiliarios.md`).
+3. Escribe el contenido en Markdown normal.
+4. Añade la URL al `sitemap.xml` y al `llms.txt`.
+5. `git add`, `commit`, `push` — Cloudflare redespliega automáticamente.
+
+**Todavía por hacer (fase 2):**
+- Sistema de categorías con filtro.
+- Autopublicación desde n8n/Make (montar cuando el flujo esté aceitado).
+- Sincronización con carruseles de Instagram.
+
+### 13. Metadatos SEO/AEO máximos (`index.html`)
+Reescrito con set completo de metadatos para máximo posicionamiento en
+buscadores y motores de IA:
+- Robots directives específicas (`max-snippet:-1`, `max-image-preview:large`).
+- Meta author, publisher, copyright, rating, language.
+- hreflang para es-ES, es y x-default.
+- Geo tags (region, country, ICBM, position).
+- Preconnect a youtube-nocookie y wa.me.
+- Open Graph completo (con image:width/height/alt y locale:alternate).
+- Twitter Card completo.
+- Schema.org `@graph` con 4 tipos combinados: Organization, LocalBusiness,
+  Service, WebSite — con IDs internos para que se referencien entre sí.
+- Manifest.webmanifest para PWA básica.
+
+**IMPORTANTE:** Los campos `sameAs` y `aggregateRating` se dejan fuera
+deliberadamente. Añadirlos con datos que no existan aún (Google Business
+Profile, Trustpilot) penaliza más que ayudarlos — un motor de IA que
+contrasta el dato con la fuente y no lo encuentra, deja de confiar en la
+web entera. Añadirlos SOLO cuando esos perfiles existan de verdad.
 
 ## Añadidos nuevos respecto al sitio original
 

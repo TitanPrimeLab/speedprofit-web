@@ -1,79 +1,49 @@
-import { useState } from 'react'
+import { useMemo, useState } from 'react'
 import { ChevronDown } from 'lucide-react'
 import { CALCULADORA } from '../contenido'
-import { BotonOro, CabeceraSeccion, Insignia, Seccion, Tarjeta } from './ui'
+import { BotonOro, CabeceraSeccion, Seccion, Tarjeta } from './ui'
 
 // ============================================================================
-// CALCULADORA DE COMISIONES PERDIDAS
+// CALCULADORA DE PÉRDIDAS POR TIEMPO DE RESPUESTA
 //
-// Toda la fórmula está aquí, comentada línea a línea a propósito: esta
-// calculadora hace afirmaciones sobre dinero real, así que tiene que poder
-// justificarse. El texto "Cómo lo calculamos" que se ve en la web (más abajo,
-// en `transparencia`) es literalmente esta lógica explicada en prosa —
-// si cambias la fórmula, actualiza también ese texto en contenido.js.
+// Rediseñada: dos columnas (inputs a la izquierda, resultados en vivo a la
+// derecha). Los valores por defecto son los del sector, así que en cuanto
+// alguien entra ya ve un resultado — cero fricción. Todo se recalcula en
+// tiempo real conforme cambian los inputs, sin botón "calcular".
 //
-// Diseño pedido por Ángel tras probar la primera versión: "leads" son los
-// leads totales que recibes al mes (sin más matices). De los que NO cierras
-// (leads − operaciones), no todos son una venta perdida — una parte son
-// curiosos sin intención real de compra, así que se descuentan primero. Lo
-// que queda son las oportunidades reales que se pierden por respuesta tardía
-// o falta de seguimiento. Con esto, cerrar el 100% de tus leads da SIEMPRE
-// pérdida cero — no hay forma de que el cálculo se contradiga a sí mismo.
+// FÓRMULA (documentada aquí porque hace afirmaciones sobre dinero real):
 //
-// Segundo ajuste pedido por Ángel: los resultados seguían saliendo muy
-// elevados incluso sin la contradicción. Se subió el descuento de curiosos
-// del 30% al 45% y se añadió un techo (máximo 30% de los leads mensuales).
+//   1) Penalización por tiempo de respuesta:
+//      El % de leads que se pierden aumenta con el tiempo que tardas en
+//      responder. Basado en estudios del sector (Lead Response Management
+//      Study, Harvard Business Review, InsideSales.com).
 //
-// Tercer ajuste (el techo tenía un bug de UX serio): con leads fijos, el
-// techo se activaba para casi cualquier tasa de cierre baja-a-media y el
-// resultado se quedaba CLAVADO en el mismo número aunque subieras las
-// operaciones cerradas una a una — solo empezaba a moverse al cruzar el
-// umbral del techo. Detectado por Ángel probando con leads=20 y subiendo
-// operaciones de 1 en 1: no cambiaba nada hasta llegar a 10. Un techo duro
-// (Math.min) siempre hace esto en algún tramo — no es una fórmula que se
-// pueda "arreglar un poco", hay que quitarlo. Se sustituye por un único
-// porcentaje de curiosos más alto (60%): sigue moderando el resultado, pero
-// ahora es una proporción simple y por eso responde a CADA cambio de
-// operaciones, sin tramos planos.
+//   2) Leads perdidos/mes = leadsMes × penalizacion
+//
+//   3) Ventas perdidas/mes = leadsPerdidos × tasaConversion
+//
+//   4) Dinero perdido/mes = ventasPerdidas × ticket × comision
+//
+//   5) Con SpeedProfit se asume respuesta en < 3 segundos → penalización
+//      mínima (5%), y por tanto se recupera casi toda la pérdida.
+//
+// Si cambias esta lógica, actualiza también CALCULADORA.transparencia
+// en contenido.js — el texto explica esta fórmula al usuario.
 // ============================================================================
 
-const PORCENTAJE_CURIOSOS = 0.6 // de los leads no cerrados, ~60% no eran una venta real
-const PORCENTAJE_RECUPERADO_CON_IA = 0.7 // de las oportunidades reales perdidas, SpeedProfit recupera un 70%
-const PORCENTAJE_TIEMPO_LIBERADO = 0.6
-
-function calcular({ leads, operaciones, comision, horas }) {
-  if (!leads || leads <= 0) return null
-
-  const operacionesReales = Math.min(operaciones, leads) // no se puede cerrar más de lo que entra
-
-  // --- Lo que se pierde HOY ------------------------------------------------
-  const noConvertidosMes = leads - operacionesReales
-  const perdidosRealesMes = noConvertidosMes * (1 - PORCENTAJE_CURIOSOS)
-  const dineroPerdidoMes = perdidosRealesMes * comision
-
-  const operacionesPerdidasAnio = perdidosRealesMes * 12
-  const dineroPerdidoAnio = dineroPerdidoMes * 12
-
-  // --- Lo que se podría recuperar con SpeedProfit --------------------------
-  const operacionesGanadasMes = perdidosRealesMes * PORCENTAJE_RECUPERADO_CON_IA
-  const dineroGanadoMes = operacionesGanadasMes * comision
-
-  const operacionesGanadasAnio = operacionesGanadasMes * 12
-  const dineroGanadoAnio = dineroGanadoMes * 12
-
-  // --- Horas liberadas (informativo, no afecta al cálculo de dinero) -------
-  const horasAhorradasAnio = horas > 0 ? Math.round(horas * 52 * PORCENTAJE_TIEMPO_LIBERADO) : null
-
-  return {
-    operacionesPerdidasAnio: Math.round(operacionesPerdidasAnio),
-    dineroPerdidoMes: Math.round(dineroPerdidoMes),
-    dineroPerdidoAnio: Math.round(dineroPerdidoAnio),
-    operacionesGanadasAnio: Math.round(operacionesGanadasAnio),
-    dineroGanadoMes: Math.round(dineroGanadoMes),
-    dineroGanadoAnio: Math.round(dineroGanadoAnio),
-    horasAhorradasAnio,
-  }
+// Curva de penalización según tiempo de respuesta (en minutos)
+// Fuente: Lead Response Management Study (InsideSales.com + MIT)
+const PENALIZACION_POR_TIEMPO = {
+  1: 0.05, // Respuesta inmediata: pierdes solo 5%
+  3: 0.10, // 1-5 min: 10%
+  15: 0.20, // 5-30 min: 20%
+  45: 0.30, // 30 min - 1h: 30%
+  210: 0.60, // 1-6h: 60%
+  720: 0.90, // >6h: 90%
 }
+
+// Con SpeedProfit se asume respuesta instantánea
+const PENALIZACION_CON_SPEEDPROFIT = 0.05
 
 const formatoEuros = new Intl.NumberFormat('es-ES', {
   style: 'currency',
@@ -81,44 +51,58 @@ const formatoEuros = new Intl.NumberFormat('es-ES', {
   maximumFractionDigits: 0,
 })
 
+const formatoNumero = new Intl.NumberFormat('es-ES', { maximumFractionDigits: 1 })
+
 export default function Calculadora() {
   const { campos } = CALCULADORA
-  const [leads, setLeads] = useState('')
-  const [operaciones, setOperaciones] = useState('')
-  const [comision, setComision] = useState('')
-  const [horas, setHoras] = useState('')
-  const [mostrarResultado, setMostrarResultado] = useState(false)
-  const [mostrarMejora, setMostrarMejora] = useState(false)
+
+  // Estados con valores por defecto (sin fricción — ya se ve un resultado)
+  const [leads, setLeads] = useState(campos.leads.defecto)
+  const [tiempoRespuesta, setTiempoRespuesta] = useState(campos.tiempoRespuesta.defecto)
+  const [ticket, setTicket] = useState(campos.ticket.defecto)
+  const [comision, setComision] = useState(campos.comision.defecto)
+  const [conversion, setConversion] = useState(campos.conversion.defecto)
   const [mostrarTransparencia, setMostrarTransparencia] = useState(false)
 
-  const valores = {
-    leads: parseFloat(leads) || 0,
-    operaciones: parseFloat(operaciones) || 0,
-    comision: parseFloat(comision) || 0,
-    horas: parseFloat(horas) || 0,
-  }
-  const resultado = calcular(valores)
-  const datosValidos = valores.leads > 0 && valores.comision > 0
+  const resultado = useMemo(() => {
+    const opcionTiempo = campos.tiempoRespuesta.opciones.find((o) => o.valor === tiempoRespuesta)
+    const minutos = opcionTiempo?.minutos ?? 45
+    const penalizacion = PENALIZACION_POR_TIEMPO[minutos] ?? 0.30
 
-  const handleCalcular = (e) => {
-    e.preventDefault()
-    if (!datosValidos) return
-    setMostrarResultado(true)
-    setMostrarMejora(false)
-    // Desplaza suavemente hasta el resultado
-    requestAnimationFrame(() => {
-      document.getElementById('resultado-calculadora')?.scrollIntoView({
-        behavior: 'smooth',
-        block: 'center',
-      })
-    })
-  }
+    const nLeads = parseFloat(leads) || 0
+    const nTicket = parseFloat(ticket) || 0
+    const nComision = (parseFloat(comision) || 0) / 100
+    const nConversion = (parseFloat(conversion) || 0) / 100
 
-  const mensajeWhatsApp = resultado
-    ? `Hola Ángel, he calculado en la web que mi agencia podría estar perdiendo unos ${formatoEuros.format(
-        resultado.dineroPerdidoAnio
-      )} al año. Quiero hablar sobre cómo recuperarlo.`
-    : CALCULADORA.mejora.cta
+    // Estado actual
+    const leadsPerdidosMes = nLeads * penalizacion
+    const ventasPerdidasMes = leadsPerdidosMes * nConversion
+    const dineroPerdidoMes = ventasPerdidasMes * nTicket * nComision
+    const dineroPerdidoAnio = dineroPerdidoMes * 12
+
+    // Con SpeedProfit
+    const leadsPerdidosMesSP = nLeads * PENALIZACION_CON_SPEEDPROFIT
+    const ventasPerdidasMesSP = leadsPerdidosMesSP * nConversion
+    const dineroPerdidoMesSP = ventasPerdidasMesSP * nTicket * nComision
+    const dineroRecuperadoMes = dineroPerdidoMes - dineroPerdidoMesSP
+
+    const dineroRecuperadoAnio = dineroRecuperadoMes * 12
+
+    return {
+      leadsPerdidosMes,
+      ventasPerdidasMes,
+      dineroPerdidoMes,
+      dineroPerdidoAnio,
+      penalizacionPct: Math.round(penalizacion * 100),
+      dineroRecuperadoMes,
+      dineroRecuperadoAnio,
+    }
+  }, [leads, tiempoRespuesta, ticket, comision, conversion, campos.tiempoRespuesta.opciones])
+
+  const mensajeWhatsApp = CALCULADORA.mejora.ctaMensajeBase.replace(
+    '%DINERO%',
+    formatoEuros.format(resultado.dineroPerdidoAnio)
+  )
 
   return (
     <Seccion id={CALCULADORA.id} fondo="rgba(5,5,8,0.9)">
@@ -128,185 +112,216 @@ export default function Calculadora() {
         subtitulo={CALCULADORA.subtitulo}
       />
 
-      <div className="max-w-2xl mx-auto">
-        <Tarjeta>
-          <form onSubmit={handleCalcular} className="space-y-6">
-            <Campo
-              etiqueta={campos.leads.etiqueta}
-              placeholder={campos.leads.placeholder}
-              valor={leads}
-              onChange={setLeads}
-            />
-            <Campo
-              etiqueta={campos.operaciones.etiqueta}
-              placeholder={campos.operaciones.placeholder}
-              valor={operaciones}
-              onChange={setOperaciones}
-            />
-            <Campo
-              etiqueta={campos.comision.etiqueta}
-              placeholder={campos.comision.placeholder}
-              valor={comision}
-              onChange={setComision}
-              prefijo="€"
-            />
-            <Campo
-              etiqueta={campos.horas.etiqueta}
-              placeholder={campos.horas.placeholder}
-              valor={horas}
-              onChange={setHoras}
-            />
+      <div className="max-w-5xl mx-auto">
+        {/* Dos columnas: inputs / resultados */}
+        <div className="grid md:grid-cols-2 gap-6">
+          {/* ---- Columna izquierda: INPUTS ---- */}
+          <Tarjeta>
+            <div className="space-y-5">
+              <CampoNumero
+                etiqueta={campos.leads.etiqueta}
+                ayuda={campos.leads.ayuda}
+                valor={leads}
+                onChange={setLeads}
+              />
 
-            <BotonOro className="w-full" tamano="medio" onClick={handleCalcular}>
-              {CALCULADORA.botonCalcular}
-            </BotonOro>
-            {!datosValidos && (leads || comision) && (
-              <p className="text-sm texto-apagado text-center">
-                Rellena al menos los leads mensuales y la comisión media para calcular.
+              <CampoSelect
+                etiqueta={campos.tiempoRespuesta.etiqueta}
+                valor={tiempoRespuesta}
+                onChange={setTiempoRespuesta}
+                opciones={campos.tiempoRespuesta.opciones}
+              />
+
+              <CampoNumero
+                etiqueta={campos.ticket.etiqueta}
+                ayuda={campos.ticket.ayuda}
+                valor={ticket}
+                onChange={setTicket}
+              />
+
+              <CampoNumero
+                etiqueta={campos.comision.etiqueta}
+                ayuda={campos.comision.ayuda}
+                valor={comision}
+                onChange={setComision}
+              />
+
+              <CampoNumero
+                etiqueta={campos.conversion.etiqueta}
+                ayuda={campos.conversion.ayuda}
+                valor={conversion}
+                onChange={setConversion}
+              />
+            </div>
+          </Tarjeta>
+
+          {/* ---- Columna derecha: RESULTADOS EN VIVO ---- */}
+          <div className="space-y-4">
+            {/* Bloque grande: pérdida al mes */}
+            <div className="rounded-2xl p-6 bg-[rgba(220,60,60,0.08)] border border-[rgba(220,60,60,0.25)] text-center">
+              <p className="text-sm text-white/70 mb-1">{CALCULADORA.resultado.titulo}</p>
+              <p className="text-5xl md:text-6xl font-bold text-[#FF6B6B] leading-tight">
+                {formatoEuros.format(resultado.dineroPerdidoMes)}
               </p>
-            )}
-          </form>
-        </Tarjeta>
-
-        {/* --- Resultado: lo que se pierde hoy --- */}
-        {mostrarResultado && resultado && (
-          <div id="resultado-calculadora" className="mt-8">
-            <Tarjeta className="border-[rgba(201,168,76,0.35)] text-center">
-              <Insignia>{CALCULADORA.resultado.titulo}</Insignia>
-
-              <div className="grid sm:grid-cols-2 gap-6 mt-8">
-                <div>
-                  <p className="text-4xl font-bold text-white">
-                    {resultado.operacionesPerdidasAnio}
-                  </p>
-                  <p className="texto-apagado text-sm mt-2">
-                    {CALCULADORA.resultado.etiquetaOperacionesPerdidas}
-                  </p>
-                </div>
-                <div>
-                  <p className="text-4xl font-bold texto-oro">
-                    {formatoEuros.format(resultado.dineroPerdidoAnio)}
-                  </p>
-                  <p className="texto-apagado text-sm mt-2">
-                    {CALCULADORA.resultado.etiquetaDineroPerdido}
-                  </p>
-                  <p className="texto-apagado text-xs mt-1">
-                    {formatoEuros.format(resultado.dineroPerdidoMes)}{' '}
-                    {CALCULADORA.resultado.etiquetaDineroPerdidoMes}
-                  </p>
-                </div>
-              </div>
-
-              {!mostrarMejora && (
-                <div className="mt-8">
-                  <BotonOro tamano="medio" onClick={() => setMostrarMejora(true)}>
-                    {CALCULADORA.botonMejora}
-                  </BotonOro>
-                </div>
-              )}
-            </Tarjeta>
-
-            {/* --- Mejora: lo que se podría ganar --- */}
-            {mostrarMejora && (
-              <Tarjeta className="mt-6 border-[rgba(201,168,76,0.5)] text-center bg-[rgba(201,168,76,0.06)]">
-                <Insignia>{CALCULADORA.mejora.titulo}</Insignia>
-
-                <div className="grid sm:grid-cols-2 gap-6 mt-8">
-                  <div>
-                    <p className="text-4xl font-bold text-white">
-                      +{resultado.operacionesGanadasAnio}
-                    </p>
-                    <p className="texto-apagado text-sm mt-2">
-                      {CALCULADORA.mejora.etiquetaOperacionesGanadas}
-                    </p>
-                  </div>
-                  <div>
-                    <p className="text-4xl font-bold texto-oro">
-                      +{formatoEuros.format(resultado.dineroGanadoAnio)}
-                    </p>
-                    <p className="texto-apagado text-sm mt-2">
-                      {CALCULADORA.mejora.etiquetaDineroGanado}
-                    </p>
-                    <p className="texto-apagado text-xs mt-1">
-                      +{formatoEuros.format(resultado.dineroGanadoMes)}{' '}
-                      {CALCULADORA.mejora.etiquetaDineroGanadoMes}
-                    </p>
-                  </div>
-                </div>
-
-                {/* Horas liberadas — sustituye al ROI/días de recuperación, más creíble que un múltiplo */}
-                {resultado.horasAhorradasAnio != null && (
-                  <div className="mt-8 pt-8 border-t border-[rgba(201,168,76,0.2)]">
-                    <p className="text-4xl font-bold text-white">+{resultado.horasAhorradasAnio}</p>
-                    <p className="texto-apagado text-sm mt-2">
-                      {CALCULADORA.mejora.etiquetaHorasAhorradas}
-                    </p>
-                  </div>
-                )}
-
-                <div className="mt-8">
-                  <BotonOro mensaje={mensajeWhatsApp}>{CALCULADORA.mejora.cta}</BotonOro>
-                </div>
-              </Tarjeta>
-            )}
-
-            {/* --- Transparencia del cálculo --- */}
-            <div className="mt-6">
-              <button
-                type="button"
-                onClick={() => setMostrarTransparencia((v) => !v)}
-                className="w-full flex items-center justify-between gap-3 text-left px-5 py-4 rounded-xl border border-[rgba(201,168,76,0.15)] bg-[rgba(255,255,255,0.02)] hover:bg-[rgba(255,255,255,0.04)] transition-colors"
-              >
-                <span className="text-sm font-semibold texto-oro">
-                  {CALCULADORA.transparencia.titulo}
-                </span>
-                <ChevronDown
-                  className={`w-4 h-4 texto-oro flex-shrink-0 transition-transform duration-300 ${
-                    mostrarTransparencia ? 'rotate-180' : ''
-                  }`}
-                />
-              </button>
-              {mostrarTransparencia && (
-                <p className="texto-apagado text-sm leading-relaxed mt-4 px-1">
-                  {CALCULADORA.transparencia.texto}
-                </p>
-              )}
+              <p className="text-white/70 text-sm mt-1">{CALCULADORA.resultado.etiquetaMes}</p>
             </div>
 
-            <p className="texto-apagado text-xs text-center mt-6 max-w-lg mx-auto leading-relaxed">
-              {CALCULADORA.disclaimer}
-            </p>
+            {/* Segundo bloque: pérdida anual */}
+            <div className="rounded-2xl p-4 bg-[rgba(220,60,60,0.05)] border border-[rgba(220,60,60,0.15)] text-center">
+              <p className="text-3xl font-bold text-[#FF6B6B]">
+                {formatoEuros.format(resultado.dineroPerdidoAnio)}
+              </p>
+              <p className="text-white/60 text-sm mt-1">{CALCULADORA.resultado.etiquetaAnio}</p>
+            </div>
+
+            {/* 3 métricas horizontales */}
+            <div className="grid grid-cols-3 gap-3">
+              <MiniMetrica
+                valor={Math.round(resultado.leadsPerdidosMes)}
+                etiqueta={CALCULADORA.resultado.metricas.leadsPerdidos}
+              />
+              <MiniMetrica
+                valor={formatoNumero.format(resultado.ventasPerdidasMes)}
+                etiqueta={CALCULADORA.resultado.metricas.ventasPerdidas}
+              />
+              <MiniMetrica
+                valor={`${resultado.penalizacionPct}%`}
+                etiqueta={CALCULADORA.resultado.metricas.penalizacion}
+              />
+            </div>
+
+            {/* Bloque VERDE: recuperación con SpeedProfit */}
+            <div className="rounded-2xl p-5 bg-[rgba(74,222,128,0.06)] border border-[rgba(74,222,128,0.25)]">
+              <p className="text-sm font-semibold text-[#4ADE80] mb-3">
+                {CALCULADORA.mejora.titulo}
+              </p>
+              <div className="space-y-2 text-sm">
+                <div className="flex justify-between items-center">
+                  <span className="text-white/70">{CALCULADORA.mejora.etiquetaRecupera}</span>
+                  <span className="font-bold text-[#4ADE80]">
+                    {formatoEuros.format(resultado.dineroRecuperadoMes)}/mes
+                  </span>
+                </div>
+                <div className="flex justify-between items-center">
+                  <span className="text-white/70">{CALCULADORA.mejora.etiquetaRecuperaAnio}</span>
+                  <span className="font-bold text-[#4ADE80]">
+                    {formatoEuros.format(resultado.dineroRecuperadoAnio)}/año
+                  </span>
+                </div>
+              </div>
+            </div>
+
+            {/* CTA */}
+            <BotonOro className="w-full" mensaje={mensajeWhatsApp}>
+              {CALCULADORA.mejora.cta}
+            </BotonOro>
           </div>
-        )}
+        </div>
+
+        {/* -------- BLOQUE INFERIOR: cómo lo calculamos -------- */}
+        <div className="mt-10">
+          <button
+            type="button"
+            onClick={() => setMostrarTransparencia((v) => !v)}
+            className="w-full flex items-center justify-between gap-3 text-left px-5 py-4 rounded-xl border border-[rgba(201,168,76,0.15)] bg-[rgba(255,255,255,0.02)] hover:bg-[rgba(255,255,255,0.04)] transition-colors"
+          >
+            <span className="text-sm font-semibold texto-oro">
+              {CALCULADORA.transparencia.titulo}
+            </span>
+            <ChevronDown
+              className={`w-4 h-4 texto-oro flex-shrink-0 transition-transform duration-300 ${
+                mostrarTransparencia ? 'rotate-180' : ''
+              }`}
+            />
+          </button>
+
+          {mostrarTransparencia && (
+            <div className="mt-6 grid md:grid-cols-3 gap-6">
+              {CALCULADORA.transparencia.puntos.map((punto) => (
+                <div key={punto.numero} className="text-left">
+                  <div className="flex items-center gap-3 mb-3">
+                    <span className="w-8 h-8 rounded-full bg-black text-white text-sm font-bold flex items-center justify-center flex-shrink-0">
+                      {punto.numero}
+                    </span>
+                    <h4 className="text-white font-semibold text-sm">{punto.titulo}</h4>
+                  </div>
+                  <p className="text-white/60 text-sm leading-relaxed">{punto.texto}</p>
+                </div>
+              ))}
+            </div>
+          )}
+
+          {mostrarTransparencia && (
+            <>
+              <p className="text-white/40 text-xs text-center mt-6">
+                {CALCULADORA.transparencia.fuentes}
+              </p>
+              <p className="text-center mt-3">
+                <a
+                  href={CALCULADORA.transparencia.enlaceArticulo.url}
+                  className="text-sm texto-oro hover:underline"
+                >
+                  {CALCULADORA.transparencia.enlaceArticulo.texto}
+                </a>
+              </p>
+            </>
+          )}
+
+          <p className="texto-apagado text-xs text-center mt-6 max-w-lg mx-auto leading-relaxed">
+            {CALCULADORA.disclaimer}
+          </p>
+        </div>
       </div>
     </Seccion>
   )
 }
 
 // ---------------------------------------------------------------------------
-function Campo({ etiqueta, placeholder, valor, onChange, prefijo }) {
+function CampoNumero({ etiqueta, ayuda, valor, onChange }) {
   return (
     <label className="block">
-      <span className="block text-sm font-medium text-white mb-2">{etiqueta}</span>
+      <span className="block text-sm font-semibold text-white mb-1.5">{etiqueta}</span>
+      <input
+        type="number"
+        inputMode="decimal"
+        min="0"
+        step="any"
+        value={valor}
+        onChange={(e) => onChange(e.target.value)}
+        className="w-full bg-[rgba(255,255,255,0.04)] border border-[rgba(201,168,76,0.2)] rounded-xl py-2.5 px-4 text-white focus:outline-none focus:border-[var(--gold)] transition-colors"
+      />
+      {ayuda && <span className="block text-xs text-white/50 mt-1.5">{ayuda}</span>}
+    </label>
+  )
+}
+
+function CampoSelect({ etiqueta, valor, onChange, opciones }) {
+  return (
+    <label className="block">
+      <span className="block text-sm font-semibold text-white mb-1.5">{etiqueta}</span>
       <div className="relative">
-        {prefijo && (
-          <span className="absolute left-4 top-1/2 -translate-y-1/2 texto-apagado">
-            {prefijo}
-          </span>
-        )}
-        <input
-          type="number"
-          inputMode="decimal"
-          min="0"
-          step="1"
+        <select
           value={valor}
           onChange={(e) => onChange(e.target.value)}
-          placeholder={placeholder}
-          className={`w-full bg-[rgba(255,255,255,0.04)] border border-[rgba(201,168,76,0.2)] rounded-xl py-3 ${
-            prefijo ? 'pl-9' : 'pl-4'
-          } pr-4 text-white placeholder:text-white/30 focus:outline-none focus:border-[var(--gold)] transition-colors`}
-        />
+          className="w-full appearance-none bg-[rgba(255,255,255,0.04)] border border-[rgba(201,168,76,0.2)] rounded-xl py-2.5 pl-4 pr-10 text-white focus:outline-none focus:border-[var(--gold)] transition-colors cursor-pointer"
+        >
+          {opciones.map((op) => (
+            <option key={op.valor} value={op.valor} className="bg-[#0a0a0a]">
+              {op.texto}
+            </option>
+          ))}
+        </select>
+        <ChevronDown className="w-4 h-4 texto-oro absolute right-4 top-1/2 -translate-y-1/2 pointer-events-none" />
       </div>
     </label>
+  )
+}
+
+function MiniMetrica({ valor, etiqueta }) {
+  return (
+    <div className="rounded-xl p-3 bg-[rgba(255,255,255,0.03)] border border-[rgba(255,255,255,0.06)] text-center">
+      <p className="text-xl font-bold text-white">{valor}</p>
+      <p className="text-[10px] text-white/60 mt-1 leading-tight">{etiqueta}</p>
+    </div>
   )
 }

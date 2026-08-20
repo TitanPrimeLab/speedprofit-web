@@ -1,37 +1,8 @@
-import { useState } from 'react'
 import { CONTACTO } from '../contenido'
-import { BotonOro, CampoTexto, Icono, Insignia, Seccion, Tarjeta } from '../componentes/ui'
+import { BotonOro, Icono, Insignia, Seccion } from '../componentes/ui'
 import VolverAlInicio from '../componentes/VolverAlInicio'
-import { enviarFormulario } from '../lib/formularios'
 
 export default function Contacto() {
-  const { formulario } = CONTACTO
-  const [datos, setDatos] = useState({ nombre: '', email: '', telefono: '', empresa: '', mensaje: '' })
-  const [estado, setEstado] = useState('idle') // idle | enviando | exito | error
-
-  const cambiar = (campo) => (valor) => setDatos((d) => ({ ...d, [campo]: valor }))
-
-  const enviar = async (e) => {
-    e.preventDefault()
-    setEstado('enviando')
-    try {
-      await enviarFormulario({
-        asunto: 'Nuevo contacto desde speedprofitai.com',
-        campos: {
-          from_name: datos.nombre,
-          email: datos.email,
-          telefono: datos.telefono,
-          empresa: datos.empresa,
-          mensaje: datos.mensaje,
-        },
-      })
-      setEstado('exito')
-      setDatos({ nombre: '', email: '', telefono: '', empresa: '', mensaje: '' })
-    } catch {
-      setEstado('error')
-    }
-  }
-
   return (
     <>
       <VolverAlInicio />
@@ -89,75 +60,6 @@ export default function Contacto() {
             <BotonOro className="w-full" mensaje={CONTACTO.ctaMensaje}>
               {CONTACTO.cta}
             </BotonOro>
-          </div>
-
-          {/* Formulario — envía un email vía Web3Forms, sin backend propio */}
-          <div className="mt-14">
-            <h2 className="text-xl font-semibold text-white mb-6">{formulario.titulo}</h2>
-            <Tarjeta>
-              {estado === 'exito' ? (
-                <p className="texto-oro font-medium text-center py-6">{formulario.exito}</p>
-              ) : (
-                <form onSubmit={enviar} className="space-y-5">
-                  <div className="grid sm:grid-cols-2 gap-5">
-                    <CampoTexto
-                      nombre="nombre"
-                      etiqueta={formulario.campos.nombre.etiqueta}
-                      placeholder={formulario.campos.nombre.placeholder}
-                      valor={datos.nombre}
-                      onChange={cambiar('nombre')}
-                      requerido
-                    />
-                    <CampoTexto
-                      nombre="email"
-                      tipo="email"
-                      etiqueta={formulario.campos.email.etiqueta}
-                      placeholder={formulario.campos.email.placeholder}
-                      valor={datos.email}
-                      onChange={cambiar('email')}
-                      requerido
-                    />
-                    <CampoTexto
-                      nombre="telefono"
-                      tipo="tel"
-                      etiqueta={formulario.campos.telefono.etiqueta}
-                      placeholder={formulario.campos.telefono.placeholder}
-                      valor={datos.telefono}
-                      onChange={cambiar('telefono')}
-                    />
-                    <CampoTexto
-                      nombre="empresa"
-                      etiqueta={formulario.campos.empresa.etiqueta}
-                      placeholder={formulario.campos.empresa.placeholder}
-                      valor={datos.empresa}
-                      onChange={cambiar('empresa')}
-                    />
-                  </div>
-                  <CampoTexto
-                    nombre="mensaje"
-                    tipo="textarea"
-                    etiqueta={formulario.campos.mensaje.etiqueta}
-                    placeholder={formulario.campos.mensaje.placeholder}
-                    valor={datos.mensaje}
-                    onChange={cambiar('mensaje')}
-                    requerido
-                  />
-
-                  {estado === 'error' && (
-                    <p className="text-sm text-red-400 text-center">{formulario.error}</p>
-                  )}
-
-                  <BotonOro
-                    className="w-full"
-                    tamano="medio"
-                    submit
-                    disabled={estado === 'enviando'}
-                  >
-                    {estado === 'enviando' ? formulario.botonEnviando : formulario.botonEnviar}
-                  </BotonOro>
-                </form>
-              )}
-            </Tarjeta>
           </div>
         </div>
       </Seccion>

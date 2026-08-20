@@ -23,12 +23,13 @@ export default function ChatSimulado() {
   const contenedorRef = useRef(null)
 
   useEffect(() => {
-    // Este chat es decorativo (aria-hidden, los lectores de pantalla ya lo
-    // ignoran), así que anima siempre — no se condiciona a
-    // prefers-reduced-motion. Confirmado con Ángel: en su navegador normal
-    // el chat aparecía siempre estático con todos los mensajes de golpe,
-    // pese a que su Windows/Chrome no tienen el movimiento reducido
-    // activado — así que depender de ese media query no era fiable aquí.
+    // Respetar preferencia de movimiento reducido: mostrar todo de golpe
+    const sinMovimiento = window.matchMedia('(prefers-reduced-motion: reduce)').matches
+    if (sinMovimiento) {
+      setVisibles(chat.mensajes)
+      return
+    }
+
     let temporizadores = []
     let activo = true
 
@@ -127,27 +128,22 @@ function Burbuja({ mensaje }) {
   const esCliente = mensaje.de === 'cliente'
 
   if (mensaje.tipo === 'propiedad') {
-    const propiedades = mensaje.propiedades ?? [mensaje.propiedad]
+    const p = mensaje.propiedad
     return (
       <div className="flex justify-start">
         <div className="max-w-[85%] bg-white rounded-lg rounded-tl-none shadow-sm overflow-hidden">
           <div className="bg-[#075E54]/5 px-3 py-2 border-b border-gray-100">
             <p className="text-[11px] uppercase tracking-wider text-[#075E54] font-semibold">
-              {propiedades.length > 1 ? 'Propiedades encontradas' : 'Propiedad encontrada'}
+              Propiedad encontrada
             </p>
           </div>
-          {propiedades.map((p, i) => (
-            <div
-              key={i}
-              className={`px-3 py-2.5 space-y-1 ${i > 0 ? 'border-t border-gray-100' : ''}`}
-            >
-              <p className="text-gray-900 font-semibold text-sm">{p.titulo}</p>
-              <p className="text-gray-600 text-xs">{p.detalles}</p>
-              <p className="text-gray-600 text-xs">{p.extras}</p>
-              <p className="text-gray-600 text-xs">{p.ubicacion}</p>
-              <p className="text-[#075E54] font-bold text-base pt-1">{p.precio}</p>
-            </div>
-          ))}
+          <div className="px-3 py-2.5 space-y-1">
+            <p className="text-gray-900 font-semibold text-sm">{p.titulo}</p>
+            <p className="text-gray-600 text-xs">{p.detalles}</p>
+            <p className="text-gray-600 text-xs">{p.extras}</p>
+            <p className="text-gray-600 text-xs">{p.ubicacion}</p>
+            <p className="text-[#075E54] font-bold text-base pt-1">{p.precio}</p>
+          </div>
           <div className="px-3 pb-2 flex justify-end">
             <DobleCheck />
           </div>

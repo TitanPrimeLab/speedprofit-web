@@ -92,24 +92,13 @@ export function Icono({ nombre, className = 'w-6 h-6', strokeWidth = 1.5 }) {
 //   - onClick (sin href ni mensaje): botón real, para acciones en la propia
 //     página (ej. calcular un resultado) sin navegar a ningún sitio
 // ---------------------------------------------------------------------------
-export function BotonOro({
-  children,
-  mensaje,
-  href,
-  onClick,
-  submit,
-  disabled,
-  className = '',
-  tamano = 'grande',
-}) {
+export function BotonOro({ children, mensaje, href, onClick, className = '', tamano = 'grande' }) {
   const tamanos = {
     grande: 'py-5 px-8 text-lg',
     medio: 'py-3 px-6 text-base',
     pequeno: 'py-2 px-4 text-sm',
   }
-  const clases = `btn-gold group inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-xl ${tamanos[tamano]} ${
-    disabled ? 'opacity-60 pointer-events-none' : ''
-  } ${className}`
+  const clases = `btn-gold group inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-xl ${tamanos[tamano]} ${className}`
   const flecha = (
     <ArrowRight
       className="w-5 h-5 transition-transform duration-200 group-hover:translate-x-1"
@@ -117,20 +106,10 @@ export function BotonOro({
     />
   )
 
-  // Modo botón de envío de formulario (dentro de un <form onSubmit>)
-  if (submit) {
-    return (
-      <button type="submit" disabled={disabled} className={clases}>
-        {children}
-        {flecha}
-      </button>
-    )
-  }
-
   // Modo botón de acción (sin destino) — no navega a ningún sitio
   if (onClick && !href && !mensaje) {
     return (
-      <button type="button" onClick={onClick} disabled={disabled} className={clases}>
+      <button type="button" onClick={onClick} className={clases}>
         {children}
         {flecha}
       </button>
@@ -177,13 +156,14 @@ export function Kicker({ children }) {
 // ---------------------------------------------------------------------------
 // Cabecera de sección: kicker + título + subtítulo
 // ---------------------------------------------------------------------------
-export function CabeceraSeccion({ kicker, titulo, subtitulo, centrado = true }) {
+export function CabeceraSeccion({ kicker, titulo, subtitulo, centrado = true, esH1 = false }) {
+  const Titulo = esH1 ? 'h1' : 'h2'
   return (
     <div className={`${centrado ? 'text-center max-w-3xl mx-auto' : ''} mb-14`}>
       {kicker && <Kicker>{kicker}</Kicker>}
-      <h2 className="text-3xl md:text-4xl font-bold text-white mt-3 mb-4 leading-tight">
+      <Titulo className="text-3xl md:text-4xl font-bold text-white mt-3 mb-4 leading-tight">
         {titulo}
-      </h2>
+      </Titulo>
       {subtitulo && <p className="texto-apagado text-lg leading-relaxed">{subtitulo}</p>}
     </div>
   )
@@ -208,25 +188,15 @@ export function Insignia({ children }) {
 }
 
 // ---------------------------------------------------------------------------
-// Bloque de estadística (número grande + etiqueta). Con `href` se convierte
-// en enlace — se usa para las cifras de ROI que ahora apuntan a la
-// calculadora en vez de mostrar un número fijo (ver contenido.js).
+// Bloque de estadística (número grande + etiqueta)
 // ---------------------------------------------------------------------------
-export function Estadistica({ valor, etiqueta, href }) {
-  const contenido = (
-    <>
+export function Estadistica({ valor, etiqueta }) {
+  return (
+    <div>
       <p className="text-3xl md:text-4xl font-bold texto-oro leading-none">{valor}</p>
       <p className="texto-apagado text-sm mt-2 leading-snug">{etiqueta}</p>
-    </>
+    </div>
   )
-  if (href) {
-    return (
-      <a href={href} className="block hover:opacity-80 transition-opacity">
-        {contenido}
-      </a>
-    )
-  }
-  return <div>{contenido}</div>
 }
 
 // ---------------------------------------------------------------------------
@@ -250,29 +220,9 @@ export function ListaPuntos({ puntos }) {
 }
 
 // ---------------------------------------------------------------------------
-// Ilustración de sección — imágenes decorativas en public/img (todas WebP,
-// comprimidas). `loading="lazy"` + tamaño intrínseco para evitar saltos de
-// layout. Usar `alt=""` solo cuando la imagen es puramente decorativa y el
-// texto de alrededor ya transmite la misma información.
-// ---------------------------------------------------------------------------
-export function Ilustracion({ src, alt = '', ancho, alto, className = '' }) {
-  return (
-    <img
-      src={src}
-      alt={alt}
-      width={ancho}
-      height={alto}
-      loading="lazy"
-      decoding="async"
-      className={`rounded-2xl border border-[rgba(201,168,76,0.15)] shadow-2xl w-full h-auto object-cover ${className}`}
-    />
-  )
-}
-
-// ---------------------------------------------------------------------------
 // Bloque de cierre / CTA final reutilizable
 // ---------------------------------------------------------------------------
-export function CierreCTA({ titulo, texto, cta, ctaMensaje, microcopy, badge }) {
+export function CierreCTA({ titulo, texto, cta, ctaMensaje, ctaHref, microcopy, badge }) {
   return (
     <Seccion className="text-center">
       {badge && (
@@ -286,7 +236,7 @@ export function CierreCTA({ titulo, texto, cta, ctaMensaje, microcopy, badge }) 
       {texto && (
         <p className="texto-apagado text-lg max-w-2xl mx-auto mb-10 leading-relaxed">{texto}</p>
       )}
-      <BotonOro mensaje={ctaMensaje}>{cta}</BotonOro>
+      <BotonOro mensaje={ctaMensaje} href={ctaHref}>{cta}</BotonOro>
       {microcopy && <p className="texto-apagado text-sm mt-6">{microcopy}</p>}
     </Seccion>
   )
@@ -319,41 +269,5 @@ export function Revelar({ children, className = '' }) {
     <div ref={ref} className={`revelar ${visible ? 'visible' : ''} ${className}`}>
       {children}
     </div>
-  )
-}
-
-// ---------------------------------------------------------------------------
-// Campo de texto genérico para formularios (Contacto, reseñas). `tipo`
-// admite 'text', 'email', 'tel' o 'textarea'.
-// ---------------------------------------------------------------------------
-export function CampoTexto({ etiqueta, placeholder, valor, onChange, tipo = 'text', requerido, nombre }) {
-  const clases =
-    'w-full bg-[rgba(255,255,255,0.04)] border border-[rgba(201,168,76,0.2)] rounded-xl py-3 px-4 text-white placeholder:text-white/30 focus:outline-none focus:border-[var(--gold)] transition-colors'
-
-  return (
-    <label className="block">
-      <span className="block text-sm font-medium text-white mb-2">{etiqueta}</span>
-      {tipo === 'textarea' ? (
-        <textarea
-          name={nombre}
-          required={requerido}
-          rows={5}
-          value={valor}
-          onChange={(e) => onChange(e.target.value)}
-          placeholder={placeholder}
-          className={`${clases} resize-y`}
-        />
-      ) : (
-        <input
-          type={tipo}
-          name={nombre}
-          required={requerido}
-          value={valor}
-          onChange={(e) => onChange(e.target.value)}
-          placeholder={placeholder}
-          className={clases}
-        />
-      )}
-    </label>
   )
 }
