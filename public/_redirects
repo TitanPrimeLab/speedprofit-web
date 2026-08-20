@@ -1,1 +1,18 @@
+# =============================================================================
+# _redirects — Cloudflare Pages
+# =============================================================================
+# ORDEN IMPORTANTE: Cloudflare evalúa de arriba abajo y aplica la primera regla
+# que coincida. El catch-all de la SPA va SIEMPRE el último.
+# =============================================================================
+
+# --- www → dominio principal (301) -------------------------------------------
+# Sin esto, www.speedprofitai.com y speedprofitai.com sirven la misma página
+# con el mismo título → Semrush lo marca como "títulos y H1 duplicados".
+# Un solo dominio canónico, sin excepciones.
+https://www.speedprofitai.com/*    https://speedprofitai.com/:splat    301!
+
+# --- Fallback de la SPA ------------------------------------------------------
+# Solo actúa si NO existe un archivo estático para esa ruta. Como el prerender
+# genera un .html por página, estas ya se sirven directas con 200 y no llegan
+# aquí. Esto cubre rutas nuevas de React que aún no estén prerenderizadas.
 /*    /index.html   200

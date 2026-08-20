@@ -144,11 +144,25 @@ Allow: /
 User-agent: *
 Allow: /
 
-# --- Content Signals (Cloudflare / IETF aipref) ------------------------------
-# Declaración explícita: permitimos indexación en buscadores, uso como
-# input de IA (RAG, AI Overviews, etc.) y entrenamiento. Todo permitido
-# porque nuestra estrategia depende de aparecer en respuestas de IA.
-Content-Signal: search=yes, ai-input=yes, ai-train=yes
+# --- Content Signals: POR QUÉ NO ESTÁN ---------------------------------------
+# Aquí había una línea "Content-Signal: search=yes, ai-input=yes, ai-train=yes".
+# Se ha retirado deliberadamente, por dos motivos:
+#
+# 1. Content-Signal es una directiva muy reciente (propuesta Cloudflare/IETF),
+#    no forma parte del estándar clásico de robots.txt. Los validadores que no
+#    la conocen la marcan como error de formato — es exactamente lo que hacía
+#    Semrush ("El archivo Robots.txt tiene errores de formato").
+#
+# 2. Su valor real para nosotros era cero. Content-Signal es un mecanismo para
+#    RESTRINGIR usos: declarar "yes" a todo equivale al comportamiento por
+#    defecto cuando la cabecera no existe. No ganábamos permisos que no
+#    tuviéramos ya, y a cambio arrastrábamos un error permanente en auditoría.
+#
+# Lo que SÍ permite el acceso de los modelos son las reglas "Allow: /" por
+# user-agent de arriba, que son estándar y las respetan todos los crawlers.
+#
+# Si en el futuro quisiéramos RESTRINGIR algo (por ejemplo, permitir citas
+# pero no entrenamiento), entonces sí tendría sentido reintroducirla.
 
 # --- Sitemap ----------------------------------------------------------------
 Sitemap: https://speedprofitai.com/sitemap.xml

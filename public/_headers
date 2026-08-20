@@ -1,0 +1,22 @@
+# =============================================================================
+# _headers — Cloudflare Pages
+# =============================================================================
+# Cabeceras HTTP aplicadas a todas las respuestas.
+#
+# HSTS resuelve el aviso "2 subdominios no son compatibles con HSTS" de la
+# auditoría del 20/08/2026. Le dice al navegador que este dominio SOLO debe
+# servirse por HTTPS durante un año, evitando cualquier intento de conexión
+# por HTTP en visitas posteriores.
+#
+# NOTA: max-age=31536000 (1 año) con includeSubDomains es la configuración
+# estándar. Es difícil de revertir: durante ese año los navegadores que ya
+# hayan visto la cabecera rechazarán HTTP en el dominio y sus subdominios.
+# Como todo el sitio ya va por HTTPS, no hay riesgo práctico — pero conviene
+# saberlo antes de crear cualquier subdominio nuevo sin certificado.
+# =============================================================================
+
+/*
+  Strict-Transport-Security: max-age=31536000; includeSubDomains; preload
+  X-Content-Type-Options: nosniff
+  Referrer-Policy: strict-origin-when-cross-origin
+  X-Frame-Options: SAMEORIGIN
