@@ -68,6 +68,8 @@ function leerArticulosBlog() {
         slug: campo('slug') || archivo.replace(/\.md$/, ''),
         titulo: campo('titulo'),
         descripcion: campo('descripcion'),
+        fecha: campo('fecha'),
+        autor: campo('autor'),
         parrafos,
       }
     })
@@ -94,24 +96,39 @@ const NAV_HTML = `<nav aria-label="Navegación principal">
 
 const PIE_HTML = `<footer>
   <p>SpeedProfit AI — marca comercial de SpeedProficient OÜ (registro 17532333), Pärnu mnt 105, Tallinn, Harju maakond, 11312, Estonia.</p>
-  <p>Contacto: <a href="mailto:info@speedprofitai.com">info@speedprofitai.com</a> · Teléfono y WhatsApp: +34 722 842 925</p>
+  <p>Contacto: <!--email_off-->info@speedprofitai.com<!--/email_off--> · Teléfono y WhatsApp: +34 722 842 925</p>
 </footer>`
 
 function construirContenido(pagina) {
-  const partes = [`<h1>${pagina.h1}</h1>`]
+  // HTML semántico: <main> + <article> + <section> por bloque.
+  // Los sistemas de extracción de pasajes (RAG, AI Overviews) usan la
+  // estructura del documento para decidir qué trozo citar. Un <section>
+  // con su <h2> y sus párrafos es una unidad citable limpia; un <div>
+  // genérico no lo es. Esto también resuelve el aviso "bajo uso de HTML
+  // semántico" de Semrush.
+  const partes = [`<header><h1>${pagina.h1}</h1></header>`]
 
   for (const seccion of pagina.secciones) {
-    if (seccion.h2) partes.push(`<h2>${seccion.h2}</h2>`)
-    if (seccion.p) for (const p of seccion.p) partes.push(`<p>${p}</p>`)
+    const cuerpo = []
+    if (seccion.h2) cuerpo.push(`<h2>${seccion.h2}</h2>`)
+    if (seccion.p) for (const p of seccion.p) cuerpo.push(`<p>${p}</p>`)
     if (seccion.lista) {
-      partes.push('<ul>')
-      for (const item of seccion.lista) partes.push(`<li>${item}</li>`)
-      partes.push('</ul>')
+      cuerpo.push('<ul>')
+      for (const item of seccion.lista) cuerpo.push(`<li>${item}</li>`)
+      cuerpo.push('</ul>')
     }
+    partes.push(`<section>\n${cuerpo.join('\n')}\n</section>`)
   }
 
-  partes.push(NAV_HTML, PIE_HTML)
-  return `<div style="${ESTILO}">\n${partes.join('\n')}\n</div>`
+  return `<div style="${ESTILO}">
+<main>
+<article>
+${partes.join('\n')}
+</article>
+</main>
+${NAV_HTML}
+${PIE_HTML}
+</div>`
 }
 
 function generarHtml(plantilla, ruta, pagina, contenidoHtml) {
@@ -146,6 +163,49 @@ function generarHtml(plantilla, ruta, pagina, contenidoHtml) {
   html = html.replace('<div id="root"></div>', `<div id="root">${contenidoHtml}</div>`)
   html = html.replace(/<noscript>[\s\S]*?<\/noscript>/, '')
 
+  // --- Schema específico de esta página (AEO/GEO) ---------------------------
+  // WebPage ancla la URL a la entidad Organization ya declarada en el head,
+  // y BreadcrumbList le da al modelo la jerarquía del sitio. Ambas cosas
+  // ayudan a que un sistema de recuperación sepa QUÉ es esta URL y dónde
+  // encaja, en lugar de tratarla como texto suelto.
+  const migas =
+    ruta === '/'
+      ? [{ nombre: 'Inicio', url: `${BASE_URL}/` }]
+      : [
+          { nombre: 'Inicio', url: `${BASE_URL}/` },
+          { nombre: pagina.h1, url },
+        ]
+
+  const schemaPagina = {
+    '@context': 'https://schema.org',
+    '@graph': [
+      {
+        '@type': 'WebPage',
+        '@id': url,
+        url,
+        name: pagina.title,
+        description: pagina.description,
+        inLanguage: 'es-ES',
+        isPartOf: { '@type': 'WebSite', '@id': `${BASE_URL}/#website`, url: `${BASE_URL}/` },
+        publisher: { '@type': 'Organization', name: 'SpeedProfit AI', url: `${BASE_URL}/` },
+      },
+      {
+        '@type': 'BreadcrumbList',
+        itemListElement: migas.map((m, i) => ({
+          '@type': 'ListItem',
+          position: i + 1,
+          name: m.nombre,
+          item: m.url,
+        })),
+      },
+    ],
+  }
+
+  html = html.replace(
+    '</head>',
+    `  <script type="application/ld+json">${JSON.stringify(schemaPagina)}</script>\n  </head>`
+  )
+
   return html
 }
 
@@ -178,7 +238,32 @@ function main() {
       h1: art.titulo,
       secciones: [{ p: art.parrafos }],
     }
-    const html = generarHtml(plantilla, ruta, pagina, construirContenido(pagina))
+    let html = generarHtml(plantilla, ruta, pagina, construirContenido(pagina))
+
+    // Schema Article: da al modelo autor, fecha y editor — los tres campos
+    // que un sistema de recuperación usa para decidir si una fuente es
+    // citable y si está vigente.
+    const schemaArticulo = {
+      '@context': 'https://schema.org',
+      '@type': 'Article',
+      headline: art.titulo,
+      description: art.descripcion,
+      datePublished: art.fecha || undefined,
+      dateModified: art.fecha || undefined,
+      author: { '@type': 'Person', name: art.autor || 'SpeedProfit AI' },
+      publisher: {
+        '@type': 'Organization',
+        name: 'SpeedProfit AI',
+        url: `${BASE_URL}/`,
+      },
+      mainEntityOfPage: { '@type': 'WebPage', '@id': `${BASE_URL}${ruta}` },
+      inLanguage: 'es-ES',
+    }
+    html = html.replace(
+      '</head>',
+      `  <script type="application/ld+json">${JSON.stringify(schemaArticulo)}</script>\n  </head>`
+    )
+
     writeFileSync(join(DIST, 'blog', `${art.slug}.html`), html)
     rutas.push(ruta)
   }

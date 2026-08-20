@@ -355,7 +355,7 @@ export const PAGINAS = {
       {
         h2: 'Cómo contactar',
         lista: [
-          'Email: <a href="mailto:info@speedprofitai.com">info@speedprofitai.com</a>',
+          'Email: <!--email_off-->info@speedprofitai.com<!--/email_off-->',
           'WhatsApp y teléfono: +34 722 842 925',
           'Atención los 365 días del año.',
         ],
@@ -368,9 +368,33 @@ export const PAGINAS = {
         ],
       },
       {
+        h2: 'Qué información nos ayuda desde el primer mensaje',
+        lista: [
+          'El nombre de tu agencia y la zona en la que trabajáis.',
+          'Cuántas personas sois en el equipo comercial.',
+          'Por dónde os llegan hoy los contactos: WhatsApp, formulario web, portales, teléfono.',
+          'Qué CRM usáis, si usáis alguno.',
+          'Qué es lo que más os está costando ahora mismo: captar, atender o cerrar.',
+        ],
+      },
+      {
+        h2: 'Cuánto tardamos en responder',
+        p: [
+          'Sería difícil de justificar que una empresa dedicada al tiempo de respuesta tardara en contestar. Respondemos los 365 días del año, y en la práctica en cuestión de minutos, porque usamos internamente el mismo sistema que implantamos en las agencias.',
+        ],
+      },
+      {
+        h2: 'Trabajamos con una agencia por zona',
+        p: [
+          'Antes de avanzar comprobamos si tu zona está libre. No trabajamos simultáneamente con agencias que compiten directamente entre sí: no tendría sentido optimizar la captación de dos negocios que se disputan los mismos propietarios y los mismos compradores.',
+          'Si tu zona ya está ocupada, te lo decimos en el primer mensaje en lugar de hacerte perder el tiempo.',
+        ],
+      },
+      {
         h2: 'Antes de escribir, quizá te interese',
         p: [
-          'Si quieres entender primero cómo funciona el sistema, está detallado paso a paso en <a href="/como-funciona">cómo funciona</a>. Si prefieres ver resultados medidos de otras agencias, están en <a href="/testimonios">casos reales</a>. Y si tienes dudas sobre qué hace exactamente un agente, lo explicamos en <a href="/agentes-ia">agentes de IA</a>.',
+          'Si quieres entender primero cómo funciona el sistema, está detallado paso a paso en <a href="/como-funciona">cómo funciona</a>. Si prefieres ver resultados medidos de otras agencias, están en <a href="/testimonios">casos reales</a>. Y si tienes dudas sobre qué hace exactamente un agente de inteligencia artificial en el día a día de una inmobiliaria, lo explicamos en <a href="/agentes-ia">agentes de IA</a>.',
+          'También puedes leer sobre el sector en el <a href="/blog">blog</a> o conocer quiénes estamos detrás en <a href="/sobre-nosotros">sobre nosotros</a>.',
         ],
       },
     ],
@@ -397,10 +421,30 @@ export const PAGINAS = {
         ],
       },
       {
+        h2: 'Nuestro criterio editorial',
+        p: [
+          'No publicamos artículos genéricos sobre inteligencia artificial. Escribimos sobre lo que medimos directamente: llevamos 63 auditorías de tiempo de respuesta realizadas sobre agencias inmobiliarias españolas, y ese dataset propio es la base de casi todo lo que publicamos aquí.',
+          'Cuando citamos una cifra, decimos de dónde sale. Cuando es una estimación, lo decimos también. En un sector donde abundan las promesas sin respaldo, preferimos publicar menos y publicar comprobable.',
+        ],
+      },
+      {
+        h2: 'El hallazgo que más se repite',
+        p: [
+          'De todas las auditorías realizadas, el patrón más consistente no es que las agencias respondan lentamente en general: es que <strong>más del 90% del tiempo total de espera se concentra en los mensajes que entran fuera del horario de oficina</strong>. Un mensaje que llega a las diez de la noche no se contesta hasta la mañana siguiente, y para entonces esa persona ya ha escrito a otras tres agencias.',
+          'El problema no es de actitud ni de profesionalidad del equipo comercial. Es estructural: nadie puede estar disponible las veinticuatro horas, y precisamente esas horas concentran una parte enorme de las consultas de compradores que miran portales por la noche o el fin de semana.',
+        ],
+      },
+      {
+        h2: 'Artículos publicados',
+        lista: [
+          '<a href="/blog/coste-real-responder-tarde-leads-inmobiliarios">El coste real de responder tarde a tus leads inmobiliarios</a>: cuánto dinero deja de facturar una agencia por cada hora de retraso en la primera respuesta, con el cálculo desglosado.',
+        ],
+      },
+      {
         h2: 'Más allá del blog',
         p: [
-          'Si buscas algo más concreto que un artículo: los <a href="/testimonios">casos reales medidos</a> muestran cifras de antes y después de agencias reales, y <a href="/como-funciona">cómo funciona</a> explica el proceso completo de implantación.',
-          'También puedes ver qué hacen exactamente los <a href="/agentes-ia">agentes de IA</a> o consultar el <a href="/diseno-web-inmobiliarias">diseño web para inmobiliarias</a>, nuestro producto de entrada por 399€.',
+          'Si buscas algo más concreto que un artículo: los <a href="/testimonios">casos reales medidos</a> muestran cifras de antes y después de agencias reales, con el mismo método de medición aplicado en los dos momentos, y <a href="/como-funciona">cómo funciona</a> explica el proceso completo de implantación paso a paso.',
+          'También puedes ver qué hacen exactamente los <a href="/agentes-ia">agentes de IA</a>, consultar el <a href="/diseno-web-inmobiliarias">diseño web para inmobiliarias</a> que es nuestro producto de entrada por 399€, o conocer al equipo en <a href="/sobre-nosotros">sobre nosotros</a>. Si prefieres hablarlo directamente, escríbenos desde <a href="/contacto">contacto</a> y empezamos por la auditoría gratuita de tu canal de atención.',
         ],
       },
     ],
@@ -425,16 +469,35 @@ export const PAGINAS = {
         ],
       },
       {
+        h2: 'Base legal del tratamiento',
+        p: [
+          'La base legal es tu consentimiento al enviarnos el formulario o escribirnos, y la ejecución de un contrato o de medidas precontractuales cuando solicitas una auditoría o un presupuesto. En el caso de comunicaciones comerciales sobre nuestros propios servicios a clientes existentes, la base es el interés legítimo.',
+        ],
+      },
+      {
         h2: 'Conservación y cesión',
         p: [
-          'Conservamos los datos el tiempo necesario para atender tu solicitud y cumplir las obligaciones legales aplicables. Los datos van cifrados y no se comparten con terceros con fines comerciales.',
+          'Conservamos los datos el tiempo necesario para atender tu solicitud y cumplir las obligaciones legales aplicables. Los datos van cifrados y no se comparten con terceros con fines comerciales. No vendemos datos personales bajo ninguna circunstancia.',
+          'Cuando implantamos un agente de inteligencia artificial en la agencia de un cliente, ese cliente es el responsable de los datos de sus propios contactos y nosotros actuamos como encargado del tratamiento, con el contrato correspondiente firmado conforme al artículo 28 del RGPD.',
+        ],
+      },
+      {
+        h2: 'Transferencias internacionales',
+        p: [
+          'SpeedProficient OÜ está constituida en Estonia, dentro del Espacio Económico Europeo, por lo que el tratamiento se realiza bajo el marco del RGPD. Si alguna herramienta que utilizamos implicara transferencia fuera del EEE, se realizaría con las garantías previstas en el capítulo V del RGPD.',
         ],
       },
       {
         h2: 'Tus derechos',
         p: [
-          'Puedes ejercer en cualquier momento tus derechos de acceso, rectificación, supresión, oposición, limitación del tratamiento y portabilidad escribiendo a info@speedprofitai.com.',
-          'Consulta también nuestros <a href="/terminos">términos y condiciones</a> y la <a href="/cookies">política de cookies</a>. Para cualquier duda, escríbenos desde <a href="/contacto">contacto</a>.',
+          'Puedes ejercer en cualquier momento tus derechos de acceso, rectificación, supresión, oposición, limitación del tratamiento y portabilidad escribiendo a nuestro correo de contacto. Responderemos en el plazo máximo previsto por la normativa.',
+          'También tienes derecho a retirar tu consentimiento en cualquier momento y a presentar una reclamación ante la autoridad de control competente si consideras que el tratamiento no se ajusta a la normativa.',
+        ],
+      },
+      {
+        h2: 'Documentos relacionados',
+        p: [
+          'Consulta también nuestros <a href="/terminos">términos y condiciones</a> y la <a href="/cookies">política de cookies</a>. Para cualquier duda sobre el tratamiento de tus datos, escríbenos desde <a href="/contacto">contacto</a>. Puedes conocer más sobre la empresa en <a href="/sobre-nosotros">sobre nosotros</a>.',
         ],
       },
     ],
@@ -463,13 +526,37 @@ export const PAGINAS = {
       {
         h2: 'Garantía',
         p: [
-          'Ofrecemos garantía de resultados a 30 días en los términos acordados por escrito con cada cliente antes de la contratación.',
+          'Ofrecemos garantía de resultados a 30 días en los términos acordados por escrito con cada cliente antes de la contratación. El alcance concreto de la garantía se define en la propuesta firmada, ya que depende del servicio contratado y del punto de partida de cada agencia.',
+        ],
+      },
+      {
+        h2: 'Exclusividad por zona',
+        p: [
+          'Para los servicios de captación trabajamos con una única agencia por zona geográfica. Esta exclusividad se concreta por escrito en la propuesta e implica que, mientras el contrato esté vigente, no prestaremos ese mismo servicio a agencias que compitan directamente en el área acordada.',
+        ],
+      },
+      {
+        h2: 'Obligaciones del cliente',
+        p: [
+          'Para poder prestar el servicio, el cliente debe facilitar el acceso a los canales que se vayan a conectar (WhatsApp Business, web, CRM, calendario) y la información necesaria para entrenar el agente. El cliente es responsable de que la información de su catálogo sea veraz y esté actualizada, y de disponer de las autorizaciones necesarias sobre los datos de sus propios contactos.',
+        ],
+      },
+      {
+        h2: 'Duración y cancelación',
+        p: [
+          'La duración y las condiciones de cancelación se establecen por escrito en cada propuesta antes de la contratación. No aplicamos permanencias ocultas: cualquier compromiso de duración se comunica de forma expresa antes de firmar.',
+        ],
+      },
+      {
+        h2: 'Legislación aplicable',
+        p: [
+          'La relación se rige por la legislación aplicable a SpeedProficient OÜ como entidad prestadora del servicio, sin perjuicio de los derechos que la normativa de consumo pueda reconocer al cliente según su lugar de residencia.',
         ],
       },
       {
         h2: 'Protección de datos',
         p: [
-          'El tratamiento de datos personales se rige por nuestra <a href="/privacidad">política de privacidad</a> y por la <a href="/cookies">política de cookies</a>. Para cualquier consulta sobre estas condiciones, escríbenos desde <a href="/contacto">contacto</a>.',
+          'El tratamiento de datos personales se rige por nuestra <a href="/privacidad">política de privacidad</a> y por la <a href="/cookies">política de cookies</a>. Para cualquier consulta sobre estas condiciones, escríbenos desde <a href="/contacto">contacto</a>, o conoce más sobre la empresa en <a href="/sobre-nosotros">sobre nosotros</a>.',
         ],
       },
     ],
@@ -490,14 +577,34 @@ export const PAGINAS = {
       {
         h2: 'Qué cookies utilizamos',
         p: [
-          'Utilizamos cookies técnicas necesarias para el funcionamiento del sitio y, en su caso, cookies analíticas para entender de forma agregada cómo se navega por la web y poder mejorarla. No utilizamos cookies para vender datos a terceros.',
+          'Utilizamos cookies técnicas necesarias para el funcionamiento del sitio y, en su caso, cookies analíticas para entender de forma agregada cómo se navega por la web y poder mejorarla. No utilizamos cookies para vender datos a terceros ni para crear perfiles publicitarios cruzados entre sitios.',
         ],
       },
       {
-        h2: 'Cómo gestionarlas',
+        h2: 'Tipos de cookies según su finalidad',
+        lista: [
+          '<strong>Técnicas o necesarias</strong>: permiten la navegación y el uso de las funciones básicas del sitio. Sin ellas la web no funciona correctamente, por lo que no requieren consentimiento.',
+          '<strong>Analíticas</strong>: recogen información agregada y anónima sobre cómo se usa el sitio (páginas más visitadas, tiempo de permanencia) para poder mejorarlo. Requieren tu consentimiento.',
+          '<strong>De preferencias</strong>: recuerdan opciones que hayas elegido para no tener que volver a configurarlas en cada visita.',
+        ],
+      },
+      {
+        h2: 'Cookies de terceros',
         p: [
-          'Puedes configurar o desactivar las cookies desde los ajustes de tu navegador en cualquier momento. Ten en cuenta que desactivar las cookies técnicas puede afectar al funcionamiento de algunas partes del sitio.',
-          'Más información en nuestra <a href="/privacidad">política de privacidad</a> y en los <a href="/terminos">términos y condiciones</a>. Si tienes dudas, escríbenos desde <a href="/contacto">contacto</a>.',
+          'Algunas funcionalidades pueden apoyarse en servicios de terceros que instalen sus propias cookies, como proveedores de analítica o de mensajería. Estos terceros tienen sus propias políticas de privacidad, que te recomendamos consultar si quieres conocer el detalle de su tratamiento.',
+        ],
+      },
+      {
+        h2: 'Cómo gestionarlas o desactivarlas',
+        p: [
+          'Puedes configurar o desactivar las cookies desde los ajustes de tu navegador en cualquier momento. Todos los navegadores modernos (Chrome, Safari, Firefox, Edge) permiten bloquearlas, eliminarlas o recibir un aviso antes de que se instalen.',
+          'Ten en cuenta que desactivar las cookies técnicas puede afectar al funcionamiento de algunas partes del sitio. Desactivar las analíticas no afecta a tu navegación.',
+        ],
+      },
+      {
+        h2: 'Documentos relacionados',
+        p: [
+          'Más información en nuestra <a href="/privacidad">política de privacidad</a> y en los <a href="/terminos">términos y condiciones</a>. Si tienes dudas sobre el uso de cookies en este sitio, escríbenos desde <a href="/contacto">contacto</a> o conoce más sobre la empresa en <a href="/sobre-nosotros">sobre nosotros</a>.',
         ],
       },
     ],
