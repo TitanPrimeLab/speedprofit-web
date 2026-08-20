@@ -44,8 +44,7 @@ export default function BlogArticulo() {
     if (articulo.autor) actualizarMetaOg('article:author', articulo.autor)
     if (articulo.categoria) actualizarMetaOg('article:section', articulo.categoria)
 
-    // Canonical del artículo
-    actualizarLink('canonical', `https://speedprofitai.com/blog/${articulo.slug}`)
+    // Canonical: gestionado globalmente por SEOCanonical.jsx a partir de la ruta
 
     // JSON-LD schema.org Article + BreadcrumbList
     const jsonLd = {

@@ -1,0 +1,8 @@
+Coloca aquí las tres imágenes:
+
+  fondo.png     — fondo negro con triángulos dorados (comprimir a < 300 kB)
+  logo.png      — logo de SpeedProfit AI (fondo transparente)
+  og-image.png  — imagen para compartir en redes, 1200x630 px
+
+Sin fondo.png el sitio se ve sobre negro liso (funciona, pero pierde identidad).
+Sin logo.png saldrá el icono de imagen rota en la nav y el footer.

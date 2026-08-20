@@ -14,15 +14,7 @@ import VolverAlInicio from '../componentes/VolverAlInicio'
 // ---------------------------------------------------------------------------
 export default function Blog() {
   const articulos = listarArticulos()
-
-  // Actualiza el <title> y meta description de esta página (SEO por página en un SPA)
-  useEffect(() => {
-    document.title = 'Blog — SpeedProfit AI · Automatización con IA para inmobiliarias'
-    actualizarMeta(
-      'description',
-      'Artículos, análisis y guías sobre automatización con IA en el sector inmobiliario. Escritos por SpeedProfit AI.'
-    )
-  }, [])
+  // title/description/canonical de esta página los gestiona SEO.jsx globalmente
 
   return (
     <>

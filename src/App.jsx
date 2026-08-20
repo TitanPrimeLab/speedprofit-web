@@ -1,5 +1,6 @@
 import { BrowserRouter, Navigate, Route, Routes } from 'react-router-dom'
 import Layout from './componentes/Layout'
+import SEO from './componentes/SEO'
 import Home from './paginas/Home'
 import AgentesIA from './paginas/AgentesIA'
 import ComoFunciona from './paginas/ComoFunciona'
@@ -18,6 +19,7 @@ import NoEncontrada from './paginas/NoEncontrada'
 export default function App() {
   return (
     <BrowserRouter>
+      <SEO />
       <Layout>
         <Routes>
           <Route path="/" element={<Home />} />
