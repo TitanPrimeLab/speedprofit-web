@@ -3,6 +3,7 @@ import {
   CabeceraSeccion,
   CierreCTA,
   Icono,
+  ImagenSeccion,
   ListaPuntos,
   Revelar,
   Seccion,
@@ -24,9 +25,17 @@ export default function ComoFunciona() {
           subtitulo={COMO_FUNCIONA.subtitulo}
         />
 
+        {/* `completa`: la imagen es cuadrada (900x900). A ancho completo
+            mediría ~896px de alto y echaría los pasos fuera de pantalla. */}
+        <ImagenSeccion
+          completa
+          src="/img/como-funciona.webp"
+          alt={COMO_FUNCIONA.titulo}
+        />
+
         <div className="space-y-6 max-w-5xl mx-auto">
-          {COMO_FUNCIONA.pasos.map((paso) => (
-            <Revelar key={paso.numero}>
+          {COMO_FUNCIONA.pasos.map((paso, i) => (
+            <Revelar key={paso.numero} retraso={i * 60}>
               <Tarjeta>
                 <div className="flex flex-col md:flex-row md:items-start gap-6">
                   <div className="flex items-center gap-4 md:flex-col md:gap-3 flex-shrink-0">
@@ -56,8 +65,8 @@ export default function ComoFunciona() {
       <Seccion fondo="rgba(8,8,12,0.88)">
         <CabeceraSeccion titulo={COMO_FUNCIONA.diferenciadores.titulo} />
         <div className="grid md:grid-cols-2 gap-6 max-w-5xl mx-auto">
-          {COMO_FUNCIONA.diferenciadores.lista.map((d) => (
-            <Revelar key={d.titulo}>
+          {COMO_FUNCIONA.diferenciadores.lista.map((d, i) => (
+            <Revelar key={d.titulo} retraso={(i % 2) * 90}>
               <Tarjeta className="h-full">
                 <Icono nombre={d.icono} className="w-8 h-8 texto-oro mb-4" />
                 <h3 className="text-lg font-semibold text-white mb-2">{d.titulo}</h3>

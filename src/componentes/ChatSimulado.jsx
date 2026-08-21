@@ -23,13 +23,19 @@ export default function ChatSimulado() {
   const contenedorRef = useRef(null)
 
   useEffect(() => {
-    // Respetar preferencia de movimiento reducido: mostrar todo de golpe
-    const sinMovimiento = window.matchMedia('(prefers-reduced-motion: reduce)').matches
-    if (sinMovimiento) {
-      setVisibles(chat.mensajes)
-      return
-    }
-
+    // ⚠️ NO VOLVER A AÑADIR AQUÍ UN CORTE POR prefers-reduced-motion.
+    //
+    // Ya se hizo dos veces y las dos veces rompió el chat (commit a4506d0 lo
+    // arregló, commit 7b53e6b lo volvió a romper). Motivo comprobado: en el
+    // navegador de Ángel ese media query devuelve `true` aunque él no tenga
+    // el movimiento reducido activado a propósito (Windows 11 lo activa solo
+    // al desactivar "efectos de animación" o en modo ahorro de energía), y el
+    // chat salía estático con los 9 mensajes de golpe.
+    //
+    // Accesibilidad: el chat es decorativo (`aria-hidden`, los lectores de
+    // pantalla lo ignoran) y los mensajes solo aparecen — no hay deslizamiento,
+    // parallax ni zoom, que es lo que WCAG 2.3.3 pide evitar. Que un contenido
+    // aparezca no es movimiento vestibular.
     let temporizadores = []
     let activo = true
 

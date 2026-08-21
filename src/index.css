@@ -27,29 +27,45 @@
 /* --------------------------------------------------------------------------
    FONDO GLOBAL
    Imagen de triángulos dorados sobre negro, fija.
-   Sustituye /img/fondo.png por tu imagen real (la que ya tienes guardada).
    -------------------------------------------------------------------------- */
 html {
   scroll-behavior: smooth;
 }
 
+/* --------------------------------------------------------------------------
+   MOVIMIENTO REDUCIDO — matiz importante, no tocar sin leer esto
+
+   Antes este bloque mataba TODA transición y animación de la web a 0.01ms.
+   Efecto real: en el navegador de Ángel (y en cualquiera con los "efectos de
+   animación" de Windows 11 desactivados, o en modo ahorro de energía) la web
+   entera se veía congelada — nada aparecía al bajar.
+
+   Lo que WCAG 2.3.3 pide evitar es el movimiento vestibular: deslizamientos
+   grandes, parallax, zoom, rotaciones. NO pide que el contenido no pueda
+   aparecer. Así que aquí se quita el DESPLAZAMIENTO (transform) y se conserva
+   la aparición por opacidad, que es segura para quien sufre mareo por
+   movimiento.
+   -------------------------------------------------------------------------- */
 @media (prefers-reduced-motion: reduce) {
   html {
     scroll-behavior: auto;
   }
-  *,
-  *::before,
-  *::after {
-    animation-duration: 0.01ms !important;
-    animation-iteration-count: 1 !important;
-    transition-duration: 0.01ms !important;
+
+  /* Se conserva el fundido, se elimina el desplazamiento */
+  .animaciones .revelar {
+    transform: none !important;
+    transition: opacity 0.4s ease !important;
+  }
+
+  .animaciones .revelar.visible {
+    transform: none !important;
   }
 }
 
 body {
   margin: 0;
   background-color: var(--ink);
-  background-image: url('/img/fondo.png');
+  background-image: url('/img/fondo.webp');
   background-size: cover;
   background-position: 50% 50%;
   background-repeat: no-repeat;
@@ -133,7 +149,15 @@ button:focus-visible {
 }
 
 /* Aparición al hacer scroll */
-.revelar {
+/* --------------------------------------------------------------------------
+   APARICIÓN AL HACER SCROLL
+
+   Por defecto TODO es visible. El ocultado solo se activa dentro de
+   `html.animaciones`, clase que añade el script en línea del <head> de
+   index.html. Si el JS falla, la clase no existe, nada se oculta y la web
+   se ve entera. Ver el comentario largo en index.html antes de tocar esto.
+   -------------------------------------------------------------------------- */
+.animaciones .revelar {
   opacity: 0;
   transform: translateY(20px);
   transition:
@@ -141,7 +165,7 @@ button:focus-visible {
     transform 0.6s ease;
 }
 
-.revelar.visible {
+.animaciones .revelar.visible {
   opacity: 1;
   transform: translateY(0);
 }

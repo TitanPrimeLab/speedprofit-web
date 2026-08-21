@@ -119,6 +119,59 @@ Ya está resuelto en `ChatSimulado.jsx` con tres medidas juntas:
 
 ---
 
+## 🔁 Regresión que ya ha ocurrido DOS veces — leer antes de tocar animaciones
+
+El chat del hero se ha roto dos veces por el mismo motivo, y las dos veces el
+causante fue añadir un corte por `prefers-reduced-motion` en `ChatSimulado.jsx`:
+
+| Commit | Qué hizo |
+|---|---|
+| `a4506d0` | Quitó el corte. Chat arreglado. |
+| `7b53e6b` | **Lo volvió a meter** (y borró el comentario que lo explicaba). Chat roto otra vez. |
+
+**Motivo comprobado en el navegador de Ángel:** `matchMedia('(prefers-reduced-motion: reduce)')`
+devuelve `true` aunque él no haya activado nada a propósito — Windows 11 lo pone
+así al desactivar los "efectos de animación" o en modo ahorro de energía. Con ese
+corte, el chat salía estático con los 9 mensajes de golpe.
+
+**Regla:** en `ChatSimulado.jsx` no va ningún condicional de movimiento reducido.
+El chat es decorativo (`aria-hidden`) y sus mensajes solo *aparecen* — no hay
+deslizamiento ni zoom, que es lo que WCAG 2.3.3 pide evitar.
+
+---
+
+## Aparición al hacer scroll (toda la web)
+
+Todo el contenido aparece progresivamente al bajar, mediante el componente
+`Revelar` de `componentes/ui.jsx`.
+
+- `<Revelar retraso={i * 90}>` encadena en cascada los elementos de una fila.
+- `como="p"` / `como="li"` / `como="section"` evita meter un `<div>` extra donde
+  rompería el marcado o el layout.
+- `CabeceraSeccion` y `CierreCTA` ya se revelan solos — no hace falta envolverlos.
+
+### ⚠️ La red de seguridad — no quitarla
+
+Los elementos `.revelar` arrancan en `opacity: 0`. Si el JavaScript fallara,
+**la web entera se vería en blanco**. Por eso el ocultado está condicionado a la
+clase `animaciones`, que añade un script en línea en el `<head>` de `index.html`:
+
+```
+sin JS → sin clase → nada se oculta → la web se ve entera
+```
+
+Ese script va **en línea y en el `<head>` a propósito**: si se mueve a un archivo
+aparte o a React, llega tarde y el contenido pega un salto (aparece, se esconde y
+vuelve a aparecer). `Revelar` lleva además dos salvaguardas propias: muestra el
+contenido de inmediato si no existe `IntersectionObserver`, y no espera al
+observador para lo que ya está en la primera pantalla.
+
+Sobre `prefers-reduced-motion`: **no** se matan todas las transiciones (eso es lo
+que congelaba la web entera). Se quita el desplazamiento y se conserva el fundido
+de opacidad, que es seguro para quien sufre mareo por movimiento.
+
+---
+
 ## Imágenes que faltan
 
 El cliente las tiene guardadas. Hay que colocarlas en `public/img/`:

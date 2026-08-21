@@ -7,7 +7,7 @@ export default function Footer() {
     <footer className="py-12 border-t border-[rgba(201,168,76,0.15)] bg-black/40">
       <div className="max-w-7xl mx-auto px-6 flex flex-col md:flex-row justify-between items-center gap-6">
         <Link to="/" aria-label="Ir al inicio">
-          <img src="/img/logo.png" alt={EMPRESA.nombre} className="h-12 w-auto object-contain" />
+          <img src="/img/logo.webp" alt={EMPRESA.nombre} className="h-12 w-auto object-contain" />
         </Link>
 
         <div className="flex flex-wrap items-center justify-center gap-x-6 gap-y-3">

@@ -49,7 +49,7 @@ export default function Nav() {
         {/* Logo */}
         <Link to="/" className="flex items-center flex-shrink-0" aria-label="Ir al inicio">
           <img
-            src="/img/logo.png"
+            src="/img/logo.webp"
             alt={EMPRESA.nombre}
             className="h-12 md:h-14 w-auto object-contain"
           />

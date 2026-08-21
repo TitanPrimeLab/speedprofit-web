@@ -27,15 +27,17 @@ export default function Testimonios() {
 
         {/* Estadísticas globales */}
         <div className="grid grid-cols-3 gap-6 max-w-2xl mx-auto text-center mb-16 pb-12 border-b border-[rgba(201,168,76,0.15)]">
-          {TESTIMONIOS.estadisticas.map((e) => (
-            <Estadistica key={e.valor} valor={e.valor} etiqueta={e.etiqueta} />
+          {TESTIMONIOS.estadisticas.map((e, i) => (
+            <Revelar key={e.valor} retraso={i * 110}>
+              <Estadistica valor={e.valor} etiqueta={e.etiqueta} />
+            </Revelar>
           ))}
         </div>
 
         {/* Tarjetas */}
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {TESTIMONIOS.lista.map((t) => (
-            <Revelar key={t.nombre}>
+          {TESTIMONIOS.lista.map((t, i) => (
+            <Revelar key={t.nombre} retraso={(i % 3) * 90}>
               <Tarjeta className="h-full flex flex-col">
                 <div className="mb-5">
                   <span className="text-2xl font-bold texto-oro">{t.metrica}</span>

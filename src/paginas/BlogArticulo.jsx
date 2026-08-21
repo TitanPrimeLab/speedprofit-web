@@ -63,12 +63,12 @@ export default function BlogArticulo() {
             name: EMPRESA.nombre,
             logo: {
               '@type': 'ImageObject',
-              url: 'https://speedprofitai.com/img/logo.png',
+              url: 'https://speedprofitai.com/img/logo.webp',
             },
           },
           image: articulo.imagen
             ? `https://speedprofitai.com${articulo.imagen}`
-            : 'https://speedprofitai.com/img/og-image.png',
+            : 'https://speedprofitai.com/img/og-image.jpg',
           mainEntityOfPage: `https://speedprofitai.com/blog/${articulo.slug}`,
           inLanguage: 'es-ES',
           articleSection: articulo.categoria,

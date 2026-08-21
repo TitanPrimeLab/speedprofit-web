@@ -11,8 +11,8 @@ export default function Integraciones() {
       />
 
       <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-5">
-        {INTEGRACIONES.grupos.map((g) => (
-          <Revelar key={g.categoria}>
+        {INTEGRACIONES.grupos.map((g, i) => (
+          <Revelar key={g.categoria} retraso={i * 80}>
             <Tarjeta className="h-full">
               <div className="flex items-center gap-3 mb-4">
                 <span className="w-10 h-10 rounded-lg bg-[rgba(201,168,76,0.12)] border border-[rgba(201,168,76,0.3)] flex items-center justify-center flex-shrink-0">
@@ -33,7 +33,9 @@ export default function Integraciones() {
         ))}
       </div>
 
-      <p className="text-center texto-apagado text-sm mt-8">{INTEGRACIONES.nota}</p>
+      <Revelar>
+        <p className="text-center texto-apagado text-sm mt-8">{INTEGRACIONES.nota}</p>
+      </Revelar>
     </Seccion>
   )
 }

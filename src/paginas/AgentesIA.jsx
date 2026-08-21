@@ -25,26 +25,37 @@ export default function AgentesIA() {
         />
 
         <div className="space-y-6 max-w-5xl mx-auto">
-          {AGENTES.lista.map((agente) => (
-            <Revelar key={agente.titulo}>
+          {AGENTES.lista.map((agente, i) => (
+            <Revelar key={agente.titulo} retraso={i * 60}>
               <Tarjeta>
-                <div className="flex flex-col md:flex-row md:items-start gap-6">
-                  <div className="w-14 h-14 rounded-xl border border-[rgba(201,168,76,0.35)] bg-[rgba(201,168,76,0.08)] flex items-center justify-center flex-shrink-0">
-                    <Icono nombre={agente.icono} className="w-7 h-7 texto-oro" />
-                  </div>
+                <div className="grid md:grid-cols-[minmax(0,1fr)_260px] gap-6 items-start">
+                  <div className="flex flex-col md:flex-row md:items-start gap-6">
+                    <div className="w-14 h-14 rounded-xl border border-[rgba(201,168,76,0.35)] bg-[rgba(201,168,76,0.08)] flex items-center justify-center flex-shrink-0">
+                      <Icono nombre={agente.icono} className="w-7 h-7 texto-oro" />
+                    </div>
 
-                  <div className="flex-1">
-                    <h3 className="text-xl md:text-2xl font-bold text-white mb-3 leading-snug">
-                      {agente.titulo}
-                    </h3>
-                    <p className="texto-apagado leading-relaxed">{agente.texto}</p>
-                    <ListaPuntos puntos={agente.puntos} />
-                    <div className="mt-7">
-                      <BotonOro tamano="medio" mensaje={agente.mensaje}>
-                        {AGENTES.cta}
-                      </BotonOro>
+                    <div className="flex-1">
+                      <h3 className="text-xl md:text-2xl font-bold text-white mb-3 leading-snug">
+                        {agente.titulo}
+                      </h3>
+                      <p className="texto-apagado leading-relaxed">{agente.texto}</p>
+                      <ListaPuntos puntos={agente.puntos} />
+                      <div className="mt-7">
+                        <BotonOro tamano="medio" mensaje={agente.mensaje}>
+                          {AGENTES.cta}
+                        </BotonOro>
+                      </div>
                     </div>
                   </div>
+
+                  {agente.imagen && (
+                    <img
+                      src={agente.imagen}
+                      alt={agente.titulo}
+                      loading="lazy"
+                      className="w-full h-48 md:h-full rounded-xl object-cover border border-[rgba(201,168,76,0.15)] order-first md:order-last"
+                    />
+                  )}
                 </div>
               </Tarjeta>
             </Revelar>

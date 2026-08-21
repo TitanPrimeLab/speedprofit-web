@@ -32,8 +32,8 @@ export default function Blog() {
           <EstadoVacio />
         ) : (
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-6xl mx-auto">
-            {articulos.map((art) => (
-              <Revelar key={art.slug}>
+            {articulos.map((art, i) => (
+              <Revelar key={art.slug} retraso={(i % 3) * 90}>
                 <Link
                   to={`/blog/${art.slug}`}
                   className="block h-full group"

@@ -12,8 +12,8 @@ export const EMPRESA = {
   telefonoVisible: '+34 722 842 925',
   telefonoWhatsApp: '34722842925',
   web: 'speedprofitai.com',
-  domicilio: 'Calle Pablo Serrano nº11, 50794',
-  instagram: 'https://www.instagram.com/speedprofitai',
+  domicilio: 'Carrer Ramon Llull, Edifici Rocamar 5, 43840 Salou, Tarragona',
+  instagram: 'https://www.instagram.com/angel.speedprofit/',
   linkedin: 'https://www.linkedin.com/in/angel-valen-580a093a8',
   copyright: '© 2026 SpeedProfit AI · Todos los derechos reservados',
   youtubeId: 'rHPGOX5TKM4',
@@ -392,7 +392,10 @@ export const CALCULADORA = {
     },
     conversion: {
       etiqueta: 'Tasa de conversión (%)',
-      ayuda: '% de leads que acaban comprando',
+      // Importante que quede claro que es sobre los leads que SÍ atiendes:
+      // es lo que hace coherente la fórmula (los leads que se pierden por
+      // responder tarde habrían cerrado a este mismo ritmo).
+      ayuda: 'De los leads que sí atiendes, % que acaba comprando',
       defecto: 5,
     },
   },
@@ -402,6 +405,7 @@ export const CALCULADORA = {
     titulo: 'Pérdida mensual estimada',
     etiquetaMes: 'al mes',
     etiquetaAnio: 'al año',
+    etiquetaIngresasHoy: 'Comisiones que ingresas hoy',
     metricas: {
       leadsPerdidos: 'Leads perdidos/mes',
       ventasPerdidas: 'Ventas perdidas/mes',
@@ -520,6 +524,7 @@ export const AGENTES = {
   lista: [
     {
       icono: 'PhoneCall',
+      imagen: '/img/agente-callcenter.webp',
       titulo: 'IA Call Center — Nunca más un teléfono que nadie coge',
       texto:
         'Cada llamada que no contestas es un comprador que llama a la siguiente agencia de la lista. Tu IA atiende todas las llamadas entrantes al instante, responde, cualifica y agenda — y cuando tú llegas por la mañana, las visitas ya están en el calendario.',
@@ -532,6 +537,7 @@ export const AGENTES = {
     },
     {
       icono: 'MessageSquare',
+      imagen: '/img/agente-chat.webp',
       titulo: 'IA Vendedor por Chat — El comercial que nunca se cansa ni pide comisión',
       texto:
         'Un comprador que escribe por WhatsApp a las 11 de la noche quiere respuesta ahora, no mañana a las 9. Tu agente IA responde en segundos, resuelve dudas, envía fichas de propiedades y cierra la visita — mientras tú estás en la cena con tu familia.',
@@ -544,6 +550,7 @@ export const AGENTES = {
     },
     {
       icono: 'Users',
+      imagen: '/img/agente-setter.webp',
       titulo: 'IA Setter — Un equipo entero de prospección trabajando solo',
       texto:
         '¿Cuántos contactos tienes en tu CRM que nunca has llegado a trabajar bien? Tu IA Setter los contacta a todos, personaliza cada mensaje, filtra a los que tienen intención real de comprar o vender y te los entrega listos para hablar. Lo que un equipo de 3 personas haría en una semana, lo hace en una hora.',
@@ -556,6 +563,7 @@ export const AGENTES = {
     },
     {
       icono: 'Headphones',
+      imagen: '/img/agente-soporte.webp',
       titulo: 'IA Soporte — El 90% de las preguntas de tus clientes ya tienen respuesta',
       texto:
         'Tu equipo pierde horas respondiendo siempre lo mismo: horarios, documentación, estado de la operación, precios. Cada hora ahí es una hora que no están vendiendo. Tu agente de soporte resuelve el 90% de las consultas solo, escala solo lo que realmente necesita atención humana y libera a tu equipo para lo que genera dinero.',
@@ -568,6 +576,7 @@ export const AGENTES = {
     },
     {
       icono: 'Wrench',
+      imagen: '/img/agente-medida.webp',
       titulo: '¿Tu caso es distinto? Mejor. Lo construimos desde cero para ti.',
       texto:
         'Las agencias que más crecen no usan soluciones genéricas. Usan sistemas diseñados exactamente para cómo trabajan ellas. Si tus procesos son distintos, tus flujos son complejos o simplemente quieres algo que nadie más tenga — lo desarrollamos. Entrenado con tu material, integrado en tus herramientas, funcionando a tu manera.',

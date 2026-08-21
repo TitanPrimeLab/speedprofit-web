@@ -5,7 +5,7 @@ descripcion: Cuánto dinero pierde una agencia inmobiliaria por no responder en 
 fecha: 2026-01-15
 autor: Ángel Valén
 categoria: Sector inmobiliario
-imagen: /img/og-image.png
+imagen: /img/og-image.jpg
 palabrasClave: [tiempo respuesta leads inmobiliarios, lead response time, captación inmobiliaria, IA inmobiliaria]
 ---
 

@@ -4,9 +4,30 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
 
+    <!-- =========================================================================
+         RED DE SEGURIDAD DE LAS ANIMACIONES DE APARICIÓN
+
+         Los elementos con la clase .revelar arrancan invisibles (opacity: 0) y
+         se muestran al entrar en pantalla. Si el JavaScript fallara, esos
+         elementos se quedarían invisibles PARA SIEMPRE y la web se vería en
+         blanco.
+
+         Por eso el ocultado está condicionado a la clase "animaciones", que se
+         añade justo aquí. Regla: sin JS no hay clase → nada se oculta → la web
+         se ve entera. Va en línea y en el <head> a propósito, para que se
+         aplique antes del primer pintado y no haya parpadeo.
+
+         NO mover esto a un archivo aparte ni a React (llegaría tarde y el
+         contenido daría un salto: aparece, se esconde y vuelve a aparecer).
+         ========================================================================= -->
+    <script>
+      document.documentElement.classList.add('animaciones')
+    </script>
+
     <!-- Favicon e iconos -->
-    <link rel="icon" type="image/png" href="/img/logo.png" />
-    <link rel="apple-touch-icon" href="/img/logo.png" />
+    <link rel="icon" type="image/png" sizes="32x32" href="/img/favicon-32.png" />
+    <link rel="icon" type="image/png" sizes="192x192" href="/img/favicon-192.png" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/img/favicon-180.png" />
     <link rel="manifest" href="/manifest.webmanifest" />
 
     <!-- =========================================================================
@@ -65,9 +86,9 @@
     <meta property="og:title" content="SpeedProfit AI — Automatización con IA para inmobiliarias" />
     <meta property="og:description" content="Agentes de IA que responden, cualifican y agendan visitas 24/7 para agencias inmobiliarias independientes en España. Diseño web para inmobiliarias desde 399€. 63 auditorías de respuesta medidas." />
     <meta property="og:url" content="https://speedprofitai.com/" />
-    <meta property="og:image" content="https://speedprofitai.com/img/og-image.png" />
-    <meta property="og:image:secure_url" content="https://speedprofitai.com/img/og-image.png" />
-    <meta property="og:image:type" content="image/png" />
+    <meta property="og:image" content="https://speedprofitai.com/img/og-image.jpg" />
+    <meta property="og:image:secure_url" content="https://speedprofitai.com/img/og-image.jpg" />
+    <meta property="og:image:type" content="image/jpeg" />
     <meta property="og:image:width" content="1200" />
     <meta property="og:image:height" content="630" />
     <meta property="og:image:alt" content="SpeedProfit AI — Automatización con IA para inmobiliarias" />
@@ -81,7 +102,7 @@
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content="SpeedProfit AI — Automatización con IA para inmobiliarias" />
     <meta name="twitter:description" content="Agentes de IA que responden, cualifican y agendan visitas 24/7 para agencias inmobiliarias independientes en España. Diseño web para inmobiliarias desde 399€. 63 auditorías de respuesta medidas." />
-    <meta name="twitter:image" content="https://speedprofitai.com/img/og-image.png" />
+    <meta name="twitter:image" content="https://speedprofitai.com/img/og-image.jpg" />
     <meta name="twitter:image:alt" content="SpeedProfit AI — Automatización con IA para inmobiliarias" />
 
     <!-- =========================================================================
@@ -136,11 +157,11 @@
           },
           "logo": {
             "@type": "ImageObject",
-            "url": "https://speedprofitai.com/img/logo.png",
+            "url": "https://speedprofitai.com/img/logo.webp",
             "width": 512,
             "height": 512
           },
-          "image": "https://speedprofitai.com/img/og-image.png",
+          "image": "https://speedprofitai.com/img/og-image.jpg",
           "description": "Agencia de automatización con IA para inmobiliarias independientes en España. Desarrollamos agentes de inteligencia artificial por WhatsApp que responden leads las 24 horas, filtran consultas y agendan visitas automáticamente.",
           "email": "info@speedprofitai.com",
           "telephone": "+34722842925",
@@ -187,14 +208,16 @@
           "@id": "https://speedprofitai.com/#localbusiness",
           "name": "SpeedProfit AI",
           "url": "https://speedprofitai.com/",
-          "image": "https://speedprofitai.com/img/og-image.png",
+          "image": "https://speedprofitai.com/img/og-image.jpg",
           "priceRange": "€€",
           "telephone": "+34722842925",
           "email": "info@speedprofitai.com",
           "address": {
             "@type": "PostalAddress",
-            "streetAddress": "Calle Pablo Serrano nº11",
-            "postalCode": "50794",
+            "streetAddress": "Carrer Ramon Llull, Edifici Rocamar 5",
+            "addressLocality": "Salou",
+            "addressRegion": "Cataluña",
+            "postalCode": "43840",
             "addressCountry": "ES"
           },
           "areaServed": {

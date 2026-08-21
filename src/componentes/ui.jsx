@@ -159,13 +159,52 @@ export function Kicker({ children }) {
 export function CabeceraSeccion({ kicker, titulo, subtitulo, centrado = true, esH1 = false }) {
   const Titulo = esH1 ? 'h1' : 'h2'
   return (
-    <div className={`${centrado ? 'text-center max-w-3xl mx-auto' : ''} mb-14`}>
+    <Revelar className={`${centrado ? 'text-center max-w-3xl mx-auto' : ''} mb-14`}>
       {kicker && <Kicker>{kicker}</Kicker>}
       <Titulo className="text-3xl md:text-4xl font-bold text-white mt-3 mb-4 leading-tight">
         {titulo}
       </Titulo>
       {subtitulo && <p className="texto-apagado text-lg leading-relaxed">{subtitulo}</p>}
-    </div>
+    </Revelar>
+  )
+}
+
+// ---------------------------------------------------------------------------
+// Imagen de cabecera de sección. Va justo encima de <CabeceraSeccion /> y
+// aparece al hacer scroll como el resto del contenido.
+//
+// Dos modos:
+//
+//   Por defecto (banner) — ancho grande y altura fija con recorte. Vale para
+//   imágenes apaisadas, como home-equipo (1000x552).
+//
+//   `completa` — enseña la imagen ENTERA, sin recortar. Para las cuadradas
+//   (home-agentes 900x900, home-dashboard 1100x1100): a ancho completo medirían
+//   ~900px de alto y echarían el texto fuera de pantalla, así que se muestran
+//   más pequeñas y centradas, pero sin cortar nada.
+// ---------------------------------------------------------------------------
+export function ImagenSeccion({
+  src,
+  alt,
+  className = '',
+  posicion = 'object-center',
+  completa = false,
+}) {
+  return (
+    <Revelar
+      className={`${
+        completa ? 'max-w-md' : 'max-w-4xl'
+      } mx-auto mb-12 rounded-2xl overflow-hidden shadow-2xl border border-[rgba(201,168,76,0.2)] ${className}`}
+    >
+      <img
+        src={src}
+        alt={alt}
+        loading="lazy"
+        className={
+          completa ? 'w-full h-auto' : `w-full h-[240px] md:h-[380px] object-cover ${posicion}`
+        }
+      />
+    </Revelar>
   )
 }
 
@@ -226,48 +265,95 @@ export function CierreCTA({ titulo, texto, cta, ctaMensaje, ctaHref, microcopy, 
   return (
     <Seccion className="text-center">
       {badge && (
-        <div className="mb-6">
+        <Revelar className="mb-6">
           <Insignia>{badge}</Insignia>
-        </div>
+        </Revelar>
       )}
-      <h2 className="text-3xl md:text-5xl font-bold text-white mb-5 max-w-4xl mx-auto leading-tight">
-        {titulo}
-      </h2>
+      <Revelar retraso={badge ? 80 : 0}>
+        <h2 className="text-3xl md:text-5xl font-bold text-white mb-5 max-w-4xl mx-auto leading-tight">
+          {titulo}
+        </h2>
+      </Revelar>
       {texto && (
-        <p className="texto-apagado text-lg max-w-2xl mx-auto mb-10 leading-relaxed">{texto}</p>
+        <Revelar retraso={160}>
+          <p className="texto-apagado text-lg max-w-2xl mx-auto mb-10 leading-relaxed">{texto}</p>
+        </Revelar>
       )}
-      <BotonOro mensaje={ctaMensaje} href={ctaHref}>{cta}</BotonOro>
-      {microcopy && <p className="texto-apagado text-sm mt-6">{microcopy}</p>}
+      <Revelar retraso={240}>
+        <BotonOro mensaje={ctaMensaje} href={ctaHref}>{cta}</BotonOro>
+        {microcopy && <p className="texto-apagado text-sm mt-6">{microcopy}</p>}
+      </Revelar>
     </Seccion>
   )
 }
 
 // ---------------------------------------------------------------------------
-// Revelar al hacer scroll (respeta prefers-reduced-motion vía CSS)
+// Revelar al hacer scroll.
+//
+// `retraso` (en ms) sirve para encadenar en cascada varios elementos de una
+// misma fila: <Revelar retraso={i * 90}>. Bajo prefers-reduced-motion el CSS
+// elimina el desplazamiento y deja solo el fundido (ver index.css).
+//
+// ⚠️ Salvaguarda: si IntersectionObserver no existe, el contenido se muestra
+// de inmediato. Sin esto, un fallo del observador dejaría la página en blanco,
+// porque .revelar arranca en opacity: 0.
 // ---------------------------------------------------------------------------
-export function Revelar({ children, className = '' }) {
+export function Revelar({ children, className = '', retraso = 0, como: Etiqueta = 'div' }) {
   const ref = useRef(null)
   const [visible, setVisible] = useState(false)
 
   useEffect(() => {
     const nodo = ref.current
     if (!nodo) return
+
+    // Salvaguarda 1: navegador sin IntersectionObserver → mostrar ya.
+    if (typeof IntersectionObserver === 'undefined') {
+      setVisible(true)
+      return
+    }
+
+    let cancelado = false
+    const mostrar = () => {
+      if (!cancelado) setVisible(true)
+    }
+
+    // Salvaguarda 2: lo que ya está en pantalla al cargar (la primera
+    // pantalla) no espera al observador — se revela en el siguiente frame.
+    // El doble requestAnimationFrame es para que el navegador pinte primero
+    // el estado invisible y la transición se vea; con uno solo React agrupa
+    // los cambios y el elemento aparecería de golpe, sin fundido.
+    const caja = nodo.getBoundingClientRect()
+    if (caja.top < window.innerHeight && caja.bottom > 0) {
+      const id = requestAnimationFrame(() => requestAnimationFrame(mostrar))
+      return () => {
+        cancelado = true
+        cancelAnimationFrame(id)
+      }
+    }
+
     const observador = new IntersectionObserver(
       ([entrada]) => {
         if (entrada.isIntersecting) {
-          setVisible(true)
+          mostrar()
           observador.disconnect()
         }
       },
-      { threshold: 0.12 }
+      { threshold: 0.08, rootMargin: '0px 0px -40px 0px' }
     )
     observador.observe(nodo)
-    return () => observador.disconnect()
+    return () => {
+      cancelado = true
+      observador.disconnect()
+    }
   }, [])
 
   return (
-    <div ref={ref} className={`revelar ${visible ? 'visible' : ''} ${className}`}>
+    <Etiqueta
+      ref={ref}
+      className={`revelar ${visible ? 'visible' : ''} ${className}`}
+      style={retraso ? { transitionDelay: `${retraso}ms` } : undefined}
+    >
       {children}
-    </div>
+    </Etiqueta>
   )
 }

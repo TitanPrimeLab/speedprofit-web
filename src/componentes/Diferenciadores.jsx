@@ -1,5 +1,5 @@
 import { DIFERENCIADORES } from '../contenido'
-import { CabeceraSeccion, Icono, Revelar, Seccion, Tarjeta } from './ui'
+import { CabeceraSeccion, Icono, ImagenSeccion, Revelar, Seccion, Tarjeta } from './ui'
 
 // ---------------------------------------------------------------------------
 // 4 tarjetas de diferenciadores: mercados globales, privacidad, IA
@@ -9,6 +9,11 @@ import { CabeceraSeccion, Icono, Revelar, Seccion, Tarjeta } from './ui'
 export default function Diferenciadores() {
   return (
     <Seccion fondo="rgba(5,5,8,0.9)">
+      <ImagenSeccion
+        src="/img/home-equipo.webp"
+        alt="Equipo de SpeedProfit AI dando soporte los 365 días del año"
+      />
+
       <CabeceraSeccion
         kicker={DIFERENCIADORES.kicker}
         titulo={DIFERENCIADORES.titulo}
@@ -16,8 +21,8 @@ export default function Diferenciadores() {
       />
 
       <div className="grid md:grid-cols-2 gap-6 max-w-5xl mx-auto">
-        {DIFERENCIADORES.lista.map((item) => (
-          <Revelar key={item.titulo}>
+        {DIFERENCIADORES.lista.map((item, i) => (
+          <Revelar key={item.titulo} retraso={(i % 2) * 90}>
             <Tarjeta className="h-full">
               <div className="flex items-start gap-4">
                 <div className="w-12 h-12 rounded-xl border border-[rgba(201,168,76,0.35)] bg-[rgba(201,168,76,0.08)] flex items-center justify-center flex-shrink-0">

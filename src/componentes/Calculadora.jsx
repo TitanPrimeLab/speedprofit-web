@@ -1,7 +1,7 @@
 import { useMemo, useState } from 'react'
 import { ChevronDown } from 'lucide-react'
 import { CALCULADORA } from '../contenido'
-import { BotonOro, CabeceraSeccion, Seccion, Tarjeta } from './ui'
+import { BotonOro, CabeceraSeccion, ImagenSeccion, Revelar, Seccion, Tarjeta } from './ui'
 
 // ============================================================================
 // CALCULADORA DE PÉRDIDAS POR TIEMPO DE RESPUESTA
@@ -80,6 +80,17 @@ export default function Calculadora() {
     const dineroPerdidoMes = ventasPerdidasMes * nTicket * nComision
     const dineroPerdidoAnio = dineroPerdidoMes * 12
 
+    // Lo que YA estás ingresando con los leads que sí llegas a atender.
+    //
+    // Se enseña a propósito junto a la pérdida. Sin este dato la calculadora
+    // solo daba media foto: al subir la tasa de conversión, la pérdida sube
+    // (correcto — si cierras mejor, cada lead que se cae vale más dinero),
+    // pero sin ver que los ingresos suben en la misma proporción parecía que
+    // la herramienta te castigaba por mejorar. Con los dos números al lado
+    // se ve que la relación entre ambos no cambia.
+    const ventasCerradasMes = nLeads * (1 - penalizacion) * nConversion
+    const dineroActualMes = ventasCerradasMes * nTicket * nComision
+
     // Con SpeedProfit
     const leadsPerdidosMesSP = nLeads * PENALIZACION_CON_SPEEDPROFIT
     const ventasPerdidasMesSP = leadsPerdidosMesSP * nConversion
@@ -96,6 +107,8 @@ export default function Calculadora() {
       penalizacionPct: Math.round(penalizacion * 100),
       dineroRecuperadoMes,
       dineroRecuperadoAnio,
+      dineroActualMes,
+      ventasCerradasMes,
     }
   }, [leads, tiempoRespuesta, ticket, comision, conversion, campos.tiempoRespuesta.opciones])
 
@@ -106,13 +119,19 @@ export default function Calculadora() {
 
   return (
     <Seccion id={CALCULADORA.id} fondo="rgba(5,5,8,0.9)">
+      <ImagenSeccion
+        completa
+        src="/img/home-agentes.webp"
+        alt="Agentes de IA de SpeedProfit AI atendiendo leads inmobiliarios"
+      />
+
       <CabeceraSeccion
         kicker={CALCULADORA.kicker}
         titulo={CALCULADORA.titulo}
         subtitulo={CALCULADORA.subtitulo}
       />
 
-      <div className="max-w-5xl mx-auto">
+      <Revelar className="max-w-5xl mx-auto">
         {/* Dos columnas: inputs / resultados */}
         <div className="grid md:grid-cols-2 gap-6">
           {/* ---- Columna izquierda: INPUTS ---- */}
@@ -157,6 +176,19 @@ export default function Calculadora() {
 
           {/* ---- Columna derecha: RESULTADOS EN VIVO ---- */}
           <div className="space-y-4">
+            {/* Contexto: lo que ya ingresas con los leads que sí atiendes.
+                Va ANTES de la pérdida para que el número rojo se lea en
+                proporción a lo que ya facturas, no como un dato suelto. */}
+            <div className="rounded-2xl p-4 bg-[rgba(255,255,255,0.03)] border border-[rgba(201,168,76,0.18)] flex items-baseline justify-between gap-3">
+              <span className="text-sm text-white/70">
+                {CALCULADORA.resultado.etiquetaIngresasHoy}
+              </span>
+              <span className="text-xl font-bold text-white whitespace-nowrap">
+                {formatoEuros.format(resultado.dineroActualMes)}
+                <span className="text-white/50 text-sm font-normal">/mes</span>
+              </span>
+            </div>
+
             {/* Bloque grande: pérdida al mes */}
             <div className="rounded-2xl p-6 bg-[rgba(220,60,60,0.08)] border border-[rgba(220,60,60,0.25)] text-center">
               <p className="text-sm text-white/70 mb-1">{CALCULADORA.resultado.titulo}</p>
@@ -271,7 +303,7 @@ export default function Calculadora() {
             {CALCULADORA.disclaimer}
           </p>
         </div>
-      </div>
+      </Revelar>
     </Seccion>
   )
 }

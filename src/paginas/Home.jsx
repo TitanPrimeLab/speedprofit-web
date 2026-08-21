@@ -5,6 +5,7 @@ import {
   CierreCTA,
   Estadistica,
   Icono,
+  ImagenSeccion,
   Insignia,
   Revelar,
   Seccion,
@@ -44,32 +45,41 @@ function Hero() {
         <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
           {/* Columna izquierda */}
           <div>
-            <Insignia>{hero.badge}</Insignia>
+            <Revelar>
+              <Insignia>{hero.badge}</Insignia>
+            </Revelar>
 
-            <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white leading-[1.08] tracking-tight mt-6">
-              {hero.titulo}{' '}
-              <span className="texto-oro-degradado">{hero.tituloDestacado}</span>
-            </h1>
+            <Revelar retraso={100}>
+              <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white leading-[1.08] tracking-tight mt-6">
+                {hero.titulo}{' '}
+                <span className="texto-oro-degradado">{hero.tituloDestacado}</span>
+              </h1>
+            </Revelar>
 
-            <p className="texto-apagado text-lg md:text-xl mt-6 leading-relaxed max-w-xl">
-              {hero.subtitulo}
-            </p>
+            <Revelar retraso={200}>
+              <p className="texto-apagado text-lg md:text-xl mt-6 leading-relaxed max-w-xl">
+                {hero.subtitulo}
+              </p>
+            </Revelar>
 
-            <div className="mt-9">
+            <Revelar retraso={300} className="mt-9">
               <BotonOro href={hero.ctaHref}>{hero.cta}</BotonOro>
-            </div>
+            </Revelar>
 
             <div className="grid grid-cols-3 gap-4 mt-14 pt-8 border-t border-[rgba(201,168,76,0.15)]">
-              {hero.estadisticas.map((e) => (
-                <Estadistica key={e.valor} valor={e.valor} etiqueta={e.etiqueta} />
+              {hero.estadisticas.map((e, i) => (
+                <Revelar key={e.valor} retraso={400 + i * 100}>
+                  <Estadistica valor={e.valor} etiqueta={e.etiqueta} />
+                </Revelar>
               ))}
             </div>
           </div>
 
-          {/* Columna derecha — chat animado (oculto en móvil) */}
-          <div className="hidden lg:flex justify-center">
+          {/* Columna derecha — chat animado (oculto en móvil: justo debajo,
+              encima de la calculadora, ya va la imagen de los agentes) */}
+          <Revelar retraso={250} className="hidden lg:flex justify-center">
             <ChatSimulado />
-          </div>
+          </Revelar>
         </div>
       </div>
     </section>
@@ -88,8 +98,8 @@ function Problema() {
       />
 
       <div className="grid md:grid-cols-2 gap-6">
-        {problema.tarjetas.map((t) => (
-          <Revelar key={t.titulo}>
+        {problema.tarjetas.map((t, i) => (
+          <Revelar key={t.titulo} retraso={i * 90}>
             <Tarjeta className="h-full">
               <Icono nombre={t.icono} className="w-8 h-8 texto-oro mb-4" />
               <h3 className="text-lg font-semibold text-white mb-2">{t.titulo}</h3>
@@ -99,9 +109,9 @@ function Problema() {
         ))}
       </div>
 
-      <div className="text-center mt-12">
+      <Revelar className="text-center mt-12">
         <BotonOro mensaje={problema.ctaMensaje}>{problema.cta}</BotonOro>
-      </div>
+      </Revelar>
     </Seccion>
   )
 }
@@ -111,6 +121,12 @@ function Solucion() {
   const { solucion } = HOME
   return (
     <Seccion id="soluciones" fondo="rgba(8,8,12,0.88)">
+      <ImagenSeccion
+        completa
+        src="/img/home-dashboard.webp"
+        alt="Panel de SpeedProfit AI con las métricas de leads en tiempo real"
+      />
+
       <CabeceraSeccion
         kicker={solucion.kicker}
         titulo={solucion.titulo}
@@ -118,8 +134,8 @@ function Solucion() {
       />
 
       <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-        {solucion.bloques.map((b) => (
-          <Revelar key={b.titulo}>
+        {solucion.bloques.map((b, i) => (
+          <Revelar key={b.titulo} retraso={(i % 3) * 90}>
             <Tarjeta className="h-full flex flex-col">
               <Icono nombre={b.icono} className="w-8 h-8 texto-oro mb-4" />
               <h3 className="text-lg font-semibold text-white mb-2">{b.titulo}</h3>
@@ -132,9 +148,9 @@ function Solucion() {
         ))}
       </div>
 
-      <div className="text-center mt-12">
+      <Revelar className="text-center mt-12">
         <BotonOro mensaje={solucion.ctaMensaje}>{solucion.cta}</BotonOro>
-      </div>
+      </Revelar>
     </Seccion>
   )
 }
@@ -147,8 +163,8 @@ function Proceso() {
       <CabeceraSeccion kicker={proceso.kicker} titulo={proceso.titulo} />
 
       <div className="grid md:grid-cols-3 gap-8 md:gap-6">
-        {proceso.pasos.map((paso) => (
-          <Revelar key={paso.numero}>
+        {proceso.pasos.map((paso, i) => (
+          <Revelar key={paso.numero} retraso={i * 120}>
             <div className="text-center px-4">
               <div className="relative inline-flex mb-6">
                 <div className="w-16 h-16 rounded-full border border-[rgba(201,168,76,0.35)] bg-[rgba(201,168,76,0.08)] flex items-center justify-center">
@@ -165,9 +181,9 @@ function Proceso() {
         ))}
       </div>
 
-      <div className="text-center mt-14">
+      <Revelar className="text-center mt-14">
         <BotonOro mensaje={proceso.ctaMensaje}>{proceso.cta}</BotonOro>
-      </div>
+      </Revelar>
     </Seccion>
   )
 }
@@ -194,15 +210,18 @@ function Video() {
   const { video } = HOME
   return (
     <Seccion>
-      <div className="text-center max-w-3xl mx-auto mb-10">
+      <Revelar className="text-center max-w-3xl mx-auto mb-10">
         <Insignia>▶ {video.badge}</Insignia>
         <h2 className="text-3xl md:text-4xl font-bold text-white mt-5 mb-4 leading-tight">
           {video.titulo}
         </h2>
         <p className="texto-apagado text-lg">{video.subtitulo}</p>
-      </div>
+      </Revelar>
 
-      <div className="max-w-4xl mx-auto rounded-2xl overflow-hidden shadow-2xl border border-[rgba(201,168,76,0.2)]">
+      <Revelar
+        retraso={120}
+        className="max-w-4xl mx-auto rounded-2xl overflow-hidden shadow-2xl border border-[rgba(201,168,76,0.2)]"
+      >
         <div className="relative w-full" style={{ paddingBottom: '56.25%' }}>
           <iframe
             className="absolute inset-0 w-full h-full"
@@ -213,7 +232,7 @@ function Video() {
             allowFullScreen
           />
         </div>
-      </div>
+      </Revelar>
     </Seccion>
   )
 }
@@ -246,7 +265,9 @@ function Faq() {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(schemaFAQ) }}
       />
       <CabeceraSeccion titulo={faq.titulo} subtitulo={faq.subtitulo} />
-      <Acordeon preguntas={faq.preguntas} />
+      <Revelar>
+        <Acordeon preguntas={faq.preguntas} />
+      </Revelar>
     </Seccion>
   )
 }

@@ -1,4 +1,4 @@
-import { Seccion } from '../componentes/ui'
+import { Revelar, Seccion } from '../componentes/ui'
 import VolverAlInicio from '../componentes/VolverAlInicio'
 
 // Plantilla compartida para Privacidad y Términos.
@@ -10,14 +10,16 @@ export default function PaginaLegal({ titulo, actualizado, bloques }) {
 
       <Seccion className="!pt-12">
         <div className="max-w-3xl mx-auto">
-          <h1 className="text-3xl md:text-4xl font-bold text-white mb-3">{titulo}</h1>
-          {actualizado && (
-            <p className="texto-apagado text-sm mb-12">Última actualización: {actualizado}</p>
-          )}
+          <Revelar>
+            <h1 className="text-3xl md:text-4xl font-bold text-white mb-3">{titulo}</h1>
+            {actualizado && (
+              <p className="texto-apagado text-sm mb-12">Última actualización: {actualizado}</p>
+            )}
+          </Revelar>
 
           <div className="space-y-10">
             {bloques.map((bloque, i) => (
-              <section key={i}>
+              <Revelar key={i} como="section">
                 {bloque.titulo && (
                   <h2 className="text-xl font-semibold text-white mb-4">{bloque.titulo}</h2>
                 )}
@@ -28,7 +30,7 @@ export default function PaginaLegal({ titulo, actualizado, bloques }) {
                     </p>
                   ))}
                 </div>
-              </section>
+              </Revelar>
             ))}
           </div>
         </div>

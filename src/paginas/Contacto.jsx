@@ -1,5 +1,5 @@
 import { CONTACTO } from '../contenido'
-import { BotonOro, Icono, Insignia, Seccion } from '../componentes/ui'
+import { BotonOro, Icono, Insignia, Revelar, Seccion } from '../componentes/ui'
 import VolverAlInicio from '../componentes/VolverAlInicio'
 
 export default function Contacto() {
@@ -9,18 +9,24 @@ export default function Contacto() {
 
       <Seccion className="!pt-12">
         <div className="max-w-2xl mx-auto">
-          <Insignia>{CONTACTO.kicker}</Insignia>
+          <Revelar>
+            <Insignia>{CONTACTO.kicker}</Insignia>
+          </Revelar>
 
-          <h1 className="text-4xl md:text-5xl font-bold text-white mt-6 mb-5 leading-tight">
-            {CONTACTO.titulo}{' '}
-            <span className="texto-oro-degradado">{CONTACTO.tituloDestacado}</span>
-          </h1>
+          <Revelar retraso={100}>
+            <h1 className="text-4xl md:text-5xl font-bold text-white mt-6 mb-5 leading-tight">
+              {CONTACTO.titulo}{' '}
+              <span className="texto-oro-degradado">{CONTACTO.tituloDestacado}</span>
+            </h1>
+          </Revelar>
 
-          <p className="texto-apagado text-lg leading-relaxed mb-3">{CONTACTO.subtitulo}</p>
-          <p className="texto-oro font-semibold mb-10">{CONTACTO.nota}</p>
+          <Revelar retraso={200}>
+            <p className="texto-apagado text-lg leading-relaxed mb-3">{CONTACTO.subtitulo}</p>
+            <p className="texto-oro font-semibold mb-10">{CONTACTO.nota}</p>
+          </Revelar>
 
           {/* Tarjeta con los datos de contacto */}
-          <div className="tarjeta-glass p-6 md:p-8 space-y-6">
+          <Revelar retraso={280} className="tarjeta-glass p-6 md:p-8 space-y-6">
             {CONTACTO.campos.map((campo) => {
               const contenido = (
                 <>
@@ -54,13 +60,13 @@ export default function Contacto() {
                 </div>
               )
             })}
-          </div>
+          </Revelar>
 
-          <div className="mt-10">
+          <Revelar retraso={360} className="mt-10">
             <BotonOro className="w-full" mensaje={CONTACTO.ctaMensaje}>
               {CONTACTO.cta}
             </BotonOro>
-          </div>
+          </Revelar>
         </div>
       </Seccion>
     </>
