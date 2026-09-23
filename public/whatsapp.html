@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Hablar por WhatsApp | SpeedProfit AI</title>
+  <meta name="robots" content="noindex, nofollow" />
+  <style>
+    html, body {
+      margin: 0;
+      height: 100%;
+      background: #0b0b0c;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      color: #f5f5f5;
+      text-align: center;
+    }
+    .box {
+      padding: 24px;
+    }
+    .spinner {
+      width: 40px;
+      height: 40px;
+      margin: 0 auto 20px;
+      border: 3px solid rgba(255,255,255,0.15);
+      border-top-color: #25D366;
+      border-radius: 50%;
+      animation: spin 0.8s linear infinite;
+    }
+    @keyframes spin { to { transform: rotate(360deg); } }
+    p { font-size: 15px; opacity: 0.75; margin: 0; }
+    a { color: #25D366; }
+  </style>
+</head>
+<body>
+  <div class="box">
+    <div class="spinner"></div>
+    <p>Abriendo WhatsApp…</p>
+    <p><a id="fallback" href="#">Si no se abre automáticamente, toca aquí</a></p>
+  </div>
+
+  <script>
+    // =========================================================================
+    // Página puente para el formulario de Meta Ads: redirige a WhatsApp con el
+    // mensaje ya escrito. Accesible en https://speedprofitai.com/whatsapp
+    //
+    // ⚠️ EXCEPCIÓN A LA REGLA DEL PROYECTO — leer antes de cambiar el teléfono.
+    //
+    // La regla dice que el número solo se escribe en `EMPRESA.telefonoWhatsApp`
+    // (src/contenido.js) y que nunca va a pelo. Aquí no hay más remedio: este
+    // archivo vive en `public/`, se copia tal cual al build sin pasar por Vite
+    // ni React, así que no puede importar nada de `contenido.js`.
+    //
+    // CONSECUENCIA: si algún día cambia el número de WhatsApp, hay que tocarlo
+    // en DOS sitios — en `contenido.js` y aquí abajo. Es el único punto de toda
+    // la web donde el número está duplicado.
+    // =========================================================================
+
+    // Número de WhatsApp de SpeedProfit AI (formato internacional, sin +, sin espacios)
+    var PHONE = "34722842925";
+    var MESSAGE = "Hola, acabo de rellenar el formulario y quiero ver la demo del agente de IA para mi inmobiliaria";
+
+    var url = "https://wa.me/" + PHONE + "?text=" + encodeURIComponent(MESSAGE);
+    document.getElementById("fallback").href = url;
+
+    // Redirección automática e inmediata
+    window.location.replace(url);
+  </script>
+</body>
+</html>
