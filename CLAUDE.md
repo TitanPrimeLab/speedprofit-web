@@ -298,11 +298,43 @@ que no es una garantía.
 No existía en el sitio original ni estaba pedida por las IAs — se añadió
 aparte, a petición del cliente, por transparencia. A diferencia de
 Privacidad y Términos, **este contenido SÍ es real y no un placeholder**:
-refleja el estado técnico actual (sin Analytics, sin píxeles, YouTube en
-modo `nocookie`). Si en algún momento se añade Analytics o cualquier píxel
-de seguimiento, hay que actualizar el bloque "Qué cookies usamos" — y en ese
-momento sí pasaría a ser obligatorio un banner de consentimiento, que hoy no
-lo es.
+refleja el estado técnico actual (sin Analytics, **Meta Pixel solo con
+consentimiento**, YouTube en modo `nocookie`). Si se añade otra herramienta
+de seguimiento, ver el apartado "Meta Pixel y consentimiento" más abajo:
+hay que colgarla del mismo consentimiento y actualizar los tres textos
+legales.
+
+### 6b. Meta Pixel y consentimiento (sep 2026) — NO pegar el snippet en index.html
+El píxel de Meta (ID en `EMPRESA.metaPixelId`, `contenido.js`) **no está en el
+`<head>`**. Lo carga `src/consentimiento.js` y **solo si el visitante pulsa
+«Aceptar»** en el aviso (`componentes/BannerCookies.jsx`, montado en `Layout`).
+
+Por qué no va en `index.html`, como sugiere Meta: en España (RGPD + art. 22.2
+LSSI) el píxel de publicidad exige consentimiento previo, y en el `<head>`
+cargaría para todos desde el primer segundo. Tampoco se usa el
+`<noscript><img>` del snippet: dispararía el evento sin JS y, por tanto, sin
+consentimiento posible.
+
+- **Aceptar y Rechazar pesan igual** (mismo tamaño y nivel). Rechazar tiene que
+  ser tan fácil como aceptar; no convertirlo en un enlace de texto.
+- **Retirar el consentimiento:** enlace «Configurar cookies» en el `Footer`.
+  Rechazar envía `fbq('consent','revoke')` y borra `_fbp`/`_fbc`.
+- La elección se guarda en `localStorage` (`sp_consentimiento_publicidad`:
+  `si`/`no`). Si el almacenamiento falla, se vuelve a preguntar; nunca se
+  asume un «sí».
+- **PageViews entre páginas:** `fbevents.js` ya detecta los cambios de URL
+  (`pushState`) y dispara un PageView por navegación. **No añadir PageViews
+  manuales** al cambiar de ruta: saldrían duplicados.
+- El banner va por debajo del botón de WhatsApp (`z-[9998]` vs `z-[9999]`) y
+  elevado en móvil, para no tapar nunca el canal por el que entran los contactos.
+- `public/whatsapp.html` (página puente del formulario de Meta) **no lleva
+  píxel**: redirige al instante y no puede pedir consentimiento.
+
+Al añadir cualquier otra herramienta de medición (Analytics, TikTok...):
+1. colgarla del mismo consentimiento en `src/consentimiento.js`,
+2. añadir su bloque en `paginas/PoliticaCookies.jsx`,
+3. mencionarla en `paginas/Privacidad.jsx` y en `scripts/contenido-estatico.mjs`
+   (bloques `/cookies` y `/privacidad`, que es lo que ven buscadores y sin JS).
 
 ### 7. llms.txt (`public/llms.txt`)
 Estándar nuevo (2024-2026, llmstxt.org) — el equivalente de robots.txt pero

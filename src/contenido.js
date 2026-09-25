@@ -17,6 +17,9 @@ export const EMPRESA = {
   linkedin: 'https://www.linkedin.com/in/angel-valen-580a093a8',
   copyright: '© 2026 SpeedProfit AI · Todos los derechos reservados',
   youtubeId: 'rHPGOX5TKM4',
+  // Meta Pixel. Se carga SOLO tras aceptar el aviso de cookies — ver
+  // src/consentimiento.js. No pegar el snippet de Meta en index.html.
+  metaPixelId: '2250144802503259',
 }
 
 // Construye un enlace de WhatsApp con mensaje preescrito opcional
@@ -42,6 +45,21 @@ export const NAV_LEGAL = [
   { etiqueta: 'Política de Cookies', ruta: '/cookies' },
   { etiqueta: 'Contacto', ruta: '/contacto' },
 ]
+
+// --- AVISO DE COOKIES -------------------------------------------------------
+// Aceptar y Rechazar deben pesar lo mismo (mismo tamaño, mismo nivel): rechazar
+// tiene que ser tan fácil como aceptar. No convertir uno en enlace de texto.
+export const CONSENTIMIENTO = {
+  titulo: 'Tu privacidad, tu decisión',
+  texto:
+    'Usamos el píxel de Meta (Facebook e Instagram) para medir si nuestros anuncios funcionan. Solo se activa si aceptas. Puedes cambiar de opinión cuando quieras desde el pie de la web.',
+  enlace: 'Más información',
+  enlaceRuta: '/cookies',
+  aceptar: 'Aceptar',
+  rechazar: 'Rechazar',
+  // Enlace del pie de página que vuelve a abrir el aviso
+  configurar: 'Configurar cookies',
+}
 
 // ============================================================================
 // HOME

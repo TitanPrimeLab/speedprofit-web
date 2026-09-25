@@ -28,7 +28,8 @@ const BLOQUES = [
       'Recogemos únicamente los datos estrictamente necesarios para prestar nuestros servicios y responder a tus consultas. En concreto:',
       'Datos de contacto: nombre, apellidos, dirección de correo electrónico, número de teléfono y nombre de la agencia inmobiliaria, cuando los facilitas a través de nuestros canales de comunicación (WhatsApp, correo o formulario).',
       'Datos de comunicación: contenido de los mensajes que nos envías, historial de conversaciones y cualquier información que compartas voluntariamente durante el proceso comercial o de trabajo.',
-      'Datos técnicos limitados: dirección IP y tipo de navegador únicamente si son necesarios para el funcionamiento del servicio. Esta web no utiliza herramientas de analítica ni píxeles de seguimiento de terceros.',
+      'Datos técnicos limitados: dirección IP y tipo de navegador únicamente si son necesarios para el funcionamiento del servicio. Esta web no utiliza herramientas de analítica.',
+      'Datos de publicidad (solo si los aceptas): si pulsas "Aceptar" en el aviso de cookies, se activa el píxel de Meta (Facebook e Instagram), que recoge las páginas que visitas, tu dirección IP y datos de tu navegador para medir nuestras campañas. Si pulsas "Rechazar" o no respondes, no se activa. Más detalle en nuestra Política de Cookies.',
     ],
   },
   {
@@ -48,6 +49,7 @@ const BLOQUES = [
       'Para responder a tus consultas y ejecutar el servicio contratado, la base es la ejecución de un contrato o la aplicación de medidas precontractuales a tu solicitud (art. 6.1.b RGPD).',
       'Para el cumplimiento de obligaciones legales y fiscales, la base es el cumplimiento de una obligación legal (art. 6.1.c RGPD).',
       'Para envío de comunicaciones comerciales, cuando aplique, la base es tu consentimiento expreso (art. 6.1.a RGPD), que puedes retirar en cualquier momento.',
+      'Para el píxel de Meta y las cookies de publicidad, la base es tu consentimiento (art. 6.1.a RGPD y art. 22.2 de la LSSI), que puedes retirar en cualquier momento con el enlace "Configurar cookies" del pie de página.',
     ],
   },
   {
@@ -55,6 +57,7 @@ const BLOQUES = [
     parrafos: [
       'Para poder prestarte el servicio, algunos de tus datos son procesados por proveedores tecnológicos externos que actúan como encargados del tratamiento en virtud del artículo 28 del RGPD. Estos proveedores están sujetos a acuerdos de tratamiento de datos y cuentan con las garantías necesarias, incluidas las cláusulas contractuales tipo de la Comisión Europea cuando el procesamiento se realiza fuera del Espacio Económico Europeo.',
       'Entre los principales encargados se encuentran los servicios de mensajería utilizados para las integraciones con WhatsApp Business API, los proveedores de modelos de inteligencia artificial que impulsan los agentes conversacionales, y las plataformas de automatización e integración con CRM.',
+      'Si aceptas las cookies de publicidad, los datos del píxel se envían además a Meta Platforms Ireland Limited, que puede tratarlos fuera del Espacio Económico Europeo y para sus propios fines conforme a su política de datos (facebook.com/privacy/policy).',
       'La relación concreta de encargados actualizada está disponible bajo petición escrita al correo indicado en esta política.',
     ],
   },
@@ -98,5 +101,5 @@ const BLOQUES = [
 ]
 
 export default function Privacidad() {
-  return <PaginaLegal titulo="Política de Privacidad" actualizado="14 de agosto de 2026" bloques={BLOQUES} />
+  return <PaginaLegal titulo="Política de Privacidad" actualizado="25 de septiembre de 2026" bloques={BLOQUES} />
 }

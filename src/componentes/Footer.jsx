@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom'
 import { Instagram, Linkedin } from 'lucide-react'
-import { EMPRESA, NAV_LEGAL } from '../contenido'
+import { CONSENTIMIENTO, EMPRESA, NAV_LEGAL } from '../contenido'
+import { abrirConfiguracionCookies } from '../consentimiento'
 
 export default function Footer() {
   return (
@@ -22,6 +23,15 @@ export default function Footer() {
               {item.etiqueta}
             </Link>
           ))}
+
+          {/* Permite cambiar o retirar el consentimiento en cualquier momento */}
+          <button
+            type="button"
+            onClick={abrirConfiguracionCookies}
+            className="texto-apagado text-sm hover:text-white transition-colors"
+          >
+            {CONSENTIMIENTO.configurar}
+          </button>
 
           <div className="flex items-center gap-4">
             <a

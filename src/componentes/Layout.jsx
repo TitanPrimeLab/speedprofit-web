@@ -3,6 +3,7 @@ import { useLocation } from 'react-router-dom'
 import Nav from './Nav'
 import Footer from './Footer'
 import BotonWhatsApp from './BotonWhatsApp'
+import BannerCookies from './BannerCookies'
 
 // Sube al inicio al cambiar de ruta
 function ScrollAlInicio() {
@@ -26,6 +27,7 @@ export default function Layout({ children }) {
       </main>
       <Footer />
       <BotonWhatsApp />
+      <BannerCookies />
     </div>
   )
 }

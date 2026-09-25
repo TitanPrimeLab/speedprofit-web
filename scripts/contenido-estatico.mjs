@@ -466,6 +466,7 @@ export const PAGINAS = {
         h2: 'Qué datos tratamos y con qué finalidad',
         p: [
           'Tratamos los datos que nos facilitas voluntariamente al contactar con nosotros (nombre, email, teléfono y la información que incluyas en tu mensaje), con la finalidad de responder a tu consulta, elaborar la auditoría solicitada y, en su caso, gestionar la relación comercial.',
+          'Solo si aceptas las cookies de publicidad en el aviso de la web, se activa el píxel de Meta (Facebook e Instagram), que recoge las páginas que visitas, tu dirección IP y datos de tu navegador para medir nuestras campañas. Si las rechazas, no se activa. Tu consentimiento es la base legal y puedes retirarlo cuando quieras.',
         ],
       },
       {
@@ -485,6 +486,7 @@ export const PAGINAS = {
         h2: 'Transferencias internacionales',
         p: [
           'SpeedProficient OÜ está constituida en Estonia, dentro del Espacio Económico Europeo, por lo que el tratamiento se realiza bajo el marco del RGPD. Si alguna herramienta que utilizamos implicara transferencia fuera del EEE, se realizaría con las garantías previstas en el capítulo V del RGPD.',
+          'Si aceptas las cookies de publicidad, los datos del píxel se envían a Meta Platforms Ireland Limited, que puede tratarlos fuera del EEE conforme a su propia política de datos.',
         ],
       },
       {
@@ -565,40 +567,41 @@ export const PAGINAS = {
   '/cookies': {
     title: 'Política de Cookies — SpeedProfit AI',
     description:
-      'Política de cookies de speedprofitai.com: qué cookies utilizamos, para qué sirven y cómo puedes gestionarlas o desactivarlas.',
+      'Política de cookies de speedprofitai.com: qué cookies utilizamos, para qué sirven y cómo puedes aceptarlas, rechazarlas o retirarlas.',
     h1: 'Política de Cookies',
     secciones: [
       {
-        h2: 'Qué son las cookies',
+        h2: 'Qué cookies usamos',
         p: [
-          'Las cookies son pequeños archivos de texto que se almacenan en tu dispositivo cuando visitas un sitio web. Sirven para que la web funcione correctamente y, en algunos casos, para recopilar información sobre el uso del sitio.',
+          'speedprofitai.com solo instala cookies de publicidad si tú lo aceptas en el aviso que aparece al entrar. Si pulsas "Rechazar", o simplemente no respondes, no se carga ninguna herramienta de seguimiento y no se instala ninguna cookie de terceros. No utilizamos Google Analytics ni ninguna otra herramienta de analítica.',
         ],
       },
       {
-        h2: 'Qué cookies utilizamos',
-        p: [
-          'Utilizamos cookies técnicas necesarias para el funcionamiento del sitio y, en su caso, cookies analíticas para entender de forma agregada cómo se navega por la web y poder mejorarla. No utilizamos cookies para vender datos a terceros ni para crear perfiles publicitarios cruzados entre sitios.',
-        ],
-      },
-      {
-        h2: 'Tipos de cookies según su finalidad',
+        h2: 'Cookies de publicidad: Meta Pixel (solo con tu consentimiento)',
         lista: [
-          '<strong>Técnicas o necesarias</strong>: permiten la navegación y el uso de las funciones básicas del sitio. Sin ellas la web no funciona correctamente, por lo que no requieren consentimiento.',
-          '<strong>Analíticas</strong>: recogen información agregada y anónima sobre cómo se usa el sitio (páginas más visitadas, tiempo de permanencia) para poder mejorarlo. Requieren tu consentimiento.',
-          '<strong>De preferencias</strong>: recuerdan opciones que hayas elegido para no tener que volver a configurarlas en cada visita.',
+          '<strong>Proveedor</strong>: Meta Platforms Ireland Limited (Facebook e Instagram).',
+          '<strong>Para qué</strong>: medir si nuestros anuncios en Facebook e Instagram funcionan y poder mostrarlos a personas con intereses similares.',
+          '<strong>Qué recoge</strong>: las páginas que visitas, tu dirección IP, datos de tu navegador y dispositivo, e identificadores como las cookies _fbp y _fbc.',
+          '<strong>Duración</strong>: las cookies _fbp y _fbc caducan como máximo a los 90 días.',
+          '<strong>Transferencias</strong>: Meta puede tratar esta información fuera del Espacio Económico Europeo y para sus propios fines, conforme a su política de datos.',
         ],
       },
       {
-        h2: 'Cookies de terceros',
+        h2: 'Cómo dar o retirar tu consentimiento',
         p: [
-          'Algunas funcionalidades pueden apoyarse en servicios de terceros que instalen sus propias cookies, como proveedores de analítica o de mensajería. Estos terceros tienen sus propias políticas de privacidad, que te recomendamos consultar si quieres conocer el detalle de su tratamiento.',
+          'Al entrar en la web verás un aviso con los botones "Aceptar" y "Rechazar". Puedes cambiar tu elección cuando quieras con el enlace "Configurar cookies" que hay al pie de todas las páginas. Al rechazar, dejamos de enviar datos a Meta y eliminamos sus cookies. También puedes bloquear o borrar las cookies desde los ajustes de tu navegador.',
         ],
       },
       {
-        h2: 'Cómo gestionarlas o desactivarlas',
+        h2: 'Cookies estrictamente necesarias',
         p: [
-          'Puedes configurar o desactivar las cookies desde los ajustes de tu navegador en cualquier momento. Todos los navegadores modernos (Chrome, Safari, Firefox, Edge) permiten bloquearlas, eliminarlas o recibir un aviso antes de que se instalen.',
-          'Ten en cuenta que desactivar las cookies técnicas puede afectar al funcionamiento de algunas partes del sitio. Desactivar las analíticas no afecta a tu navegación.',
+          'Esta web no requiere iniciar sesión y no instala cookies técnicas propias. Lo único que guardamos en tu navegador es tu elección sobre las cookies de publicidad, para no volver a preguntártelo en cada visita.',
+        ],
+      },
+      {
+        h2: 'Contenido de terceros: vídeo de YouTube',
+        p: [
+          'La página de inicio incluye un vídeo de YouTube en modo de privacidad ampliada (youtube-nocookie.com). Si le das a reproducir, YouTube (Google LLC) puede instalar sus propias cookies conforme a su política de privacidad.',
         ],
       },
       {
