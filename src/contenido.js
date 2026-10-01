@@ -12,7 +12,7 @@ export const EMPRESA = {
   telefonoVisible: '+34 722 842 925',
   telefonoWhatsApp: '34722842925',
   web: 'speedprofitai.com',
-  domicilio: 'Carrer Ramon Llull, Edifici Rocamar 5, 43840 Salou, Tarragona',
+  domicilio: 'Pärnu mnt 105, 11312 Tallinn, Harju maakond, Estonia',
   instagram: 'https://www.instagram.com/angel.speedprofit/',
   linkedin: 'https://www.linkedin.com/in/angel-valen-580a093a8',
   copyright: '© 2026 SpeedProfit AI · Todos los derechos reservados',
@@ -1072,6 +1072,6 @@ export const CONTACTO = {
       href: waLink(),
     },
     { icono: 'Globe', etiqueta: 'Web', valor: EMPRESA.web, href: 'https://speedprofitai.com/' },
-    { icono: 'MapPin', etiqueta: 'Oficina en España', valor: EMPRESA.domicilio, href: null },
+    { icono: 'MapPin', etiqueta: 'Domicilio social', valor: EMPRESA.domicilio, href: null },
   ],
 }
