@@ -1,6 +1,9 @@
+import { Facebook, Instagram, Linkedin } from 'lucide-react'
 import { CONTACTO } from '../contenido'
 import { BotonOro, Icono, Insignia, Revelar, Seccion } from '../componentes/ui'
 import VolverAlInicio from '../componentes/VolverAlInicio'
+
+const ICONOS_REDES = { facebook: Facebook, instagram: Instagram, linkedin: Linkedin }
 
 export default function Contacto() {
   return (
@@ -60,6 +63,25 @@ export default function Contacto() {
                 </div>
               )
             })}
+
+            <div className="flex items-center justify-center gap-4 pt-2">
+              {CONTACTO.redes.map((r) => {
+                const IconoRed = ICONOS_REDES[r.red]
+                return (
+                  <a
+                    key={r.etiqueta}
+                    href={r.href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    aria-label={r.etiqueta}
+                    title={r.etiqueta}
+                    className="w-12 h-12 rounded-xl border border-[rgba(201,168,76,0.35)] bg-[rgba(201,168,76,0.08)] flex items-center justify-center texto-oro hover:scale-110 transition-transform"
+                  >
+                    <IconoRed className="w-5 h-5" />
+                  </a>
+                )
+              })}
+            </div>
           </Revelar>
 
           <Revelar retraso={360} className="mt-10">

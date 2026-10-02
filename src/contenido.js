@@ -1063,6 +1063,14 @@ export const CONTACTO = {
   nota: 'Soporte 24 horas, los 365 días del año.',
   cta: 'Escríbenos por WhatsApp ahora',
   ctaMensaje: 'Hola Ángel, me gustaría hablar sobre SpeedProfit AI',
+  // Orden de aparición de los iconos de redes en la página de contacto.
+  redes: [
+    { red: 'facebook', etiqueta: 'Facebook personal', href: 'https://www.facebook.com/profile.php?id=61589397451686' },
+    { red: 'facebook', etiqueta: 'Facebook empresa', href: 'https://www.facebook.com/profile.php?id=61592401971148' },
+    { red: 'instagram', etiqueta: 'Instagram', href: 'https://www.instagram.com/angel.speedprofit/' },
+    { red: 'linkedin', etiqueta: 'LinkedIn personal', href: 'https://www.linkedin.com/in/angel-valen/' },
+    { red: 'linkedin', etiqueta: 'LinkedIn empresa', href: 'https://www.linkedin.com/company/142184072/' },
+  ],
   campos: [
     { icono: 'Mail', etiqueta: 'Email', valor: EMPRESA.email, href: `mailto:${EMPRESA.email}` },
     {
@@ -1072,6 +1080,5 @@ export const CONTACTO = {
       href: waLink(),
     },
     { icono: 'Globe', etiqueta: 'Web', valor: EMPRESA.web, href: 'https://speedprofitai.com/' },
-    { icono: 'MapPin', etiqueta: 'Domicilio social', valor: EMPRESA.domicilio, href: null },
   ],
 }
